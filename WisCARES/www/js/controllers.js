@@ -2,7 +2,7 @@ angular.module('wiscares.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('PetsCtrl', function($scope, Pets) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -11,14 +11,14 @@ angular.module('wiscares.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
+  $scope.pets = Pets.all();
+  $scope.remove = function(pet) {
+    Pets.remove(pet);
   };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('PetDetailCtrl', function($scope, $stateParams, Pets) {
+  $scope.pet = Pets.get($stateParams.petId);
 })
 
 .controller('AccountCtrl', function($scope) {

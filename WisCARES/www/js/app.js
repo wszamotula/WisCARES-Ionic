@@ -50,21 +50,21 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.pets', {
+      url: '/pets',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-pets': {
+          templateUrl: 'templates/tab-pets.html',
+          controller: 'PetsCtrl'
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+    .state('tab.pet-detail', {
+      url: '/pets/:petId',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+        'tab-pets': {
+          templateUrl: 'templates/pet-detail.html',
+          controller: 'petDetailCtrl'
         }
       }
     })
