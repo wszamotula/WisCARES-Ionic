@@ -18,13 +18,45 @@
                     {{pet.gender}}
                 </p>
             </ion-item>
+                <ul class="eventTypeList">
+                    <li class="item item-checkbox eventType">
+                        <label class="checkbox">
+                            <input type="checkbox" checked>
+                        </label>
+                        Health problems
+                    </li>
+                    <li class="item item-checkbox eventType">
+                        <label class="checkbox">
+                            <input type="checkbox" checked>
+                        </label>
+                        Vaccinations
+                    </li>
+                    <li class="item item-checkbox eventType">
+                        <label class="checkbox">
+                            <input type="checkbox" checked>
+                        </label>
+                        Medications
+                    </li>
+                    <li class="item item-checkbox eventType">
+                        <label class="checkbox">
+                            <input type="checkbox" checked>
+                        </label>
+                        Visits
+                    </li>
+                    <li class="item item-checkbox eventType">
+                        <label class="checkbox">
+                            <input type="checkbox" checked>
+                        </label>
+                        Documents
+                    </li>
+                </ul>
             <ion-item class="item-icon-right" type="item-text-wrap" href="#">
                 <i class="icon ion-ios-plus-empty"></i>
                 <h2>New event</h2>
             </ion-item>
             <ion-item ng-repeat="event in events" type="item-text-wrap" href="#">
 
-                <h2>{{event.name}}</h2>
+                <h2>{{event.type}} - {{event.name}}</h2>
                 <p>{{event.description}}</p>
 
             </ion-item>

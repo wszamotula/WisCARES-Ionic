@@ -1,1 +1,13 @@
 /* Empty. Add your own CSS if you like */
+/*input[type='checkbox'] {
+    margin-left: 20px;
+    margin-right: 5px;
+}*/
+.eventType {
+    display: inline-block;
+    margin: 2px;
+
+}
+.eventTypeList {
+    margin: 10px;
+}
