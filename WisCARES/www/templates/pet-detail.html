@@ -5,14 +5,29 @@
   The Friends service returns an array of friend data
 -->
 <ion-view view-title="{{pet.name}}">
-  <ion-content class="padding">
-    <img ng-src="https://d30y9cdsu7xlg0.cloudfront.net/png/13421-200.png" style="width: 64px; height: 64px">
-        <p>
-            {{pet.name}}
-            <br/>
-            {{pet.species}}
-            <br/>
-            {{pet.breed}}
-        </p>
-  </ion-content>
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item class="item-remove-animate item-thumbnail-left item-icon-right" type="item-text-wrap">
+                <img ng-src="https://d30y9cdsu7xlg0.cloudfront.net/png/13421-200.png" style="width: 64px; height: 64px">
+                <h2>{{pet.name}}</h2>
+                <p>
+                    {{pet.species}}
+                    <br />
+                    {{pet.breed}}
+                    <br />
+                    {{pet.gender}}
+                </p>
+            </ion-item>
+            <ion-item class="item-icon-right" type="item-text-wrap" href="#">
+                <i class="icon ion-ios-plus-empty"></i>
+                <h2>New event</h2>
+            </ion-item>
+            <ion-item ng-repeat="event in events" type="item-text-wrap" href="#">
+
+                <h2>{{event.name}}</h2>
+                <p>{{event.description}}</p>
+
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>
