@@ -1,7 +1,6 @@
 angular.module('wiscares.services', [])
 
 .factory('Pets', function($resource) {
-  // Might use a resource here that returns a JSON array
 
     return $resource("http://vast-bastion-6115.herokuapp.com/pets/:id.json", { id: '@id' }, {
         update: {

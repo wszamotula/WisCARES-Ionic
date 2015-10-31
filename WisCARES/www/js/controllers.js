@@ -22,7 +22,10 @@ angular.module('wiscares.controllers', [])
 })
 
 .controller('PetDetailCtrl', function($scope, $stateParams, Pets) {
-  $scope.pet = Pets.get($stateParams.petId);
+    $scope.loadPet = function () { //Issues a GET request
+        $scope.pet = Pets.get({ id: $stateParams.petId });
+    };
+    $scope.loadPet();
 })
 
 .controller('AccountCtrl', function($scope) {

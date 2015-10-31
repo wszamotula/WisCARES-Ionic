@@ -64,7 +64,7 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
       views: {
         'tab-pets': {
           templateUrl: 'templates/pet-detail.html',
-          controller: 'petDetailCtrl'
+          controller: 'PetDetailCtrl'
         }
       }
     })
