@@ -11,10 +11,14 @@ angular.module('wiscares.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.pets = Pets.all();
-  $scope.remove = function(pet) {
-    Pets.remove(pet);
-  };
+    Pets.query().$promise.then(function (response) {
+        $scope.pets = response;
+    });
+
+   //$scope.pets = Pets.all();
+   //$scope.remove = function(pet) {
+   // Pets.remove(pet);
+  //};
 })
 
 .controller('PetDetailCtrl', function($scope, $stateParams, Pets) {
