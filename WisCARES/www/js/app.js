@@ -32,9 +32,26 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
+ 
+          .state('app', {
+                url: "/app",
+                abstract: true,
+                templateUrl: "templates/menu.html",
+                controller: 'AppCtrl'
+            })
+
+            .state('app.home', {
+                url: "/home",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/home.html"
+                    }
+                }
+            })
+
+  .state('tab', {
     url: '/tab',
-    abstract: true,
+  //  abstract: true,
     templateUrl: 'templates/tabs.html'
   })
 
@@ -80,6 +97,16 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/app/home');
 
 });
+
+var success = function (message) {
+    alert(message);
+}
+
+var failure = function () {
+    alert("Error calling Hello Plugin");
+}
+
+hello.greet("World", success, failure);

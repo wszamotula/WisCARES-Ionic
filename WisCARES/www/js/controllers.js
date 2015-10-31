@@ -1,6 +1,6 @@
 angular.module('wiscares.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function ($scope) { })
 
 .controller('PetsCtrl', function($scope, Pets) {
   // With the new view caching in Ionic, Controllers are only called
