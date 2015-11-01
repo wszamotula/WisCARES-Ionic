@@ -11,7 +11,7 @@ angular.module('wiscares.controllers', [])
     //$scope.$on('$ionicView.enter', function(e) {
     //});
 
-    Pets.query().$promise.then(function (response) {
+    Pets.query({"userId":"2"}).$promise.then(function (response) {
         $scope.pets = response;
     });
 
