@@ -53,7 +53,11 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
             }
         }
     })
-
+    .state('vets', {
+        url: '/vets',
+        templateUrl: 'templates/vets.html',
+        controller: 'VetsCtrl'
+    })
     .state('tab.pets', {
         url: '/pets',
         views: {

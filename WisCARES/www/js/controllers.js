@@ -21,6 +21,17 @@ angular.module('wiscares.controllers', [])
     //};
 })
 
+.controller('VetsCtrl', function ($scope) {
+    console.log('VetsCtrl');
+
+    $scope.leftButtons = [{
+        type: 'button-icon icon ion-navicon',
+        tap: function (e) {
+            console.log('Going back!');
+        }
+    }];
+})
+
 .controller('PetDetailCtrl', function ($scope, $stateParams, Pets, Events) {
     $scope.loadPet = function () { //Issues a GET request
         $scope.pet = Pets.get({ id: $stateParams.petId });
