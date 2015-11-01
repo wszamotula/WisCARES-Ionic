@@ -94,13 +94,5 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
 
 });
 
-var success = function(message) {
-    alert(message);
-}
 
-var failure = function() {
-    alert("Error calling Hello Plugin");
-}
-
-hello.greet("World", success, failure);
 

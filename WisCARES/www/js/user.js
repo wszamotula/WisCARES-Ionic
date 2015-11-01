@@ -1,6 +1,6 @@
 angular.module('loginCtrl', [])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $timeout,$ionicPopup,$localstorage) {
+    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicPopup, $localstorage, UserSession) {
 
         //-------------------------------------------SIGN UP----------------------------------
         $scope.signUpDate = {};
@@ -53,22 +53,26 @@ angular.module('loginCtrl', [])
 
         $scope.login = function () {
             $scope.loginData = {};
+
             $scope.modal.show();
         };
 
-        $scope.doLogin = function () {
-            console.log('Doing login', $scope.loginData);
-            //if the user is valid
-            if ($scope.loginData.password == $localstorage.get($scope.loginData.username)) {
-                $scope.valid_user = false;
-                $timeout(function () {
-                    $scope.closeLogin();
-                }, 500);
-            }else{
-                $scope.valid_user = true;
-                $timeout(function () {
-                    $scope.valid_user = false;
-                }, 3000);
-            }
-        };
-    })
+        $scope.doLogin = function() {
+            console.log("Testing");
+            console.log($scope.loginData);
+            var user_session = new UserSession({ user: $scope.loginData });
+
+            user_session.$save(
+                function(data){
+                    window.localStorage['userId'] = data.id;
+                    window.localStorage['userName'] = data.name;
+                    $scope.modal.hide();
+                },
+                function(err){
+                    //var error = err["data"]["error"] || err.data.join('. ')
+                    var confirmPopup = $ionicPopup.alert({
+                        template: "Invalid username or password"
+                    });
+                });
+    }
+})
