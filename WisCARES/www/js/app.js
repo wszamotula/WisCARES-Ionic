@@ -4,12 +4,13 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services', 'ngResource'])
+// 'starter.controllers' is found in controllers.js 
+angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services',
+ 'ngResource', 'loginCtrl', 'localstorage'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // Hide the accessory bar by default  e accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -36,6 +37,7 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
           url: '/tab',
           abstract: true,
           templateUrl: 'templates/tabs.html'
+          //controller: 'loginctrl'
       })
 
     // Each tab has its own nav history stack:
@@ -46,6 +48,7 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
             'tab-home': {
                 templateUrl: 'templates/tab-home.html',
                 controller: 'DashCtrl'
+                //controller: 'loginctrl'
             }
         }
     })
@@ -74,12 +77,30 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
         views: {
             'tab-account': {
                 templateUrl: 'templates/tab-account.html',
-                controller: 'AccountCtrl'
+                //controller: 'AccountCtrl'
+                controller: 'AppCtrl'
             }
         }
-    });
+    })
+      .state('menu', {
+          url: '/menu',
+          abstract: true,
+          templateUrl: "templates/menu.html",
+          controller: 'AppCtrl'
+      });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/home');
 
 });
+
+var success = function(message) {
+    alert(message);
+}
+
+var failure = function() {
+    alert("Error calling Hello Plugin");
+}
+
+hello.greet("World", success, failure);
+

@@ -1,9 +1,16 @@
 <ion-view view-title="Account">
     <ion-content>
         <ion-list>
-            <ion-toggle ng-model="settings.enableFriends">
+          <ion-item menu-close ng-click="login()">
+            Login
+          </ion-item>
+          <ion-list>
+          <ion-item menu-close ng-click="signUp()">
+            Sign Up
+          </ion-item>
+           <!--  <ion-toggle ng-model="settings.enableFriends">
                 I'm a person
-            </ion-toggle>
+            </ion-toggle> -->
         </ion-list>
     </ion-content>
 </ion-view>
