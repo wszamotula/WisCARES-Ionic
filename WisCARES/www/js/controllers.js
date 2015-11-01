@@ -21,6 +21,10 @@ angular.module('wiscares.controllers', [])
     //};
 })
 
+.controller('VetsCtrl', function($scope) {
+    $scope.settings = true
+})
+
 .controller('PetDetailCtrl', function ($scope, $stateParams, Pets, Events) {
     $scope.loadPet = function () { //Issues a GET request
         $scope.pet = Pets.get({ id: $stateParams.petId });

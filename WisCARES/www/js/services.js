@@ -54,6 +54,10 @@ angular.module('wiscares.services', [])
     //};
 })
 
+.factory('Vets', function () {
+
+})
+
 .factory('Events', function () {
 
     var events = [{
