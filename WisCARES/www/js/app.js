@@ -103,7 +103,7 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
             'tab-account': {
                 templateUrl: 'templates/tab-account.html',
                 //controller: 'AccountCtrl'
-                controller: 'AppCtrl'
+                //controller: 'AppCtrl'
             }
         }
     })

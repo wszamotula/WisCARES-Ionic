@@ -42,7 +42,8 @@ angular.module('loginCtrl', [])
     $scope.loginData = {};
 
     $ionicModal.fromTemplateUrl('templates/login.html', {
-        scope: $scope
+        scope: $scope,
+        backdropClickToClose: false
     }).then(function (modal) {
         $scope.modal = modal;
         $scope.login()
