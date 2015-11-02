@@ -45,6 +45,15 @@ angular.module('wiscares.services', [])
     });
 })
 
+.factory('Vets', function ($resource) {
+
+    return $resource("http://vast-bastion-6115.herokuapp.com/vets/:id.json", { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+})
+
 .factory('UserSession', function($resource) {
   return $resource("http://vast-bastion-6115.herokuapp.com/users/sign_in.json");
 })

@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js 
 angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services',
- 'ngResource', 'loginCtrl', 'localstorage'])
+ 'ngResource', 'loginCtrl', 'localstorage', 'ui.router'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -32,81 +32,65 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
     // Each state's controller can be found in controllers.js
     $stateProvider
 
-
-    // setup an abstract state for the tabs directive
-      .state('tab', {
-          url: '/tab',
-          abstract: true,
-          templateUrl: 'templates/tabs.html'
-          //controller: 'loginctrl'
-      })
-
     // Each tab has its own nav history stack:
 
-    .state('tab.home', {
+    .state('home', {
         url: '/home',
-        views: {
-            'tab-home': {
-                templateUrl: 'templates/tab-home.html',
-                controller: 'AppCtrl'
-                //controller: 'loginctrl'
-            }
-        }
+        templateUrl: 'templates/tab-home.html',
+        controller: 'AppCtrl'
+        //controller: 'loginctrl'
     })
+
+    .state('mission', {
+        url: '/mission',
+        templateUrl: 'templates/mission.html',
+        controller: 'DashCtrl'
+    })
+
     .state('vets', {
         url: '/vets',
         templateUrl: 'templates/vets.html',
         controller: 'VetsCtrl'
     })
-    .state('tab.pets', {
+
+    .state('vet-add', {
+        url: '/vets/vet-add',
+        templateUrl: 'templates/vet-add.html',
+        controller: 'VetAddCtrl'
+      })
+
+    .state('pets', {
         url: '/pets',
-        views: {
-            'tab-pets': {
-                templateUrl: 'templates/tab-pets.html',
-                controller: 'PetsCtrl'
-            }
-        }
+        templateUrl: 'templates/tab-pets.html',
+        controller: 'PetsCtrl'
     })
-      .state('tab.pet-add', {
+
+    .state('pet-add', {
           url: '/pets/pet-add',
-          views: {
-              'tab-pets': {
-                  templateUrl: 'templates/pet-add.html',
-                  controller: 'PetAddCtrl'
-              }
-          }
+          templateUrl: 'templates/pet-add.html',
+          controller: 'PetAddCtrl'
       })  
 
-      .state('tab.pet-edit', {
-        url: '/pets/:id/edit',
-        views: {
-            'tab-pets': {
-                templateUrl: 'templates/pet-edit.html',
-                controller: 'PetEditCtrl'
-            }
-          }
+      .state('pet-edit', {
+          url: '/pets/:id/edit',
+          templateUrl: 'templates/pet-edit.html',
+          controller: 'PetEditCtrl'
       })
 
-      .state('tab.pet-detail', {
+      .state('pet-detail', {
           url: '/pets/:petId',
-          views: {
-              'tab-pets': {
-                  templateUrl: 'templates/pet-detail.html',
-                  controller: 'PetDetailCtrl'
-              }
-          }
+          templateUrl: 'templates/pet-detail.html',
+          controller: 'PetDetailCtrl'
       })
 
-    .state('tab.account', {
+    .state('account', {
         url: '/account',
-        views: {
-            'tab-account': {
-                templateUrl: 'templates/tab-account.html',
-                //controller: 'AccountCtrl'
-                //controller: 'AppCtrl'
-            }
-        }
+        templateUrl: 'templates/tab-account.html',
+        //controller: 'AccountCtrl'
+        //controller: 'AppCtrl'
     })
+
+
       // .state('login', {
       //     url: '/login',
       //     abstract: true,
@@ -115,7 +99,7 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
       // });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/home');
+    $urlRouterProvider.otherwise('/home');
 
 });
 

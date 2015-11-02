@@ -1,9 +1,3 @@
-<!--
-  This template loads for the 'tab.friend-detail' state (app.js)
-  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
-  The FriendsCtrl pulls data from the Friends service (service.js)
-  The Friends service returns an array of friend data
--->
 <ion-view view-title="Add New Pet">
     <ion-content class="padding">
         <ion-item class="item item-input">
@@ -30,8 +24,6 @@
             <span class="input-label">Weight</span>
                 <input type="text" placeholder="How much does your pet weigh?" ng-model="pet.weight" required>
         </ion-item>
-        <label class="item">
-            <button class="button button-block button-positive" type="submit" ng-click="addPet()">Add Pet</button>
-        </label>
+        <button class="button button-block button-positive" type="submit" ng-click="addPet()">Add Pet</button>
     </ion-content>
 </ion-view>

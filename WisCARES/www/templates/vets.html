@@ -1,21 +1,18 @@
 <ion-view title="Vet">
     <ion-content padding="true" class="has-header">
-        <form class="list">
-            <button class="button button-stable button-icon  icon-left ion-android-arrow-back">back</button>
-        </form>
-        <ion-list>
-            <label class="item item-input">
-                <span class="input-label">Pet Name</span>
-                <input type="text" placeholder="">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Contact</span>
-                <input type="tel" placeholder="">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Address</span>
-                <input type="text" placeholder="">
-            </label>
-        </ion-list>
+        <div>Health Problems</div>
+        <div class="list card" ng-repeat="vet in vets">
+            <div class="item item-divider">{{vet.name}}</div>
+            <div class="item item-body">
+                <div>
+                    {{vet.contact}}  
+                </div>
+            </div>
+        </div>
+        <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/vets/vet-add">
+                <img ng-src="https://d30y9cdsu7xlg0.cloudfront.net/png/13421-200.png">
+                <i class="icon ion-ios-plus-empty"></i>
+                <h2>New Vet</h2>
+            </ion-item>
     </ion-content>
 </ion-view>
