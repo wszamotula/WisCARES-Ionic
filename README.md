@@ -7,3 +7,8 @@ TO LOGIN TO TESTING ACCOUNT:
 
 email = email@realsite.com
 password = password
+
+EMPTY TESTING ACCOUNT:
+
+email = guest@email.com
+password = password
