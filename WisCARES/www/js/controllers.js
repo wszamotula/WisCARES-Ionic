@@ -66,7 +66,7 @@ angular.module('wiscares.controllers', ['ui.router'])
     $scope.pet.userId=window.localStorage['userId']
     $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
       $scope.pet.$save(function() {
-        $state.go('pets');
+      $state.go('pets');
     });
   };
 })
@@ -86,18 +86,19 @@ angular.module('wiscares.controllers', ['ui.router'])
 })
 
 .controller('VetsCtrl', function ($scope, Vets) {
-    var userId = window.localStorage['userId'];
+    var userID = window.localStorage['userId'];
+    console.log(userID);
 
     $scope.deleteVet = function(vet) { // Delete a movie. Issues a DELETE to /api/movies/:id
     	vet.$delete(function() {
-    		Vets.query({"userId":userId}).$promise.then(function (response) {
+    		Vets.query({"userID":userID}).$promise.then(function (response) {
             	$scope.vets = response;
         	});
     	});
   	};
 
     $scope.$on('$ionicView.enter', function() {
-        Vets.query({"userId":userId}).$promise.then(function (response) {
+        Vets.query({"userID":userID}).$promise.then(function (response) {
             $scope.vets = response;
         });
     });
@@ -115,12 +116,27 @@ angular.module('wiscares.controllers', ['ui.router'])
 
 .controller('VetAddCtrl', function ($scope, $stateParams, $state, Vets) {
     $scope.vet = new Vets();  //create new movie instance. Properties will be set via ng-model on UI
-    $scope.vet.userId=window.localStorage['userId']
+    $scope.vet.userID=window.localStorage['userId']
+    console.log($scope.vet.userID);
     $scope.addVet = function() { //create a new movie. Issues a POST to /api/movies
       $scope.vet.$save(function() {
       $state.go('vets');
     });
   };
+})
+
+.controller('VetEditCtrl', function ($scope, $state, $stateParams, Vets) {
+  $scope.updateVet = function() { //Update the edited movie. Issues a PUT to /api/movies/:id
+        $scope.vet.$update(function() {
+            $state.go('vet-detail', {id: $scope.vet.id}); // on success go back to home i.e. movies state.
+        });
+  };
+
+  $scope.loadVet = function() { 
+    $scope.vet = Vets.get({ id: $stateParams.id });
+  };
+
+  $scope.loadVet(); // Load a movie which can be edited on UI
 })
 
 .controller('AccountCtrl', function ($scope) {

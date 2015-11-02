@@ -1,0 +1,20 @@
+<ion-view title="Vet">
+    <ion-content padding="true" class="has-header">
+        <ion-list>
+            <label class="item item-input">
+                <span class="input-label">Name</span>
+                <input type="text" placeholder="Veterinarian Name" ng-model="vet.name">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Address</span>
+                <input type="tel" placeholder="Veterinarian Address" ng-model="vet.address">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Phone Number</span>
+                <input type="text" placeholder="Veterinarian Phone #" ng-model="vet.contact">
+            </label>
+        </ion-list>
+
+        <button class="button button-block button-positive" type="submit" ng-click="updateVet()">Save Vet</button>
+    </ion-content>
+</ion-view>
