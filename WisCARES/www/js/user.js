@@ -57,14 +57,13 @@ angular.module('loginCtrl', [])
         };
 
         $scope.doLogin = function() {
-            console.log("Testing");
-            console.log($scope.loginData);
             var user_session = new UserSession({ user: $scope.loginData });
 
             user_session.$save(
                 function(data){
+                    console.log(Object.keys(data));
                     window.localStorage['userId'] = data.id;
-                    window.localStorage['userName'] = data.name;
+                    window.localStorage['userEmail'] = data.email;
                     $scope.modal.hide();
                 },
                 function(err){
