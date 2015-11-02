@@ -1,0 +1,48 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="pet-add">
+    <ion-content class="padding">
+       <form ng-submit="doSignUp()" name="addPetForm">
+            <ion-item class="item item-input">
+                <span class="input-label">Pet Name</span>
+                    <input type="text" name="sex" placeholder="enter data required" ng-model="pet.name" reqred>
+            </ion-item>
+            <ion-item class="item item-input">
+                <span class="input-label">Age</span>
+                    <input type="text" name="age" placeholder="enter data required" ng-model="pet.age"  >
+            </ion-item>
+            <ion-item class="item item-input">
+                <span class="input-label">Species</span>
+                    <input type="text" name="species" placeholder="enter data required" ng-model="pet.species" required>
+            </ion-item>
+            <ion-item class="item item-input">
+                <span class="input-label">Bread</span>
+                    <input type="text" name="bread" placeholder="enter data" ng-model="pet.bread">
+            </ion-item>
+            <ion-item class="item item-input">
+                <span class="input-label">Sex</span>
+                    <input type="text" name="sex" placeholder="enter data required" ng-model="pet.sex" required>
+            </ion-item>
+            <ion-item class="item item-input">
+                <span class="input-label">Weight</span>
+                    <input type="text" name="weight" placeholder="enter data required" ng-model="pet.weight" required>
+            </ion-item>
+             <ion-item class="item item-input">
+                <span class="input-label">Vet</span>
+                    <input type="text" name="vet" placeholder="enter data" ng-model="pet.vet">
+            </ion-item>
+                       <ion-item class="item item-input">
+                <span class="input-label">Current Meds</span>
+                    <input type="text" name="meds" placeholder="enter data" ng-model="pet.meds">
+            </ion-item>
+             <label class="item">
+                    <button class="button button-block button-positive" type="submit" ng-click="">Add Pet</button>
+            </label>
+
+        </form>
+    </ion-content>
+</ion-view>
