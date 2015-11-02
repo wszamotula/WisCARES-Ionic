@@ -30,10 +30,15 @@ angular.module('wiscares.controllers', ['ui.router'])
     //};
 })
 
-.controller('PetDetailCtrl', function ($scope, $stateParams, Events, Pets, HealthProblems, Medications, Vaccinations, Visits) {
+.controller('PetDetailCtrl', function ($scope, $state, $stateParams, Events, Pets, HealthProblems, Medications, Vaccinations, Visits) {
     $scope.loadPet = function () { //Issues a GET request
         $scope.pet = Pets.get({ id: $stateParams.petId });
     };
+
+    $scope.deletePet = function() { // Delete a movie. Issues a DELETE to /api/movies/:id
+    	$scope.pet.$delete();
+    	$state.go('pets');
+  	};
 
     $scope.$on('$ionicView.enter', function() {
         $scope.loadPet();
@@ -69,7 +74,7 @@ angular.module('wiscares.controllers', ['ui.router'])
 .controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets) {
   $scope.updatePet = function() { //Update the edited movie. Issues a PUT to /api/movies/:id
         $scope.pet.$update(function() {
-            $state.go('pets'); // on success go back to home i.e. movies state.
+            $state.go('pet-detail', {petId: $scope.pet.id}); // on success go back to home i.e. movies state.
         });
   };
 

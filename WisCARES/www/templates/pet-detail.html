@@ -7,6 +7,7 @@
 <ion-view view-title="{{pet.name}}">
     <ion-content class="padding">
         <ion-list>
+            <a class="item-icon-left" ng-href="#/pets">Pets</a>
             <ion-item class="item-remove-animate item-thumbnail-left item-icon-right" type="item-text-wrap">
                 <img ng-src="https://d30y9cdsu7xlg0.cloudfront.net/png/13421-200.png" style="width: 64px; height: 64px">
                 <h2>{{pet.name}}</h2>
@@ -18,7 +19,8 @@
                     {{pet.gender}}
                 </p>
             <div>
-                <a class="btn btn-primary" ui-sref="tab.pet-edit({id:pet.id})">Edit</a>
+                <a class="btn btn-primary" ui-sref="pet-edit({id:pet.id})">Edit</a>
+                <a class="btn btn-primary" ng-click="deletePet()">Delete</a>
             </div>
             </ion-item>
 
