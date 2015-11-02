@@ -1,6 +1,12 @@
 angular.module('wiscares.controllers', [])
 
-.controller('DashCtrl', function ($scope) { })
+.controller('DashCtrl', function ($scope) { 
+   $scope.$on('$ionicView.enter', function() {
+    $scope.login();
+  });
+   $scope.home 
+})
+
 
 .controller('PetsCtrl', function ($scope, Pets) {
     // With the new view caching in Ionic, Controllers are only called
@@ -30,6 +36,9 @@ angular.module('wiscares.controllers', [])
 
     $scope.loadPet();
 })
+.controller('PetAddCtrl', function ($scope, $stateParams, Pets, Events) {
+})
+
 
 .controller('AccountCtrl', function ($scope) {
     $scope.settings = {

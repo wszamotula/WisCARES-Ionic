@@ -62,6 +62,15 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
             }
         }
     })
+           .state('tab.pet-add', {
+          url: '/pets/pet-add',
+          views: {
+              'tab-pets': {
+                  templateUrl: 'templates/pet-add.html',
+                  controller: 'PetAddCtrl'
+              }
+          }
+      })  
       .state('tab.pet-detail', {
           url: '/pets/:petId',
           views: {
@@ -82,12 +91,12 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
             }
         }
     })
-      .state('menu', {
-          url: '/menu',
-          abstract: true,
-          templateUrl: "templates/menu.html",
-          controller: 'AppCtrl'
-      });
+      // .state('login', {
+      //     url: '/login',
+      //     abstract: true,
+      //     templateUrl: "templates/login.html",
+      //     controller: 'AppCtrl'
+      // });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/home');
