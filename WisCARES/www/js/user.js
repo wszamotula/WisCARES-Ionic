@@ -62,7 +62,6 @@ angular.module('loginCtrl', [])
 
         user_session.$save(
             function(data){
-                console.log(Object.keys(data));
                 window.localStorage['userId'] = data.id;
                 window.localStorage['userEmail'] = data.email;
                 $scope.modal.hide();
