@@ -1,4 +1,4 @@
-angular.module('wiscares.controllers', [])
+angular.module('wiscares.controllers', ['ui.router'])
 
 .controller('DashCtrl', function ($scope) {})
 
@@ -12,7 +12,6 @@ angular.module('wiscares.controllers', [])
     //$scope.$on('$ionicView.enter', function(e) {
     //});
     
-    console.log();
     Pets.query({"userId":"2"}).$promise.then(function (response) {
         $scope.pets = response;
     });
@@ -45,7 +44,14 @@ angular.module('wiscares.controllers', [])
         $scope.visits = response;
     });
 })
-.controller('PetAddCtrl', function ($scope, $stateParams, Pets, Events) {
+.controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets) {
+    $scope.pet = new Pets();  //create new movie instance. Properties will be set via ng-model on UI
+    $scope.pet.userId=2
+    $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
+      $scope.pet.$save(function() {
+      $state.go('tab.pets');
+    });
+  };
 })
 
 
