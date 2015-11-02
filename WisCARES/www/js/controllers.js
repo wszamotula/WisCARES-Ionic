@@ -88,10 +88,28 @@ angular.module('wiscares.controllers', ['ui.router'])
 .controller('VetsCtrl', function ($scope, Vets) {
     var userId = window.localStorage['userId'];
 
+    $scope.deleteVet = function(vet) { // Delete a movie. Issues a DELETE to /api/movies/:id
+    	vet.$delete(function() {
+    		Vets.query({"userId":userId}).$promise.then(function (response) {
+            	$scope.vets = response;
+        	});
+    	});
+  	};
+
     $scope.$on('$ionicView.enter', function() {
         Vets.query({"userId":userId}).$promise.then(function (response) {
             $scope.vets = response;
         });
+    });
+})
+
+.controller('VetDetailCtrl', function ($scope, $state, $stateParams, Vets) {
+    $scope.loadVet = function () { //Issues a GET request
+        $scope.vet = Vets.get({ id: $stateParams.id });
+    };
+
+    $scope.$on('$ionicView.enter', function() {
+        $scope.loadVet();
     });
 })
 

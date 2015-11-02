@@ -59,6 +59,12 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
         controller: 'VetAddCtrl'
       })
 
+    .state('vet-detail', {
+        url: '/vets/:id',
+        templateUrl: 'templates/vet-detail.html',
+        controller: 'VetDetailCtrl'
+      })
+
     .state('pets', {
         url: '/pets',
         templateUrl: 'templates/tab-pets.html',
