@@ -48,7 +48,7 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
         views: {
             'tab-home': {
                 templateUrl: 'templates/tab-home.html',
-                controller: 'DashCtrl'
+                controller: 'AppCtrl'
                 //controller: 'loginctrl'
             }
         }

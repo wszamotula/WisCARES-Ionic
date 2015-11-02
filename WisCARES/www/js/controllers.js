@@ -1,11 +1,6 @@
 angular.module('wiscares.controllers', [])
 
-.controller('DashCtrl', function ($scope) { 
-   $scope.$on('$ionicView.enter', function() {
-    $scope.login();
-  });
-   $scope.home 
-})
+.controller('DashCtrl', function ($scope) {})
 
 
 .controller('PetsCtrl', function ($scope, Pets) {
