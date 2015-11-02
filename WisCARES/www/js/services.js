@@ -7,51 +7,46 @@ angular.module('wiscares.services', [])
             method: 'PUT'
         }
     });
+})
 
-    // Some fake testing data
-    //var pets = [{
-    //  id: 0,
-    //  name: 'Monty',
-    //  species: 'Cat',
-    //  breed: 'Tabby'
-    //}, {
-    //  id: 1,
-    //  name: 'Fritz',
-    //  species: 'Cat',
-    //  breed: 'Tabby'
-    //}, {
-    //  id: 2,
-    //  name: 'Harold',
-    //  species: 'Dog',
-    //  breed: 'Husky'
-    //}, {
-    //  id: 3,
-    //  name: 'Alfred',
-    //  species: 'Bird',
-    //  breed: 'Parrot'
-    //}, {
-    //  id: 4,
-    //  name: 'Fluffy',
-    //  species: 'Dog',
-    //  breed: 'Beagle'
-    //}];
+.factory('HealthProblems', function ($resource) {
 
-    //return {
-    //  all: function() {
-    //    return pets;
-    //  },
-    //  remove: function(pet) {
-    //    pets.splice(pets.indexOf(pet), 1);
-    //  },
-    //  get: function(petId) {
-    //    for (var i = 0; i < pets.length; i++) {
-    //      if (pets[i].id === parseInt(petId)) {
-    //        return pets[i];
-    //      }
-    //    }
-    //    return null;
-    //  }
-    //};
+    return $resource("http://vast-bastion-6115.herokuapp.com/health_problems/:id.json", { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+})
+
+.factory('Medications', function ($resource) {
+
+    return $resource("http://vast-bastion-6115.herokuapp.com/medications/:id.json", { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+})
+
+.factory('Vaccinations', function ($resource) {
+
+    return $resource("http://vast-bastion-6115.herokuapp.com/vaccinations/:id.json", { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+})
+
+.factory('Visits', function ($resource) {
+
+    return $resource("http://vast-bastion-6115.herokuapp.com/visits/:id.json", { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+})
+
+.factory('UserSession', function($resource) {
+  return $resource("http://vast-bastion-6115.herokuapp.com/users/sign_in.json");
 })
 
 .factory('Events', function () {

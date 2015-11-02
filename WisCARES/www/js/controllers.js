@@ -27,14 +27,27 @@ angular.module('wiscares.controllers', [])
     //};
 })
 
-.controller('PetDetailCtrl', function ($scope, $stateParams, Pets, Events) {
+.controller('PetDetailCtrl', function ($scope, $stateParams, Events, Pets, HealthProblems, Medications, Vaccinations, Visits) {
     $scope.loadPet = function () { //Issues a GET request
         $scope.pet = Pets.get({ id: $stateParams.petId });
     };
 
-    $scope.events = Events.all();
-
     $scope.loadPet();
+    HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.healthproblems = response;
+    });
+
+    Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.vaccinations = response;
+    });
+
+    Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.medications = response;
+    });
+
+    Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.visits = response;
+    });
 })
 .controller('PetAddCtrl', function ($scope, $stateParams, Pets, Events) {
 })

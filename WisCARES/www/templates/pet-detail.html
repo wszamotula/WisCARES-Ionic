@@ -18,48 +18,42 @@
                     {{pet.gender}}
                 </p>
             </ion-item>
-                <ul class="eventTypeList">
-                    <li class="item item-checkbox eventType">
-                        <label class="checkbox">
-                            <input type="checkbox" checked>
-                        </label>
-                        Health problems
-                    </li>
-                    <li class="item item-checkbox eventType">
-                        <label class="checkbox">
-                            <input type="checkbox" checked>
-                        </label>
-                        Vaccinations
-                    </li>
-                    <li class="item item-checkbox eventType">
-                        <label class="checkbox">
-                            <input type="checkbox" checked>
-                        </label>
-                        Medications
-                    </li>
-                    <li class="item item-checkbox eventType">
-                        <label class="checkbox">
-                            <input type="checkbox" checked>
-                        </label>
-                        Visits
-                    </li>
-                    <li class="item item-checkbox eventType">
-                        <label class="checkbox">
-                            <input type="checkbox" checked>
-                        </label>
-                        Documents
-                    </li>
-                </ul>
-            <ion-item class="item-icon-right" type="item-text-wrap" href="#">
-                <i class="icon ion-ios-plus-empty"></i>
-                <h2>New event</h2>
-            </ion-item>
-            <ion-item ng-repeat="event in events" type="item-text-wrap" href="#">
-
-                <h2>{{event.type}} - {{event.name}}</h2>
-                <p>{{event.description}}</p>
-
-            </ion-item>
         </ion-list>
+        <div>Health Problems</div>
+        <div class="list card" ng-repeat="healthproblem in healthproblems">
+            <div class="item item-divider">{{healthproblem.dateOccurred}}</div>
+            <div class="item item-body">
+                <div>
+                    {{healthproblem.description}}   
+                </div>
+            </div>
+        </div>
+        <div>Medications</div>
+        <div class="list card" ng-repeat="medication in medications">
+            <div class="item item-divider">{{medication.name}}</div>
+            <div class="item item-body">
+                <div>
+                    {{medication.frequency}}   
+                </div>
+            </div>
+        </div>
+        <div>Visits</div>
+        <div class="list card" ng-repeat="visit in visits">
+            <div class="item item-divider">{{visit.dateVisited}}</div>
+            <div class="item item-body">
+                <div>
+                    {{visit.location}}   
+                </div>
+            </div>
+        </div>
+        <div>Vaccinations</div>
+        <div class="list card" ng-repeat="vaccination in vaccinations">
+            <div class="item item-divider">{{vaccination.dateGiven}}</div>
+            <div class="item item-body">
+                <div>
+                    {{vaccination.name}}   
+                </div>
+            </div>
+        </div>
     </ion-content>
 </ion-view>

@@ -24,13 +24,14 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
     });
 })
 
-.config(function ($stateProvider, $urlRouterProvider) {
-
+.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    $httpProvider.defaults.withCredentials = true;
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
     $stateProvider
+
 
     // setup an abstract state for the tabs directive
       .state('tab', {
@@ -52,7 +53,11 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
             }
         }
     })
-
+    .state('vets', {
+        url: '/vets',
+        templateUrl: 'templates/vets.html',
+        controller: 'VetsCtrl'
+    })
     .state('tab.pets', {
         url: '/pets',
         views: {
@@ -103,13 +108,5 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
 
 });
 
-var success = function(message) {
-    alert(message);
-}
 
-var failure = function() {
-    alert("Error calling Hello Plugin");
-}
-
-hello.greet("World", success, failure);
 

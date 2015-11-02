@@ -9,8 +9,8 @@
     <form ng-submit="doLogin()" name="loginForm">
       <div class="list">
         <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username" required>
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="loginData.email" required>
         </label>
         <label class="item item-input">
           <span class="input-label">Password</span>
@@ -25,10 +25,5 @@
       Sign up
     </button></div>
 
-    <div class="card" ng-show="valid_user">
-      <div class="item item-text-wrap" style="text-align: center">
-        Welcome to WisCARES
-      </div>
-    </div>
   </ion-content>
 </ion-modal-view>
