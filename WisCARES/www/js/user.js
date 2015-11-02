@@ -53,7 +53,6 @@ angular.module('loginCtrl', [])
 
         $scope.login = function () {
             $scope.loginData = {};
-
             $scope.modal.show();
         };
 

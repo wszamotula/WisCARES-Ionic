@@ -9,6 +9,42 @@ angular.module('wiscares.services', [])
     });
 })
 
+.factory('HealthProblems', function ($resource) {
+
+    return $resource("http://vast-bastion-6115.herokuapp.com/health_problems/:id.json", { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+})
+
+.factory('Medications', function ($resource) {
+
+    return $resource("http://vast-bastion-6115.herokuapp.com/medications/:id.json", { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+})
+
+.factory('Vaccinations', function ($resource) {
+
+    return $resource("http://vast-bastion-6115.herokuapp.com/vaccinations/:id.json", { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+})
+
+.factory('Visits', function ($resource) {
+
+    return $resource("http://vast-bastion-6115.herokuapp.com/visits/:id.json", { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+})
+
 .factory('UserSession', function($resource) {
   return $resource("http://vast-bastion-6115.herokuapp.com/users/sign_in.json");
 })
