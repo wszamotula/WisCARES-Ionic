@@ -67,7 +67,7 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
             }
         }
     })
-           .state('tab.pet-add', {
+      .state('tab.pet-add', {
           url: '/pets/pet-add',
           views: {
               'tab-pets': {
@@ -76,6 +76,17 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
               }
           }
       })  
+
+      .state('tab.pet-edit', {
+        url: '/pets/:id/edit',
+        views: {
+            'tab-pets': {
+                templateUrl: 'templates/pet-edit.html',
+                controller: 'PetEditCtrl'
+            }
+          }
+      })
+
       .state('tab.pet-detail', {
           url: '/pets/:petId',
           views: {

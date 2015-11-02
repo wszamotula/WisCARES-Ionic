@@ -4,7 +4,7 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="Add New Pet">
+<ion-view view-title="Editing">
     <ion-content class="padding">
         <ion-item class="item item-input">
             <span class="input-label">Pet Name</span>
@@ -31,7 +31,7 @@
                 <input type="text" placeholder="How much does your pet weigh?" ng-model="pet.weight" required>
         </ion-item>
         <label class="item">
-            <button class="button button-block button-positive" type="submit" ng-click="addPet()">Add Pet</button>
+            <button class="button button-block button-positive" type="submit" ng-click="updatePet()">Add Pet</button>
         </label>
     </ion-content>
 </ion-view>

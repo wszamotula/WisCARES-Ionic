@@ -44,6 +44,7 @@ angular.module('wiscares.controllers', ['ui.router'])
         $scope.visits = response;
     });
 })
+
 .controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets) {
     $scope.pet = new Pets();  //create new movie instance. Properties will be set via ng-model on UI
     $scope.pet.userId=2
@@ -52,6 +53,20 @@ angular.module('wiscares.controllers', ['ui.router'])
       $state.go('tab.pets');
     });
   };
+})
+
+.controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets) {
+  $scope.updatePet = function() { //Update the edited movie. Issues a PUT to /api/movies/:id
+        $scope.pet.$update(function() {
+            $state.go('tab.pets'); // on success go back to home i.e. movies state.
+        });
+  };
+
+  $scope.loadPet = function() { 
+    $scope.pet = Pets.get({ id: $stateParams.id });
+  };
+
+  $scope.loadPet(); // Load a movie which can be edited on UI
 })
 
 
