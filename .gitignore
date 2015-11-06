@@ -43,3 +43,6 @@ Temporary Items
 .apdisk
 WisCARES/www/templates/login.html
 WisCARES/www/templates/tab-home.html
+platforms/
+my-release-key.keystore
+

@@ -4,6 +4,10 @@ angular.module('wiscares.controllers', ['ui.router'])
 
 })
 
+.controller('OptionsCtrl', function ($scope) {
+
+})
+
 
 .controller('PetsCtrl', function ($scope, Pets) {
     // With the new view caching in Ionic, Controllers are only called
@@ -139,8 +143,14 @@ angular.module('wiscares.controllers', ['ui.router'])
   $scope.loadVet(); // Load a movie which can be edited on UI
 })
 
+.controller('OptionsCtrl', function ($scope) {
+
+})
+
 .controller('AccountCtrl', function ($scope) {
     $scope.settings = {
         enableFriends: true
     };
 });
+
+

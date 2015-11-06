@@ -4,8 +4,10 @@
         "uninstalled": []
     },
     "config_munge": {
+
         "files": {}
     },
     "installed_plugins": {},
+
     "dependent_plugins": {}
 }
