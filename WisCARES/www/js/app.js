@@ -82,7 +82,12 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
           templateUrl: 'templates/pet-add.html',
           controller: 'PetAddCtrl'
       })  
-
+      .state('event', {
+        url: 'pets/:id/edit/event',
+        templateUrl: 'templates/event.html',
+        //controller: 'AccountCtrl'
+        controller: 'AppCtrl'
+      })
       .state('pet-edit', {
           url: '/pets/:id/edit',
           templateUrl: 'templates/pet-edit.html',
@@ -101,7 +106,7 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
         //controller: 'AccountCtrl'
         //controller: 'AppCtrl'
     })
-
+    
 
       // .state('login', {
       //     url: '/login',
