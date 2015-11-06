@@ -109,6 +109,12 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
         //controller: 'AccountCtrl'
         //controller: 'AppCtrl'
     })
+
+    .state('options', {
+        url: '/options',
+        templateUrl: 'templates/options.html',
+        controller: 'OptionsCtrl'
+    })
     
 
       // .state('login', {
