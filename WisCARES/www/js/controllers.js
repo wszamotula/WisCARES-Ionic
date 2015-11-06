@@ -139,8 +139,14 @@ angular.module('wiscares.controllers', ['ui.router'])
   $scope.loadVet(); // Load a movie which can be edited on UI
 })
 
+.controller('OptionsCtrl', function ($scope) {
+
+})
+
 .controller('AccountCtrl', function ($scope) {
     $scope.settings = {
         enableFriends: true
     };
 });
+
+
