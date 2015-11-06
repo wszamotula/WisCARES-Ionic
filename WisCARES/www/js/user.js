@@ -1,6 +1,6 @@
 angular.module('loginCtrl', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicPopup, $localstorage, UserSession) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicPopup, $localstorage, UserSession, Auth) {
 
         //-------------------------------------------SIGN UP----------------------------------
     $scope.signUpDate = {};
@@ -59,21 +59,31 @@ angular.module('loginCtrl', [])
     };
 
     $scope.doLogin = function() {
-        var user_session = new UserSession({ user: $scope.loginData });
+        //var user_session = new UserSession({ user: $scope.loginData });
 
-        user_session.$save(
-            function(data){
-                window.localStorage['userId'] = data.id;
-                window.localStorage['userEmail'] = data.email;
-                $scope.modal.hide();
-            },
-            function(err){
-                //var error = err["data"]["error"] || err.data.join('. ')
-                var confirmPopup = $ionicPopup.alert({
-                    template: "Invalid username or password"
-                });
+        //user_session.$save(
+        //    function(data){
+        //        window.localStorage['userId'] = data.id;
+        //        window.localStorage['userEmail'] = data.email;
+        //        $scope.modal.hide();
+        //    },
+        //    function(err){
+        //        //var error = err["data"]["error"] || err.data.join('. ')
+        //        var confirmPopup = $ionicPopup.alert({
+        //            template: "Invalid username or password"
+        //        });
+        //    });
+
+        Auth.login($scope.loginData).then(function(user) {
+            window.localStorage['userId'] = user.id;
+            window.localStorage['user'] = user;
+            $scope.modal.hide();
+        }, function(error) {
+            // Authentication failed...
+            var confirmPopup = $ionicPopup.alert({
+                template: "Invalid username or password"
             });
-
+        });
     }
 
 })
