@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js 
 angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services',
- 'ngResource', 'loginCtrl', 'localstorage', 'ui.router'])
+ 'ngResource', 'loginCtrl', 'localstorage', 'ui.router', 'Devise'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -24,8 +24,11 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
     });
 })
 
-.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $httpProvider, AuthProvider) {
     $httpProvider.defaults.withCredentials = true;
+    AuthProvider.loginPath("http://vast-bastion-6115.herokuapp.com/users/sign_in.json");
+    AuthProvider.loginMethod("POST");
+    
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
     // Set up the various states which the app can be in.
