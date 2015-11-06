@@ -121,7 +121,17 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/home');
 
-});
+})
+
+  // Disable BACK button on home
+  $ionicPlatform.registerBackButtonAction(function (event) {
+    if($state.current.name=="home"){
+      navigator.app.exitApp();
+    }
+    else {
+      navigator.app.backHistory();
+    }
+  }, 100);
 
 
 
