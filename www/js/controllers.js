@@ -48,6 +48,13 @@ angular.module('wiscares.controllers', ['ui.router'])
         $scope.loadPet();
     });
 
+    $scope.filters = {
+        showHealthProblems : true,
+        showVaccinations : true,
+        showMedications : true,
+        showVisits : true
+    };
+
     HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.healthproblems = response;
     });

@@ -23,41 +23,77 @@
                 <a class="btn btn-primary" ng-click="deletePet()">Delete</a>
             </div>
             </ion-item>
-
+            <ion-item type="item-text-wrap">
+                <ul class="eventTypeList">
+                    <li class="item item-checkbox eventType">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="filters.showHealthProblems" >
+                        </label>
+                        Health problems
+                    </li>
+                    <li class="item item-checkbox eventType">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="filters.showVaccinations" >
+                        </label>
+                        Vaccinations
+                    </li>
+                    <li class="item item-checkbox eventType">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="filters.showMedications" >
+                        </label>
+                        Medications
+                    </li>
+                    <li class="item item-checkbox eventType">
+                        <label class="checkbox">
+                            <input type="checkbox" ng-model="filters.showVisits" >
+                        </label>
+                        Visits
+                    </li>
+                </ul>
+            </ion-item>
         </ion-list>
-        <div>Health Problems</div>
-        <div class="list card" ng-repeat="healthproblem in healthproblems">
-            <div class="item item-divider">{{healthproblem.dateOccurred}}</div>
-            <div class="item item-body">
-                <div>
-                    {{healthproblem.description}}   
+        <br />
+        <div ng-show="filters.showHealthProblems">
+            <h4>Health Problems</h4>
+            <div class="list card" ng-repeat="healthproblem in healthproblems">
+                <div class="item item-divider">{{healthproblem.dateOccurred}}</div>
+                <div class="item item-body">
+                    <div>
+                        {{healthproblem.description}}   
+                    </div>
                 </div>
             </div>
         </div>
-        <div>Medications</div>
-        <div class="list card" ng-repeat="medication in medications">
-            <div class="item item-divider">{{medication.name}}</div>
-            <div class="item item-body">
-                <div>
-                    {{medication.frequency}}   
+        <div ng-show="filters.showMedications">
+            <h4>Medications</h4>
+            <div class="list card" ng-repeat="medication in medications">
+                <div class="item item-divider">{{medication.name}}</div>
+                <div class="item item-body">
+                    <div>
+                        {{medication.frequency}}
+                    </div>
                 </div>
             </div>
         </div>
-        <div>Visits</div>
-        <div class="list card" ng-repeat="visit in visits">
-            <div class="item item-divider">{{visit.dateVisited}}</div>
-            <div class="item item-body">
-                <div>
-                    {{visit.location}}   
+        <div ng-show="filters.showVisits">
+            <h4>Visits</h4>
+            <div class="list card" ng-repeat="visit in visits">
+                <div class="item item-divider">{{visit.dateVisited}}</div>
+                <div class="item item-body">
+                    <div>
+                        {{visit.location}}   
+                    </div>
                 </div>
             </div>
         </div>
-        <div>Vaccinations</div>
-        <div class="list card" ng-repeat="vaccination in vaccinations">
-            <div class="item item-divider">{{vaccination.dateGiven}}</div>
-            <div class="item item-body">
-                <div>
-                    {{vaccination.name}}   
+        <div ng-show="filters.showVaccinations">
+            <h4>Vaccinations</h4>
+            <div class="list card" ng-repeat="vaccination in vaccinations">
+                <div class="item item-divider">{{vaccination.dateGiven}}</div>
+                <div class="item item-body">
+                    <div>
+                        {{vaccination.name}}
+                    </div>
                 </div>
             </div>
         </div>
