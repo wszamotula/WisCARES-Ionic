@@ -9,6 +9,23 @@ angular.module('wiscares.services', [])
     });
 })
 
+  .factory('CameraPopover', ['$q', function ($q) {
+      return {
+          getPicture: function (options) {
+              var q = $q.defer();
+
+              navigator.camera.getPicture(function (result) {
+
+                  q.resolve(result);
+              }, function (err) {
+                  q.reject(err);
+              }, options);
+
+              return q.promise;
+          }
+      }
+  }])
+
 .factory('HealthProblems', function ($resource) {
 
     return $resource("http://vast-bastion-6115.herokuapp.com/health_problems/:id.json", { id: '@id' }, {
