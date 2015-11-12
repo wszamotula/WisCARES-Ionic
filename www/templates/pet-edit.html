@@ -10,42 +10,49 @@
             <span class="input-label">Pet Name</span>
                 <input type="text" placeholder="Whats your pets name?" ng-model="pet.name" required>
         </ion-item>
-        <ion-item class="item item-input">
-            <span class="input-label">Birthday</span>
+        <div data-ng-controller="CameraCtrl">
+            <button class="button button-full button-positive" ng-click="showActionSheet()">
+                upload image
+            </button>
+            <progress max="100" value="0" id="ft-prog" ng-show="showProgress" class="progress"></progress>
+        </div>
+
+            <ion-item class="item item-input">
+                <span class="input-label">Birthday</span>
                 <input type="text" placeholder="When was your pet born?" ng-model="pet.birthDate">
-        </ion-item>
-        <ion-item class="item item-input">
-            <span class="input-label">Species</span>
+            </ion-item>
+            <ion-item class="item item-input">
+                <span class="input-label">Species</span>
                 <input type="text" placeholder="What kind of pet is it?" ng-model="pet.species" required>
-        </ion-item>
-        <ion-item class="item item-input">
-            <span class="input-label">Breed</span>
+            </ion-item>
+            <ion-item class="item item-input">
+                <span class="input-label">Breed</span>
                 <input type="text" placeholder="What breed is your pet?" ng-model="pet.breed">
-        </ion-item>
-        <ion-item class="item item-input">
-            <span class="input-label">Gender</span>
+            </ion-item>
+            <ion-item class="item item-input">
+                <span class="input-label">Gender</span>
                 <input type="text" placeholder="What is your pet's gender?" ng-model="pet.gender" required>
-        </ion-item>
-        <ion-item class="item item-input">
-            <span class="input-label">Weight</span>
+            </ion-item>
+            <ion-item class="item item-input">
+                <span class="input-label">Weight</span>
                 <input type="text" placeholder="How much does your pet weigh?" ng-model="pet.weight" required>
-        </ion-item>
-        <label class="item item-input-inset">
-            <button class="button button-small" ng-href="#/event">
-                _Health Problem_
-            </button>
-            <button class="button button-small" ng-href="#/event">
-                _Medications__
-            </button>
-            <button class="button button-small"ng-href="#/event">
-                __Visits__      
-            </button>
-            <button class="button button-small"ng-href="#/event">
-                _Vaccination_
-            </button>
-        </label>
-        <label class="item">
-            <button class="button button-block button-positive" type="submit" ng-click="updatePet()">Save Pet</button>
-        </label>
-    </ion-content>
+            </ion-item>
+            <label class="item item-input-inset">
+                <button class="button button-small" ng-href="#/event">
+                    _Health Problem_
+                </button>
+                <button class="button button-small" ng-href="#/event">
+                    _Medications__
+                </button>
+                <button class="button button-small" ng-href="#/event">
+                    __Visits__
+                </button>
+                <button class="button button-small" ng-href="#/event">
+                    _Vaccination_
+                </button>
+            </label>
+            <label class="item">
+                <button class="button button-block button-positive" type="submit" ng-click="updatePet()">Save Pet</button>
+            </label>
+</ion-content>
 </ion-view>
