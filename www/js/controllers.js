@@ -74,10 +74,10 @@ angular.module('wiscares.controllers', ['ui.router'])
 
 .controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets) {
     $scope.pet = new Pets();  //create new movie instance. Properties will be set via ng-model on UI
-    $scope.pet.userId=window.localStorage['userId']
+    $scope.pet.userId = window.localStorage['userId']
     $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
       $scope.pet.$save(function() {
-      $state.go('pets');
+        $state.go('pets');
     });
   };
 })
@@ -106,7 +106,7 @@ angular.module('wiscares.controllers', ['ui.router'])
         var hideSheet = $ionicActionSheet.show({
             buttons: [
               { text: 'Take Photo' },
-              { text: 'Take Phone from albums' }
+              { text: 'Take Photo from albums' }
             ],
             // destructiveText: 'Delete',
             titleText: 'Select photos from',
