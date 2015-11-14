@@ -1,7 +1,7 @@
 angular.module('wiscares.controllers', ['ui.router'])
 
 .controller('DashCtrl', function ($scope) {
-
+ 
 })
 
 .controller('OptionsCtrl', function ($scope) {
@@ -17,16 +17,16 @@ angular.module('wiscares.controllers', ['ui.router'])
     //
     //$scope.$on('$ionicView.enter', function(e) {
     //});
-    
 
     var userId = window.localStorage['userId'];
+
+    $scope.gotCalled = true;
 
     $scope.$on('$ionicView.enter', function() {
         Pets.query({"userId":userId}).$promise.then(function (response) {
             $scope.pets = response;
         });
     });
-
 
     //$scope.pets = Pets.all();
     //$scope.remove = function(pet) {
