@@ -49,6 +49,12 @@ describe('Pet details controller', function(){
     mockPetService = {
       query: function() {
         return {$promise: petQueryDeferred.promise};
+      },
+      get: function(id) {
+        return { id: 1, name: "Monty", species: "cat" };
+      },
+      $delete: function() {
+        //do nothing
       }
     }
 
@@ -77,7 +83,8 @@ describe('Pet details controller', function(){
     }
 
     //Watch for calls to each mocks query
-    spyOn(mockPetService, 'query').and.callThrough();
+    spyOn(mockPetService, 'get');
+    spyOn(mockPetService, '$delete');
     spyOn(mockHpService, 'query').and.callThrough();
     spyOn(mockVaccService, 'query').and.callThrough();
     spyOn(mockMedService, 'query').and.callThrough();
@@ -96,6 +103,26 @@ describe('Pet details controller', function(){
     });
 
   }));
+
+  describe('Loading inital pet list', function(){
+
+    it('should have called Pets.get', function() {
+      expect(mockPetService.get).toHaveBeenCalled();
+    });
+
+  });
+
+  describe('Deleting a pet', function(){
+  
+    beforeEach(function(){
+      $scope.deletePet;
+    });
+
+    it('should have called Pets.$delete', function() {
+      expect(mockPetService.get).toHaveBeenCalled();
+    });
+
+  });
 
   describe('Pet health problem queries', function() {
 
@@ -180,8 +207,6 @@ describe('Pet details controller', function(){
     });
 
   });
-
-  //TODO: Create tests to make sure pets are loaded/deleted correctly
 
   describe('Filter setup', function(){
 

@@ -34,7 +34,7 @@ angular.module('wiscares.controllers', ['ui.router','ngMockE2E'])
 
 })
 
-.controller('PetDetailCtrl', function ($scope, $state, $stateParams, Events, Pets, HealthProblems, Medications, Vaccinations, Visits) {
+.controller('PetDetailCtrl', function ($scope, $state, $stateParams, Pets, HealthProblems, Medications, Vaccinations, Visits) {
     $scope.loadPet = function () { //Issues a GET request
         $scope.pet = Pets.get({ id: $stateParams.petId });
     };
@@ -44,6 +44,7 @@ angular.module('wiscares.controllers', ['ui.router','ngMockE2E'])
     	$state.go('pets');
   	};
 
+    $scope.loadPet();
     $scope.$on('$ionicView.enter', function() {
         $scope.loadPet();
     });
