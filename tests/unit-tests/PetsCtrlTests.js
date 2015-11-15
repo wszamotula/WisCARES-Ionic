@@ -58,7 +58,7 @@ describe('Pets controller', function(){
 
   }));
 
-  describe('Pets.query', function() {
+  describe('Pets query', function() {
 
     beforeEach(function() {
       queryDeferred.resolve(mockPetsResponse);

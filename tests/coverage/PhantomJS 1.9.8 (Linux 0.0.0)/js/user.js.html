@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/user.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">js/</a> user.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.03% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>1/33</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.03% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>1/33</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module('loginCtrl', [])
+&nbsp;
+.controller('AppCtrl', <span class="fstat-no" title="function not covered" >function ($scope, $ionicModal, $timeout, $ionicPopup, $localstorage, UserSession, Auth) {</span>
+&nbsp;
+        //-------------------------------------------SIGN UP----------------------------------
+<span class="cstat-no" title="statement not covered" >    $scope.signUpDate = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $ionicModal.fromTemplateUrl('templates/signup.html', {</span>
+        scope: $scope
+    }).then(<span class="fstat-no" title="function not covered" >function (modal) {</span>
+<span class="cstat-no" title="statement not covered" >        $scope.sign_up_modal = modal;</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.signUp = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        $scope.signUpDate = {};</span>
+<span class="cstat-no" title="statement not covered" >        $scope.modal.hide();</span>
+<span class="cstat-no" title="statement not covered" >        $scope.sign_up_modal.show();</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.password_not_match = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        $ionicPopup.alert({</span>
+            template: 'Please make sure password and confirm password are same values'
+        });
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.closeSignup = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        $scope.sign_up_modal.hide();</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.doSignUp = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        console.log('Doing signup', $scope.signUpDate);</span>
+<span class="cstat-no" title="statement not covered" >        if ($scope.signUpDate.password != $scope.signUpDate.confirm_password){</span>
+<span class="cstat-no" title="statement not covered" >            $scope.password_not_match();</span>
+        }else{
+<span class="cstat-no" title="statement not covered" >            $localstorage.set($scope.signUpDate.username,$scope.signUpDate.password);</span>
+        }
+<span class="cstat-no" title="statement not covered" >        console.log($localstorage.get($scope.signUpDate.username));</span>
+    };
+&nbsp;
+&nbsp;
+        //-------------------------------------------LOGIN----------------------------------
+<span class="cstat-no" title="statement not covered" >    $scope.loginData = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $ionicModal.fromTemplateUrl('templates/login.html', {</span>
+        scope: $scope,
+        backdropClickToClose: false
+    }).then(<span class="fstat-no" title="function not covered" >function (modal) {</span>
+<span class="cstat-no" title="statement not covered" >        $scope.modal = modal;</span>
+<span class="cstat-no" title="statement not covered" >        $scope.login()</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.closeLogin = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        $scope.modal.hide();</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.login = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        $scope.loginData = {};</span>
+<span class="cstat-no" title="statement not covered" >        $scope.modal.show();</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.doLogin = <span class="fstat-no" title="function not covered" >function() {</span></span>
+        //var user_session = new UserSession({ user: $scope.loginData });
+&nbsp;
+        //user_session.$save(
+        //    function(data){
+        //        window.localStorage['userId'] = data.id;
+        //        window.localStorage['userEmail'] = data.email;
+        //        $scope.modal.hide();
+        //    },
+        //    function(err){
+        //        //var error = err["data"]["error"] || err.data.join('. ')
+        //        var confirmPopup = $ionicPopup.alert({
+        //            template: "Invalid username or password"
+        //        });
+        //    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        Auth.login($scope.loginData).then(<span class="fstat-no" title="function not covered" >function(user) {</span></span>
+<span class="cstat-no" title="statement not covered" >            window.localStorage['userId'] = user.id;</span>
+<span class="cstat-no" title="statement not covered" >            window.localStorage['user'] = user;</span>
+<span class="cstat-no" title="statement not covered" >            $scope.modal.hide();</span>
+        }, <span class="fstat-no" title="function not covered" >function(error) {</span>
+            // Authentication failed...
+<span class="cstat-no" title="statement not covered" >            var confirmPopup = $ionicPopup.alert({</span>
+                template: "Invalid username or password"
+            });
+        });
+    }
+&nbsp;
+})
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Nov 15 2015 16:00:08 GMT-0600 (CST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

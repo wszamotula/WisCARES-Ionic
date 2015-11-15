@@ -18,11 +18,10 @@ module.exports = function(config) {
       '../www/lib/angular/angular.js',
       '../www/lib/angular-mocks/angular-mocks.js',
       '../www/lib/ionic/js/ionic.bundle.js',
-      '**/*.js',
+      'unit-tests/*.js',
       '../www/lib/ionic/js/angular/angular-resource.min.js',
       '../www/lib/AngularDevise/lib/devise-min.js',
       '../www/js/*.js',
-      '../www/templates/*.html'
     ],
 
 
@@ -34,14 +33,14 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        '../www/templates/*.html' : 'html2js'
+        '../www/js/*.js' : 'coverage'
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
 
 
     // web server port
