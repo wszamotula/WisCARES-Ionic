@@ -20,13 +20,14 @@ angular.module('wiscares.controllers', ['ui.router'])
 
     var userId = window.localStorage['userId'];
 
-    $scope.gotCalled = true;
-
     $scope.$on('$ionicView.enter', function() {
-        Pets.query({"userId":userId}).$promise.then(function (response) {
+        Pets.query().$promise.then(function (response) {
             $scope.pets = response;
+            $scope.petsLoaded = true;
         });
     });
+
+    //{"userId":userId}
 
     //$scope.pets = Pets.all();
     //$scope.remove = function(pet) {
