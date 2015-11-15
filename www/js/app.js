@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js 
 angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services',
- 'ngResource', 'loginCtrl', 'localstorage', 'ui.router', 'Devise'])
+ 'ngResource', 'loginCtrl', 'localstorage', 'ui.router', 'Devise','ngMockE2E'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {

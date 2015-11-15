@@ -21,7 +21,8 @@ module.exports = function(config) {
       '**/*.js',
       '../www/lib/ionic/js/angular/angular-resource.min.js',
       '../www/lib/AngularDevise/lib/devise-min.js',
-      '../www/js/*.js'
+      '../www/js/*.js',
+      '../www/templates/*.html'
     ],
 
 
@@ -33,6 +34,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+        '../www/templates/*.html' : 'html2js'
     },
 
 

@@ -1,4 +1,4 @@
-describe('Pets controller', function(){
+describe('Pet details controller', function(){
   var $q, $rootScope, $scope, $httpBackend, mockPetService, queryDeferred,
   mockPetsResponse = [{
         id: 1,

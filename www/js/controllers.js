@@ -1,4 +1,4 @@
-angular.module('wiscares.controllers', ['ui.router'])
+angular.module('wiscares.controllers', ['ui.router','ngMockE2E'])
 
 .controller('DashCtrl', function ($scope) {
  
@@ -20,19 +20,18 @@ angular.module('wiscares.controllers', ['ui.router'])
 
     var userId = window.localStorage['userId'];
 
+    Pets.query().$promise.then(function (response) {
+        $scope.pets = response;
+        $scope.petsLoaded = true;
+    });
+
     $scope.$on('$ionicView.enter', function() {
-        Pets.query().$promise.then(function (response) {
+        Pets.query({"userId":userId}).$promise.then(function (response) {
             $scope.pets = response;
             $scope.petsLoaded = true;
         });
     });
 
-    //{"userId":userId}
-
-    //$scope.pets = Pets.all();
-    //$scope.remove = function(pet) {
-    // Pets.remove(pet);
-    //};
 })
 
 .controller('PetDetailCtrl', function ($scope, $state, $stateParams, Events, Pets, HealthProblems, Medications, Vaccinations, Visits) {
@@ -58,18 +57,22 @@ angular.module('wiscares.controllers', ['ui.router'])
 
     HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.healthproblems = response;
+        $scope.healthproblemsLoaded = true;
     });
 
     Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.vaccinations = response;
+        $scope.vaccinationsLoaded = true;
     });
 
     Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.medications = response;
+        $scope.medicationsLoaded = true;
     });
 
     Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.visits = response;
+        $scope.visitsLoaded = true;
     });
 })
 
