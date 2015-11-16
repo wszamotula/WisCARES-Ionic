@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/controllers.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">js/</a> controllers.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">35.82% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>24/67</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20.51% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>8/39</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">35.82% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>24/67</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module('wiscares.controllers', ['ui.router','ngMockE2E'])
+&nbsp;
+.controller('DashCtrl', <span class="fstat-no" title="function not covered" >function ($scope) {</span>
+ 
+})
+&nbsp;
+.controller('OptionsCtrl', <span class="fstat-no" title="function not covered" >function ($scope) {</span>
+&nbsp;
+})
+&nbsp;
+&nbsp;
+.controller('PetsCtrl', function ($scope, Pets) {
+    // With the new view caching in Ionic, Controllers are only called
+    // when they are recreated or on app start, instead of every page change.
+    // To listen for when this page is active (for example, to refresh data),
+    // listen for the $ionicView.enter event:
+    //
+    //$scope.$on('$ionicView.enter', function(e) {
+    //});
+&nbsp;
+    var userId = window.localStorage['userId'];
+&nbsp;
+    Pets.query().$promise.then(function (response) {
+        $scope.pets = response;
+        $scope.petsLoaded = true;
+    });
+&nbsp;
+    $scope.$on('$ionicView.enter', <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >        Pets.query({"userId":userId}).$promise.then(<span class="fstat-no" title="function not covered" >function (response) {</span></span>
+<span class="cstat-no" title="statement not covered" >            $scope.pets = response;</span>
+<span class="cstat-no" title="statement not covered" >            $scope.petsLoaded = true;</span>
+        });
+    });
+&nbsp;
+})
+&nbsp;
+.controller('PetDetailCtrl', function ($scope, $state, $stateParams, Pets, HealthProblems, Medications, Vaccinations, Visits) {
+    $scope.loadPet = function () { //Issues a GET request
+        $scope.pet = Pets.get({ id: $stateParams.petId });
+    };
+&nbsp;
+    $scope.deletePet = <span class="fstat-no" title="function not covered" >function() {</span> // Delete a movie. Issues a DELETE to /api/movies/:id
+<span class="cstat-no" title="statement not covered" >    	$scope.pet.$delete();</span>
+<span class="cstat-no" title="statement not covered" >    	$state.go('pets');</span>
+  	};
+&nbsp;
+    $scope.loadPet();
+    $scope.$on('$ionicView.enter', <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >        $scope.loadPet();</span>
+    });
+&nbsp;
+    $scope.filters = {
+        showHealthProblems : true,
+        showVaccinations : true,
+        showMedications : true,
+        showVisits : true
+    };
+&nbsp;
+    HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.healthproblems = response;
+        $scope.healthproblemsLoaded = true;
+    });
+&nbsp;
+    Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.vaccinations = response;
+        $scope.vaccinationsLoaded = true;
+    });
+&nbsp;
+    Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.medications = response;
+        $scope.medicationsLoaded = true;
+    });
+&nbsp;
+    Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.visits = response;
+        $scope.visitsLoaded = true;
+    });
+})
+&nbsp;
+.controller('PetAddCtrl', <span class="fstat-no" title="function not covered" >function ($scope, $stateParams, $state, Pets) {</span>
+<span class="cstat-no" title="statement not covered" >    $scope.pet = new Pets(); </span> //create new movie instance. Properties will be set via ng-model on UI
+<span class="cstat-no" title="statement not covered" >    $scope.pet.userId=window.localStorage['userId']</span>
+<span class="cstat-no" title="statement not covered" >    $scope.addPet = <span class="fstat-no" title="function not covered" >function() {</span> //create a new movie. Issues a POST to /api/movies</span>
+<span class="cstat-no" title="statement not covered" >      $scope.pet.$save(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >      $state.go('pets');</span>
+    });
+  };
+})
+&nbsp;
+.controller('PetEditCtrl', <span class="fstat-no" title="function not covered" >function ($scope, $state, $stateParams, Pets) {</span>
+<span class="cstat-no" title="statement not covered" >  $scope.updatePet = <span class="fstat-no" title="function not covered" >function() {</span> //Update the edited movie. Issues a PUT to /api/movies/:id</span>
+<span class="cstat-no" title="statement not covered" >        $scope.pet.$update(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >            $state.go('pet-detail', {petId: $scope.pet.id}); </span>// on success go back to home i.e. movies state.
+        });
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $scope.loadPet = <span class="fstat-no" title="function not covered" >function() { </span></span>
+<span class="cstat-no" title="statement not covered" >    $scope.pet = Pets.get({ id: $stateParams.id });</span>
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $scope.loadPet(); </span>// Load a movie which can be edited on UI
+})
+&nbsp;
+.controller('VetsCtrl', <span class="fstat-no" title="function not covered" >function ($scope, Vets) {</span>
+<span class="cstat-no" title="statement not covered" >    var userID = window.localStorage['userId'];</span>
+<span class="cstat-no" title="statement not covered" >    console.log(userID);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.deleteVet = <span class="fstat-no" title="function not covered" >function(vet) {</span> // Delete a movie. Issues a DELETE to /api/movies/:id</span>
+<span class="cstat-no" title="statement not covered" >    	vet.$delete(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >    		Vets.query({"userID":userID}).$promise.then(<span class="fstat-no" title="function not covered" >function (response) {</span></span>
+<span class="cstat-no" title="statement not covered" >            	$scope.vets = response;</span>
+        	});
+    	});
+  	};
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.$on('$ionicView.enter', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        Vets.query({"userID":userID}).$promise.then(<span class="fstat-no" title="function not covered" >function (response) {</span></span>
+<span class="cstat-no" title="statement not covered" >            $scope.vets = response;</span>
+        });
+    });
+})
+&nbsp;
+.controller('VetDetailCtrl', <span class="fstat-no" title="function not covered" >function ($scope, $state, $stateParams, Vets) {</span>
+<span class="cstat-no" title="statement not covered" >    $scope.loadVet = <span class="fstat-no" title="function not covered" >function () {</span> //Issues a GET request</span>
+<span class="cstat-no" title="statement not covered" >        $scope.vet = Vets.get({ id: $stateParams.id });</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $scope.$on('$ionicView.enter', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        $scope.loadVet();</span>
+    });
+})
+&nbsp;
+.controller('VetAddCtrl', <span class="fstat-no" title="function not covered" >function ($scope, $stateParams, $state, Vets) {</span>
+<span class="cstat-no" title="statement not covered" >    $scope.vet = new Vets(); </span> //create new movie instance. Properties will be set via ng-model on UI
+<span class="cstat-no" title="statement not covered" >    $scope.vet.userID=window.localStorage['userId']</span>
+<span class="cstat-no" title="statement not covered" >    console.log($scope.vet.userID);</span>
+<span class="cstat-no" title="statement not covered" >    $scope.addVet = <span class="fstat-no" title="function not covered" >function() {</span> //create a new movie. Issues a POST to /api/movies</span>
+<span class="cstat-no" title="statement not covered" >      $scope.vet.$save(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >      $state.go('vets');</span>
+    });
+  };
+})
+&nbsp;
+.controller('VetEditCtrl', <span class="fstat-no" title="function not covered" >function ($scope, $state, $stateParams, Vets) {</span>
+<span class="cstat-no" title="statement not covered" >  $scope.updateVet = <span class="fstat-no" title="function not covered" >function() {</span> //Update the edited movie. Issues a PUT to /api/movies/:id</span>
+<span class="cstat-no" title="statement not covered" >        $scope.vet.$update(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >            $state.go('vet-detail', {id: $scope.vet.id}); </span>// on success go back to home i.e. movies state.
+        });
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $scope.loadVet = <span class="fstat-no" title="function not covered" >function() { </span></span>
+<span class="cstat-no" title="statement not covered" >    $scope.vet = Vets.get({ id: $stateParams.id });</span>
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  $scope.loadVet(); </span>// Load a movie which can be edited on UI
+})
+&nbsp;
+.controller('OptionsCtrl', <span class="fstat-no" title="function not covered" >function ($scope) {</span>
+&nbsp;
+})
+&nbsp;
+.controller('AccountCtrl', <span class="fstat-no" title="function not covered" >function ($scope) {</span>
+<span class="cstat-no" title="statement not covered" >    $scope.settings = {</span>
+        enableFriends: true
+    };
+});
+&nbsp;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Nov 15 2015 16:59:36 GMT-0600 (CST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
