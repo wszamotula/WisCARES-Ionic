@@ -35,7 +35,7 @@ describe('Pet details controller', function(){
     $rootScope = _$rootScope_;
   }));
 
-  //Load the mocked controller
+  //Load the mocked controllers
   beforeEach(inject(function($controller) {
     //Create defered queries for each event type
     $scope = $rootScope.$new();
@@ -45,7 +45,7 @@ describe('Pet details controller', function(){
     medQueryDeferred = $q.defer();
     visitsQueryDeferred = $q.defer();
 
-    //Create mocked services for all event type calls
+    //Create mocked services
     mockPetService = {
       query: function() {
         return {$promise: petQueryDeferred.promise};
@@ -82,7 +82,7 @@ describe('Pet details controller', function(){
       }
     }
 
-    //Watch for calls to each mocks query
+    //Watch for calls to each mock
     spyOn(mockPetService, 'get');
     spyOn(mockPetService, '$delete');
     spyOn(mockHpService, 'query').and.callThrough();
