@@ -378,7 +378,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
         if( mm < 10 ) { mm = '0' + mm}
         $scope.visit.dateEntered = yyyy + '/' + mm + '/' + dd;
     });
-    
+
     $scope.addVisit = function() { 
         $scope.visit.$save(function() {
             $state.go('pet-detail', {petId: $scope.visit.petID});
@@ -444,6 +444,10 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
     $scope.settings = {
         enableFriends: true
     };
+})
+
+.controller('OptionsCtrl', function ($scope) {
+
 })
 
 ////////////////////////////////////////////////
