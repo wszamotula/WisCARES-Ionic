@@ -1,0 +1,13 @@
+<ion-view view-title="Add New Health Problem">
+    <ion-content class="padding">
+        <ion-item class="item item-input">
+            <span class="input-label">Health Problem</span>
+                <input type="text" placeholder="What type of problem is it?" ng-model="healthproblem.description">
+        </ion-item>
+        <ion-item class="item item-input">
+            <span class="input-label">Date Occured</span>
+                <input type="date" placeholder="When did it happen?" ng-model="healthproblem.dateOccurred">
+        </ion-item>
+        <button class="button button-block button-positive" type="submit" ng-click="addHP()">Add Vaccination</button>
+    </ion-content>
+</ion-view>

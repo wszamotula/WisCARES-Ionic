@@ -28,6 +28,8 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
     $httpProvider.defaults.withCredentials = true;
     AuthProvider.loginPath("http://vast-bastion-6115.herokuapp.com/users/sign_in.json");
     AuthProvider.loginMethod("POST");
+    AuthProvider.registerPath("http://vast-bastion-6115.herokuapp.com/users.json");
+    AuthProvider.registerMethod("POST");
     
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -85,12 +87,6 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
           templateUrl: 'templates/pet-add.html',
           controller: 'PetAddCtrl'
       })  
-      .state('event', {
-        url: 'pets/:id/edit/event',
-        templateUrl: 'templates/event.html',
-        //controller: 'AccountCtrl'
-        controller: 'AppCtrl'
-      })
       .state('pet-edit', {
           url: '/pets/:id/edit',
           templateUrl: 'templates/pet-edit.html',
@@ -101,6 +97,31 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
           url: '/pets/:petId',
           templateUrl: 'templates/pet-detail.html',
           controller: 'PetDetailCtrl'
+      })
+      .state('add-event', {
+        url: 'pets/:id/addEvent',
+        templateUrl: 'templates/event.html',
+        controller: 'EventCtrl'
+      })
+      .state('add-medication', {
+        url: 'pets/:id/addEvent/medication',
+        templateUrl: 'templates/med-add.html',
+        controller: 'MedCtrl'
+      })
+      .state('add-visit', {
+        url: 'pets/:id/addEvent/visit',
+        templateUrl: 'templates/visit-add.html',
+        controller: 'VisitCtrl'
+      })
+      .state('add-healthproblem', {
+        url: 'pets/:id/addEvent/healthproblem',
+        templateUrl: 'templates/hp-add.html',
+        controller: 'HealthProbCtrl'
+      })
+      .state('add-vaccination', {
+        url: 'pets/:id/addEvent/vaccination',
+        templateUrl: 'templates/vac-add.html',
+        controller: 'VacCtrl'
       })
 
     .state('account', {

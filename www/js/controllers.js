@@ -40,10 +40,63 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
     	$state.go('pets');
   	};
 
+    $scope.deleteMed = function(med) { // Delete a movie. Issues a DELETE to /api/movies/:id
+        med.$delete(function() {
+            Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+                $scope.medications = response;
+            });
+        });
+    };
+
+    $scope.deleteVac = function(vac) { // Delete a movie. Issues a DELETE to /api/movies/:id
+        vac.$delete(function() {
+            Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+                $scope.vaccinations = response;
+            });
+        });
+    };
+
+    $scope.deleteHP = function(hp) { // Delete a movie. Issues a DELETE to /api/movies/:id
+        hp.$delete(function() {
+            HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+                $scope.healthproblems = response;
+            });
+        });
+    };
+
+    $scope.deleteVisit = function(visit) { // Delete a movie. Issues a DELETE to /api/movies/:id
+        visit.$delete(function() {
+            Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+                $scope.visits = response;
+            });
+        });
+    };
+
     $scope.$on('$ionicView.enter', function() {
         $scope.loadPet();
+        HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+            $scope.healthproblems = response;
+        });
+
+        Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+            $scope.vaccinations = response;
+        });
+
+        Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+            $scope.medications = response;
+        });
+
+        Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+            $scope.visits = response;
+        });
     });
 
+    $scope.filters = {
+         showHealthProblems : true,
+         showVaccinations : true,
+         showMedications : true,
+         showVisits : true
+     };
     HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.healthproblems = response;
     });
@@ -64,6 +117,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
 .controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets, ImageUploader) {
     $scope.pet = new Pets();  //create new movie instance. Properties will be set via ng-model on UI
     $scope.pet.userId = window.localStorage['userId']
+
 
     $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
         //if(typeof $scope.pet.imageURI == "undefined") {
@@ -240,6 +294,97 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
     };*/
 
 }])
+
+.controller('EventCtrl', function ($scope, $stateParams) {
+    $scope.petID = $stateParams.id
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if( dd < 10 ) { dd = '0' + dd}
+    if( mm < 10 ) { mm = '0' + mm}
+    today = yyyy + '/' + mm + '/' + dd;
+    console.log(today);
+})
+
+.controller('MedCtrl', function ($scope, $stateParams, $state, Medications){
+    $scope.$on('$ionicView.enter', function() {
+        $scope.medication = new Medications();
+        $scope.medication.petID = $stateParams.id;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if( dd < 10 ) { dd = '0' + dd}
+        if( mm < 10 ) { mm = '0' + mm}
+        $scope.medication.dateEntered = yyyy + '/' + mm + '/' + dd;
+    });
+
+    $scope.addMed = function() { //create a new movie. Issues a POST to /api/movies
+        $scope.medication.$save(function() {
+            $state.go('pet-detail', {petId: $scope.medication.petID});
+        });
+    };
+})
+
+.controller('VacCtrl', function ($scope, $stateParams, $state, Vaccinations){
+    $scope.$on('$ionicView.enter', function() {    
+        $scope.vaccination = new Vaccinations(); 
+        $scope.vaccination.petID = $stateParams.id;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if( dd < 10 ) { dd = '0' + dd}
+        if( mm < 10 ) { mm = '0' + mm}
+        $scope.vaccination.dateEntered = yyyy + '/' + mm + '/' + dd;
+    });
+        $scope.addVac = function() { 
+            $scope.vaccination.$save(function() {
+                $state.go('pet-detail', {petId: $scope.vaccination.petID});
+            });
+        };
+})
+
+.controller('HealthProbCtrl', function ($scope, $stateParams, $state, HealthProblems){
+    $scope.$on('$ionicView.enter', function() {  
+        $scope.healthproblem = new HealthProblems(); 
+        $scope.healthproblem.petID = $stateParams.id;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if( dd < 10 ) { dd = '0' + dd}
+        if( mm < 10 ) { mm = '0' + mm}
+        $scope.healthproblem.dateEntered = yyyy + '/' + mm + '/' + dd;
+    });
+
+    $scope.addHP = function() { 
+        $scope.healthproblem.$save(function() {
+            $state.go('pet-detail', {petId: $scope.healthproblem.petID});
+        });
+    };
+})
+
+.controller('VisitCtrl', function ($scope, $stateParams, $state, Visits){
+    $scope.$on('$ionicView.enter', function() {  
+        $scope.visit = new Visits(); 
+        $scope.visit.petID = $stateParams.id;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if( dd < 10 ) { dd = '0' + dd}
+        if( mm < 10 ) { mm = '0' + mm}
+        $scope.visit.dateEntered = yyyy + '/' + mm + '/' + dd;
+    });
+    
+    $scope.addVisit = function() { 
+        $scope.visit.$save(function() {
+            $state.go('pet-detail', {petId: $scope.visit.petID});
+        });
+    };
+})
 
 .controller('VetsCtrl', function ($scope, Vets) {
     var userID = window.localStorage['userId'];
