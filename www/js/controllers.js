@@ -313,14 +313,14 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
         $scope.medication.petID = $stateParams.id;
         var today = new Date();
         var dd = today.getDate();
-        var mm = today.getMonth() + 1;
+        var mm = today.getMonth() + 1();
         var yyyy = today.getFullYear();
         if( dd < 10 ) { dd = '0' + dd}
         if( mm < 10 ) { mm = '0' + mm}
         $scope.medication.dateEntered = yyyy + '/' + mm + '/' + dd;
     });
 
-    $scope.addMed = function() { //create a new movie. Issues a POST to /api/movies
+    $scope.addMed = function() { //create a new med. Issues a POST to /api/movies
         $scope.medication.$save(function() {
             $state.go('pet-detail', {petId: $scope.medication.petID});
         });
@@ -454,9 +454,30 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
 // Resources and MAPS controler functions
 ///////////////////////////////////////////////
 
+.controller('Resources', function($scope, $state, $stateParams) {
+        $scope.search = function() { 
+            console.log("search resource =: ", resource);
+            $state.go('map-search');
+    };
+})
+.controller('MapVet', function($scope, $state, $cordovaGeolocation, GoogleMaps) {
+      resource = 'veterinary_care';
+      
+      //var resource = document.getElementById("resource").value;
+      //console.log("MApCtrl resource =: ", resource);
+      GoogleMaps.init();
+})
 
-.controller('MapCtrl', function($scope, $state, $cordovaGeolocation, GoogleMaps) {
-      //var resource = 'veterinary_care';
+.controller('MapSupplies', function($scope, $state, $cordovaGeolocation, GoogleMaps) {
+      resource = 'grocery_or_supermarket';
+      
+      //var resource = document.getElementById("resource").value;
+      //console.log("MApCtrl resource =: ", resource);
+      GoogleMaps.init();
+})
+
+.controller('MapSearch', function($scope, $state, $cordovaGeolocation, GoogleMaps) {
+      //resource = 'grocery_or_supermarket';
       
       //var resource = document.getElementById("resource").value;
       //console.log("MApCtrl resource =: ", resource);
@@ -465,10 +486,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
 
 
 .factory('Markers', function($http) {
-
   var markers = [];
-
-
   return {
     getMarkers: function(params){
 
@@ -490,7 +508,6 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
   var map = null;
   var service = null;
   var infowindow;
-  //var resource = 'veterinary_care';
 
   function initMap(){
     //console.log("initMap resource =: ", resource);
@@ -585,11 +602,10 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
 
   function loadMarkers(){
 
-      console.log("loadMarkers resource =: ", resource);
       var center = map.getCenter();
       var bounds = map.getBounds();
       var zoom = map.getZoom();
-      var resource = 'veterinary_care';
+      //var resource = 'veterinary_care';
 
       //Convert objects returned by Google to be more readable
       var centerNorm = {
@@ -619,8 +635,9 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
 
      var service = new google.maps.places.PlacesService(map);
 
+     //
      //var resource = document.getElementById("resource").innerHTML;
-     console.log(document.getElementById("resource").innerHTML);
+     //console.log(document.getElementById("resource").innerHTML);
      console.log("loadMarkers resource =: ", resource);
 
      var search = {
@@ -645,7 +662,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
   }
 
   function createMarker(place) {
-    //console.log("Marker: ", place);
+    console.log("Marker: ", place);
   var placeLoc = place.geometry.location;
   var marker = new google.maps.Marker({
     map: map,

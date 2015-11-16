@@ -5,6 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js 
+var resource = '';
 angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
   'wiscares.services', 'ngResource', 'loginCtrl', 'localstorage', 'ui.router', 'Devise'])
 
@@ -140,8 +141,24 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
     .state('resources', {
         url: '/resources',
         templateUrl: 'templates/resources.html',
-        controller: 'MapCtrl'
+        controller: 'Resources'
     })
+    .state('map-vet', {
+        url: '/map-vet',
+        templateUrl: 'templates/map-vet.html',
+        controller: 'MapVet'
+    })
+    .state('map-supplies', {
+        url: '/map-supplies',
+        templateUrl: 'templates/map-supplies.html',
+        controller: 'MapSupplies'
+    })
+    .state('map-search', {
+        url: '/map-search',
+        templateUrl: 'templates/map-search.html',
+        controller: 'MapSearch'
+    })
+    
 
     
 
