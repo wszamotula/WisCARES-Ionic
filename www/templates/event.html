@@ -1,7 +1,8 @@
-<ion-view view-title="Add New Pet">
+<ion-view view-title="Add New Pet Event">
     <ion-content class="padding">
-        <ion-item class="item item-input">
-            <span class="input-label">Pet Name</span>
-        </ion-item>
+        <button class="button button-block button-light", ui-sref="add-vaccination({id:petID})">Add a new Vaccination</button>
+        <button class="button button-block button-light", ui-sref="add-visit({id:petID})">Add a new Visit</button>
+        <button class="button button-block button-light", ui-sref="add-healthproblem({id:petID})">Add a new Health Problem</button>
+        <button class="button button-block button-light", ui-sref="add-medication({id:petID})">Add a new Medication</button>
     </ion-content>
 </ion-view>

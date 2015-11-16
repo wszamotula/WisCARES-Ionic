@@ -1,0 +1,13 @@
+<ion-view view-title="Add New Vaccination">
+    <ion-content class="padding">
+        <ion-item class="item item-input">
+            <span class="input-label">Vaccination Name</span>
+                <input type="text" placeholder="What is the name of the Vaccination?" ng-model="vaccination.name">
+        </ion-item>
+        <ion-item class="item item-input">
+            <span class="input-label">Date Given</span>
+                <input type="date" placeholder="When was the vaccination given?" ng-model="vaccination.dateGiven">
+        </ion-item>
+        <button class="button button-block button-positive" type="submit" ng-click="addVac()">Add Vaccination</button>
+    </ion-content>
+</ion-view>

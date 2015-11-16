@@ -6,8 +6,8 @@
         <form ng-submit="doSignUp()" name="signUpForm">
             <div class="list">
                 <label class="item item-input">
-                    <span class="input-label">Username</span>
-                    <input type="text" name="username" placeholder="4-20 letter is allowed" ng-model="signUpDate.username" ng-minlength="4" ng-maxlength="20" required>
+                    <span class="input-label">Email</span>
+                    <input type="text" name="username" placeholder="4-20 letter is allowed" ng-model="signUpDate.email" ng-minlength="4" ng-maxlength="20" required>
                 </label>
 
                 <label class="item item-input">
@@ -17,7 +17,7 @@
 
                 <label class="item item-input">
                     <span class="input-label">Confirm Password</span>
-                    <input type="password" name="confirm_password" ng-model="signUpDate.confirm_password" placeholder="confirm password" required>
+                    <input type="password" name="password_confirmation" ng-model="signUpDate.password_confirmation" placeholder="confirm password" required>
                 </label>
                 <label class="item">
                     <button class="button button-block button-positive" type="submit" ng_disabled="!signUpForm.$valid">Sign up</button>

@@ -19,8 +19,9 @@
                     {{pet.gender}}
                 </p>
             <div>
-                <a class="btn btn-primary" ui-sref="pet-edit({id:pet.id})">Edit</a>
-                <a class="btn btn-primary" ng-click="deletePet()">Delete</a>
+                <a class="button button-clear button-positive" ui-sref="pet-edit({id:pet.id})">Edit</a>
+                <a class="button button-clear button-positive" ui-sref="add-event({id:pet.id})">Add Event</a>
+                <a class="button button-clear button-assertive" ng-click="deletePet()">Delete</a>
             </div>
             </ion-item>
             <ion-item type="item-text-wrap">
@@ -60,6 +61,7 @@
                 <div class="item item-body">
                     <div>
                         {{healthproblem.description}}   
+                        <button class="btn btn-primary" ng-click="deleteHP(healthproblem)">Delete</button>
                     </div>
                 </div>
             </div>
@@ -71,6 +73,7 @@
                 <div class="item item-body">
                     <div>
                         {{medication.frequency}}
+                        <button class="btn btn-primary" ng-click="deleteMed(medication)">Delete</button>
                     </div>
                 </div>
             </div>
@@ -82,6 +85,7 @@
                 <div class="item item-body">
                     <div>
                         {{visit.location}}   
+                        <button class="btn btn-primary" ng-click="deleteVisit(visit)">Delete</button>
                     </div>
                 </div>
             </div>
@@ -89,10 +93,11 @@
         <div ng-show="filters.showVaccinations">
             <h4>Vaccinations</h4>
             <div class="list card" ng-repeat="vaccination in vaccinations">
-                <div class="item item-divider">{{vaccination.dateGiven}}</div>
+                <div class="item item-divider">{{vaccination.name}}</div>
                 <div class="item item-body">
                     <div>
-                        {{vaccination.name}}
+                        {{vaccination.dateGiven}}
+                        <button class="btn btn-primary" ng-click="deleteVac(vaccination)">Delete</button>
                     </div>
                 </div>
             </div>

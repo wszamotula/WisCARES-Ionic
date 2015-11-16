@@ -1,0 +1,13 @@
+<ion-view view-title="Add New Visit">
+    <ion-content class="padding">
+        <ion-item class="item item-input">
+            <span class="input-label">Visit</span>
+                <input type="text" placeholder="Where did the visit happen?" ng-model="visit.location">
+        </ion-item>
+        <ion-item class="item item-input">
+            <span class="input-label">Date Occured</span>
+                <input type="date" placeholder="When did it happen?" ng-model="visit.dateVisited">
+        </ion-item>
+        <button class="button button-block button-positive" type="submit" ng-click="addVisit()">Add Vaccination</button>
+    </ion-content>
+</ion-view>

@@ -1,4 +1,4 @@
-angular.module('wiscares.controllers', ['ui.router'])
+angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
 
 .controller('DashCtrl', function ($scope) {
 
@@ -40,10 +40,63 @@ angular.module('wiscares.controllers', ['ui.router'])
     	$state.go('pets');
   	};
 
+    $scope.deleteMed = function(med) { // Delete a movie. Issues a DELETE to /api/movies/:id
+        med.$delete(function() {
+            Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+                $scope.medications = response;
+            });
+        });
+    };
+
+    $scope.deleteVac = function(vac) { // Delete a movie. Issues a DELETE to /api/movies/:id
+        vac.$delete(function() {
+            Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+                $scope.vaccinations = response;
+            });
+        });
+    };
+
+    $scope.deleteHP = function(hp) { // Delete a movie. Issues a DELETE to /api/movies/:id
+        hp.$delete(function() {
+            HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+                $scope.healthproblems = response;
+            });
+        });
+    };
+
+    $scope.deleteVisit = function(visit) { // Delete a movie. Issues a DELETE to /api/movies/:id
+        visit.$delete(function() {
+            Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+                $scope.visits = response;
+            });
+        });
+    };
+
     $scope.$on('$ionicView.enter', function() {
         $scope.loadPet();
+        HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+            $scope.healthproblems = response;
+        });
+
+        Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+            $scope.vaccinations = response;
+        });
+
+        Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+            $scope.medications = response;
+        });
+
+        Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+            $scope.visits = response;
+        });
     });
 
+    $scope.filters = {
+         showHealthProblems : true,
+         showVaccinations : true,
+         showMedications : true,
+         showVisits : true
+     };
     HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.healthproblems = response;
     });
@@ -61,21 +114,58 @@ angular.module('wiscares.controllers', ['ui.router'])
     });
 })
 
-.controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets) {
-    $scope.pet = new Pets();  //create new pet instance. Properties will be set via ng-model on UI
-    $scope.pet.userId=window.localStorage['userId']
-    $scope.addPet = function() { //create a new pet. Issues a POST to /api/pets
-      $scope.pet.$save(function() {
-      $state.go('pets');
-    });
-  };
+.controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets, ImageUploader) {
+    $scope.pet = new Pets();  //create new movie instance. Properties will be set via ng-model on UI
+    $scope.pet.userId = window.localStorage['userId']
+
+
+    $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
+        //if(typeof $scope.pet.imageURI == "undefined") {
+            $scope.pet.$save(function() {
+                $state.go('pets');
+            });
+        //} else {
+            //ImageUploader.uploadImage($scope.pet);
+            //$state.go('pets');
+            //window.resolveLocalFileSystemURL($scope.pet.imageURI, ImageUploader.createFile, ImageUploader.fail);
+        //}
+
+    };
 })
 
-.controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets) {
-  $scope.updatePet = function() { //Update the edited pet. Issues a PUT to /api/pets/:id
-        $scope.pet.$update(function() {
-            $state.go('pet-detail', {petId: $scope.pet.id}); // on success go back to home i.e. pet state.
-        });
+.controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets, Upload) {
+  function fail(error) {
+    console.log("fail: " + error.code);
+  }
+
+  function uploadImage(imageFile) {
+    console.log("http://vast-bastion-6115.herokuapp.com/pets/" + $scope.pet.id);
+    Upload.upload({
+        url: "http://vast-bastion-6115.herokuapp.com/pets/" + $scope.pet.id,
+        method: 'POST',
+        fields: { 'pet[name]': $scope.pet.name, 'pet[userId]': $scope.pet.userId, 'pet[species]': $scope.pet.species,
+        'pet[breed]': $scope.pet.breed, 'pet[gender]': $scope.pet.gender, 'pet[birthDate]': $scope.pet.birthDate,
+        'pet[weight]': $scope.pet.weight},
+        file: imageFile,
+        fileFormDataName: 'pet[photo]'
+    });
+  }
+
+  function createFile(fileEntry) {
+    fileEntry.file(uploadImage, fail)
+  };
+  
+  $scope.updatePet = function() { //Update the edited movie. Issues a PUT to /api/movies/:id
+        console.log(Object.keys($scope.pet));
+        console.log(typeof $scope.pet.imageURI == "undefined");
+        console.log($scope.pet.imageURI);
+        if(typeof $scope.pet.imageURI == "undefined") {
+            $scope.pet.$update(function() {
+                $state.go('pet-detail', {petId: $scope.pet.id}); // on success go back to home i.e. movies state.
+            });
+        } else {
+            window.resolveLocalFileSystemURL($scope.pet.imageURI, createFile, fail);
+        }
   };
 
   $scope.loadPet = function() { 
@@ -83,6 +173,217 @@ angular.module('wiscares.controllers', ['ui.router'])
   };
 
   $scope.loadPet(); // Load a pet which can be edited on UI
+})
+
+.controller('CameraCtrl', ['$scope', "CameraPopover", "$ionicActionSheet", function ($scope, CameraPopover, $ionicActionSheet) {
+    $scope.showProgress = false;
+
+
+    //var uploadFileUrl = "serve api";
+
+    $scope.showActionSheet = function () {
+        // Show the action sheet
+        console.log(Object.keys($scope.pet));
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+              { text: 'Take Photo' },
+              { text: 'Use Photo from Albums' }
+            ],
+            // destructiveText: 'Delete',
+            titleText: 'Select photos from',
+            cancelText: 'Cancel',
+            cancel: function () {
+                hideSheet();
+            },
+            buttonClicked: function (index) {
+                // click "take phone"
+                if (index == 0) {
+                    var options = {
+                        quality: 100,
+                        allowEdit: true,
+                        targetWidth: 500,
+                        targetHeight: 225,
+                        // Android doesn't recognize this.
+                        // http://stackoverflow.com/questions/29392639/error-capturing-image-with-phonegap-on-android
+                        // saveToPhotoAlbum: true,
+                        sourceType: Camera.PictureSourceType.CAMERA,
+                        encodingType: Camera.EncodingType.JPEG,
+                        destinationType: Camera.DestinationType.FILE_URI
+                    };
+                    CameraPopover.getPicture(options).then(function (imageURI) {
+                        $scope.pet.imageURI = imageURI;
+                    }, function (err) {
+                        console.error(err);
+                    });
+                } else if (index == 1) {
+                    var options = {
+                        quality: 100,
+                        allowEdit: true,
+                        targetWidth: 500,
+                        targetHeight: 225,
+                        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                        encodingType: Camera.EncodingType.JPEG,
+                        destinationType: Camera.DestinationType.FILE_URI
+                    };
+                    CameraPopover.getPicture(options).then(function (imageURI) {
+                        console.log(imageURI);
+                        $scope.pet.imageURI = imageURI;
+                    }, function (err) {
+                        console.error(err);
+                    });
+                } else {
+                    return true;
+                }
+                hideSheet();
+            }
+        });
+    };
+
+    // upload file with a imageURI
+    /*var uploadFile = function (imageURI) {
+        // show the progress bar
+        safeApply($scope, function () {
+            $scope.showProgress = true;
+        });
+        var uploadOptions = new FileUploadOptions();
+        uploadOptions.fileKey = "petImage";
+        uploadOptions.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+        uploadOptions.mimeType = "image/jpeg";
+        uploadOptions.chunkedMode = false;
+
+        var ft = new FileTransfer();
+
+        var statusDom = document.getElementById("ft-prog");
+
+        ft.onprogress = function (progressEvent) {
+            if (progressEvent.lengthComputable) {
+                var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+                statusDom.value = perc;
+                if (perc == 100) {
+                    safeApply($scope, function () {
+                        $scope.showProgress = false;
+                    });
+                }
+            } else {
+                console.log("loading....");
+            }
+        };
+
+        ft.upload(imageURI, encodeURI(uploadFileUrl), onSuccess, onFail, uploadOptions, true);
+
+        function onSuccess(responseData) {
+            responseString = JSON.stringify(responseData);
+            responseObject = JSON.parse(responseString);
+            responsePerson = JSON.parse(responseObject.response);
+            safeApply($scope, function () {
+                // update url
+            });
+        };
+        function onFail() {
+            alert("something wrong, please try again");
+        };
+    };
+
+    //get photos form device and return a file path url
+    var takePicture = function (options) {
+        CameraPopover.getPicture(options).then(function (imageURI) {
+            uploadFile(imageURI);
+        }, function (err) {
+            console.error(err);
+        });
+    };*/
+
+}])
+
+.controller('EventCtrl', function ($scope, $stateParams) {
+    $scope.petID = $stateParams.id
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if( dd < 10 ) { dd = '0' + dd}
+    if( mm < 10 ) { mm = '0' + mm}
+    today = yyyy + '/' + mm + '/' + dd;
+    console.log(today);
+})
+
+.controller('MedCtrl', function ($scope, $stateParams, $state, Medications){
+    $scope.$on('$ionicView.enter', function() {
+        $scope.medication = new Medications();
+        $scope.medication.petID = $stateParams.id;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if( dd < 10 ) { dd = '0' + dd}
+        if( mm < 10 ) { mm = '0' + mm}
+        $scope.medication.dateEntered = yyyy + '/' + mm + '/' + dd;
+    });
+
+    $scope.addMed = function() { //create a new movie. Issues a POST to /api/movies
+        $scope.medication.$save(function() {
+            $state.go('pet-detail', {petId: $scope.medication.petID});
+        });
+    };
+})
+
+.controller('VacCtrl', function ($scope, $stateParams, $state, Vaccinations){
+    $scope.$on('$ionicView.enter', function() {    
+        $scope.vaccination = new Vaccinations(); 
+        $scope.vaccination.petID = $stateParams.id;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if( dd < 10 ) { dd = '0' + dd}
+        if( mm < 10 ) { mm = '0' + mm}
+        $scope.vaccination.dateEntered = yyyy + '/' + mm + '/' + dd;
+    });
+        $scope.addVac = function() { 
+            $scope.vaccination.$save(function() {
+                $state.go('pet-detail', {petId: $scope.vaccination.petID});
+            });
+        };
+})
+
+.controller('HealthProbCtrl', function ($scope, $stateParams, $state, HealthProblems){
+    $scope.$on('$ionicView.enter', function() {  
+        $scope.healthproblem = new HealthProblems(); 
+        $scope.healthproblem.petID = $stateParams.id;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if( dd < 10 ) { dd = '0' + dd}
+        if( mm < 10 ) { mm = '0' + mm}
+        $scope.healthproblem.dateEntered = yyyy + '/' + mm + '/' + dd;
+    });
+
+    $scope.addHP = function() { 
+        $scope.healthproblem.$save(function() {
+            $state.go('pet-detail', {petId: $scope.healthproblem.petID});
+        });
+    };
+})
+
+.controller('VisitCtrl', function ($scope, $stateParams, $state, Visits){
+    $scope.$on('$ionicView.enter', function() {  
+        $scope.visit = new Visits(); 
+        $scope.visit.petID = $stateParams.id;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if( dd < 10 ) { dd = '0' + dd}
+        if( mm < 10 ) { mm = '0' + mm}
+        $scope.visit.dateEntered = yyyy + '/' + mm + '/' + dd;
+    });
+
+    $scope.addVisit = function() { 
+        $scope.visit.$save(function() {
+            $state.go('pet-detail', {petId: $scope.visit.petID});
+        });
+    };
 })
 
 .controller('VetsCtrl', function ($scope, Vets) {
@@ -143,6 +444,10 @@ angular.module('wiscares.controllers', ['ui.router'])
     $scope.settings = {
         enableFriends: true
     };
+})
+
+.controller('OptionsCtrl', function ($scope) {
+
 })
 
 ////////////////////////////////////////////////
