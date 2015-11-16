@@ -5,6 +5,7 @@
     "ionic": "driftyco/ionic-bower#1.1.0"
   },
   "dependencies": {
-    "AngularDevise": "angular-devise#~1.1.0"
+    "AngularDevise": "angular-devise#~1.1.0",
+    "ng-file-upload": "~10.0.2"
   }
 }

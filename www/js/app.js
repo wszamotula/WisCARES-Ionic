@@ -130,14 +130,14 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
 })
 
   // Disable BACK button on home
-  $ionicPlatform.registerBackButtonAction(function (event) {
+  /*$ionicPlatform.registerBackButtonAction(function (event) {
     if($state.current.name=="home"){
       navigator.app.exitApp();
     }
     else {
       navigator.app.backHistory();
     }
-  }, 100);
+  }, 100);*/
 
 
 

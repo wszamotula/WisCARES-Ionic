@@ -1,4 +1,4 @@
-angular.module('wiscares.controllers', ['ui.router'])
+angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
 
 .controller('DashCtrl', function ($scope) {
 
@@ -72,21 +72,57 @@ angular.module('wiscares.controllers', ['ui.router'])
     });
 })
 
-.controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets) {
+.controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets, ImageUploader) {
     $scope.pet = new Pets();  //create new movie instance. Properties will be set via ng-model on UI
     $scope.pet.userId = window.localStorage['userId']
+
     $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
-      $scope.pet.$save(function() {
-        $state.go('pets');
-    });
-  };
+        if(typeof $scope.pet.imageURI == "undefined") {
+            $scope.pet.$save(function() {
+                $state.go('pets');
+            });
+        } else {
+            ImageUploader.uploadImage($scope.pet);
+            $state.go('pets');
+            //window.resolveLocalFileSystemURL($scope.pet.imageURI, ImageUploader.createFile, ImageUploader.fail);
+        }
+
+    };
 })
 
-.controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets) {
+.controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets, Upload) {
+  function fail(error) {
+    console.log("fail: " + error.code);
+  }
+
+  function uploadImage(imageFile) {
+    console.log("http://vast-bastion-6115.herokuapp.com/pets/" + $scope.pet.id);
+    Upload.upload({
+        url: "http://vast-bastion-6115.herokuapp.com/pets/" + $scope.pet.id,
+        method: 'POST',
+        fields: { 'pet[name]': $scope.pet.name, 'pet[userId]': $scope.pet.userId, 'pet[species]': $scope.pet.species,
+        'pet[breed]': $scope.pet.breed, 'pet[gender]': $scope.pet.gender, 'pet[birthDate]': $scope.pet.birthDate,
+        'pet[weight]': $scope.pet.weight},
+        file: imageFile,
+        fileFormDataName: 'pet[photo]'
+    });
+  }
+
+  function createFile(fileEntry) {
+    fileEntry.file(uploadImage, fail)
+  };
+  
   $scope.updatePet = function() { //Update the edited movie. Issues a PUT to /api/movies/:id
-        $scope.pet.$update(function() {
-            $state.go('pet-detail', {petId: $scope.pet.id}); // on success go back to home i.e. movies state.
-        });
+        console.log(Object.keys($scope.pet));
+        console.log(typeof $scope.pet.imageURI == "undefined");
+        console.log($scope.pet.imageURI);
+        if(typeof $scope.pet.imageURI == "undefined") {
+            $scope.pet.$update(function() {
+                $state.go('pet-detail', {petId: $scope.pet.id}); // on success go back to home i.e. movies state.
+            });
+        } else {
+            window.resolveLocalFileSystemURL($scope.pet.imageURI, createFile, fail);
+        }
   };
 
   $scope.loadPet = function() { 
@@ -99,14 +135,16 @@ angular.module('wiscares.controllers', ['ui.router'])
 .controller('CameraCtrl', ['$scope', "CameraPopover", "$ionicActionSheet", function ($scope, CameraPopover, $ionicActionSheet) {
     $scope.showProgress = false;
 
-    var uploadFileUrl = "serve api";
+
+    //var uploadFileUrl = "serve api";
 
     $scope.showActionSheet = function () {
         // Show the action sheet
+        console.log(Object.keys($scope.pet));
         var hideSheet = $ionicActionSheet.show({
             buttons: [
               { text: 'Take Photo' },
-              { text: 'Take Photo from albums' }
+              { text: 'Use Photo from Albums' }
             ],
             // destructiveText: 'Delete',
             titleText: 'Select photos from',
@@ -117,7 +155,7 @@ angular.module('wiscares.controllers', ['ui.router'])
             buttonClicked: function (index) {
                 // click "take phone"
                 if (index == 0) {
-                    takePicture({
+                    var options = {
                         quality: 100,
                         allowEdit: true,
                         targetWidth: 500,
@@ -128,9 +166,14 @@ angular.module('wiscares.controllers', ['ui.router'])
                         sourceType: Camera.PictureSourceType.CAMERA,
                         encodingType: Camera.EncodingType.JPEG,
                         destinationType: Camera.DestinationType.FILE_URI
+                    };
+                    CameraPopover.getPicture(options).then(function (imageURI) {
+                        $scope.pet.imageURI = imageURI;
+                    }, function (err) {
+                        console.error(err);
                     });
                 } else if (index == 1) {
-                    takePicture({
+                    var options = {
                         quality: 100,
                         allowEdit: true,
                         targetWidth: 500,
@@ -138,6 +181,12 @@ angular.module('wiscares.controllers', ['ui.router'])
                         sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                         encodingType: Camera.EncodingType.JPEG,
                         destinationType: Camera.DestinationType.FILE_URI
+                    };
+                    CameraPopover.getPicture(options).then(function (imageURI) {
+                        console.log(imageURI);
+                        $scope.pet.imageURI = imageURI;
+                    }, function (err) {
+                        console.error(err);
                     });
                 } else {
                     return true;
@@ -148,7 +197,7 @@ angular.module('wiscares.controllers', ['ui.router'])
     };
 
     // upload file with a imageURI
-    var uploadFile = function (imageURI) {
+    /*var uploadFile = function (imageURI) {
         // show the progress bar
         safeApply($scope, function () {
             $scope.showProgress = true;
@@ -199,7 +248,7 @@ angular.module('wiscares.controllers', ['ui.router'])
         }, function (err) {
             console.error(err);
         });
-    };
+    };*/
 
 }])
 
