@@ -35,7 +35,7 @@ angular.module('wiscares.controllers', ['ui.router'])
         $scope.pet = Pets.get({ id: $stateParams.petId });
     };
 
-    $scope.deletePet = function() { // Delete a movie. Issues a DELETE to /api/movies/:id
+    $scope.deletePet = function() { // Delete a pet. Issues a DELETE to /api/pets/:id
     	$scope.pet.$delete();
     	$state.go('pets');
   	};
@@ -62,9 +62,9 @@ angular.module('wiscares.controllers', ['ui.router'])
 })
 
 .controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets) {
-    $scope.pet = new Pets();  //create new movie instance. Properties will be set via ng-model on UI
+    $scope.pet = new Pets();  //create new pet instance. Properties will be set via ng-model on UI
     $scope.pet.userId=window.localStorage['userId']
-    $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
+    $scope.addPet = function() { //create a new pet. Issues a POST to /api/pets
       $scope.pet.$save(function() {
       $state.go('pets');
     });
@@ -72,9 +72,9 @@ angular.module('wiscares.controllers', ['ui.router'])
 })
 
 .controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets) {
-  $scope.updatePet = function() { //Update the edited movie. Issues a PUT to /api/movies/:id
+  $scope.updatePet = function() { //Update the edited pet. Issues a PUT to /api/pets/:id
         $scope.pet.$update(function() {
-            $state.go('pet-detail', {petId: $scope.pet.id}); // on success go back to home i.e. movies state.
+            $state.go('pet-detail', {petId: $scope.pet.id}); // on success go back to home i.e. pet state.
         });
   };
 
@@ -82,14 +82,14 @@ angular.module('wiscares.controllers', ['ui.router'])
     $scope.pet = Pets.get({ id: $stateParams.id });
   };
 
-  $scope.loadPet(); // Load a movie which can be edited on UI
+  $scope.loadPet(); // Load a pet which can be edited on UI
 })
 
 .controller('VetsCtrl', function ($scope, Vets) {
     var userID = window.localStorage['userId'];
     console.log(userID);
 
-    $scope.deleteVet = function(vet) { // Delete a movie. Issues a DELETE to /api/movies/:id
+    $scope.deleteVet = function(vet) { // Delete a movie. Issues a DELETE to /api/pets/:id
     	vet.$delete(function() {
     		Vets.query({"userID":userID}).$promise.then(function (response) {
             	$scope.vets = response;
@@ -115,10 +115,10 @@ angular.module('wiscares.controllers', ['ui.router'])
 })
 
 .controller('VetAddCtrl', function ($scope, $stateParams, $state, Vets) {
-    $scope.vet = new Vets();  //create new movie instance. Properties will be set via ng-model on UI
+    $scope.vet = new Vets();  //create new pet instance. Properties will be set via ng-model on UI
     $scope.vet.userID=window.localStorage['userId']
     console.log($scope.vet.userID);
-    $scope.addVet = function() { //create a new movie. Issues a POST to /api/movies
+    $scope.addVet = function() { //create a new pet. Issues a POST to /api/pets
       $scope.vet.$save(function() {
       $state.go('vets');
     });
@@ -126,9 +126,9 @@ angular.module('wiscares.controllers', ['ui.router'])
 })
 
 .controller('VetEditCtrl', function ($scope, $state, $stateParams, Vets) {
-  $scope.updateVet = function() { //Update the edited movie. Issues a PUT to /api/movies/:id
+  $scope.updateVet = function() { //Update the edited pet. Issues a PUT to /api/pets/:id
         $scope.vet.$update(function() {
-            $state.go('vet-detail', {id: $scope.vet.id}); // on success go back to home i.e. movies state.
+            $state.go('vet-detail', {id: $scope.vet.id}); // on success go back to home i.e. pets state.
         });
   };
 
@@ -136,7 +136,7 @@ angular.module('wiscares.controllers', ['ui.router'])
     $scope.vet = Vets.get({ id: $stateParams.id });
   };
 
-  $scope.loadVet(); // Load a movie which can be edited on UI
+  $scope.loadVet(); // Load a pet which can be edited on UI
 })
 
 .controller('AccountCtrl', function ($scope) {
@@ -148,9 +148,21 @@ angular.module('wiscares.controllers', ['ui.router'])
 ////////////////////////////////////////////////
 // Resources and MAPS controler functions
 ///////////////////////////////////////////////
+
+
+.controller('MapCtrl', function($scope, $state, $cordovaGeolocation, GoogleMaps) {
+      //var resource = 'veterinary_care';
+      
+      //var resource = document.getElementById("resource").value;
+      //console.log("MApCtrl resource =: ", resource);
+      GoogleMaps.init();
+})
+
+
 .factory('Markers', function($http) {
 
   var markers = [];
+
 
   return {
     getMarkers: function(params){
@@ -158,6 +170,7 @@ angular.module('wiscares.controllers', ['ui.router'])
       return $http.get("http://www.example.com/markers.php",{params:params}).then(function(response){
           markers = response;
           return markers;
+
       });
 
     }
@@ -170,9 +183,12 @@ angular.module('wiscares.controllers', ['ui.router'])
   var markerCache = [];
   var apiKey = false;
   var map = null;
+  var service = null;
+  var infowindow;
+  //var resource = 'veterinary_care';
 
   function initMap(){
-
+    //console.log("initMap resource =: ", resource);
     var options = {timeout: 10000, enableHighAccuracy: true};
 
     $cordovaGeolocation.getCurrentPosition(options).then(function(position){
@@ -189,6 +205,7 @@ angular.module('wiscares.controllers', ['ui.router'])
 
       //Wait until the map is loaded
       google.maps.event.addListenerOnce(map, 'idle', function(){
+        infowindow = new google.maps.InfoWindow();
         loadMarkers();
 
         //Reload markers every time the map moves
@@ -240,11 +257,13 @@ angular.module('wiscares.controllers', ['ui.router'])
     script.id = "googleMaps";
 
     //Note the callback function in the URL is the one we created above
-    if(apiKey){
-      script.src = 'http://maps.google.com/maps/api/js?key=' + apiKey + '&sensor=true&callback=mapInit';
+    if(apiKey){ AIzaSyAXuhO3FrK0b7FMM6FyhmmyzsDvJofi0Ik
+      script.src = 'http://maps.google.com/maps/api/js?key=AIzaSyAXuhO3FrK0b7FMM6FyhmmyzsDvJofi0Ik&signed_in=true&libraries=places&callback=initMap';
+      //script.src = 'http://maps.google.com/maps/api/js?key=' + apiKey + '&sensor=true&callback=mapInit';
     }
     else {
-      script.src = 'http://maps.google.com/maps/api/js?sensor=true&callback=mapInit';
+      script.src = 'http://maps.google.com/maps/api/js?key=AIzaSyAXuhO3FrK0b7FMM6FyhmmyzsDvJofi0Ik&signed_in=true&libraries=places&callback=initMap';
+      //script.src = 'http://maps.google.com/maps/api/js?sensor=true&callback=mapInit';
     }
 
     document.body.appendChild(script);
@@ -261,9 +280,11 @@ angular.module('wiscares.controllers', ['ui.router'])
 
   function loadMarkers(){
 
+      console.log("loadMarkers resource =: ", resource);
       var center = map.getCenter();
       var bounds = map.getBounds();
       var zoom = map.getZoom();
+      var resource = 'veterinary_care';
 
       //Convert objects returned by Google to be more readable
       var centerNorm = {
@@ -291,43 +312,46 @@ angular.module('wiscares.controllers', ['ui.router'])
         "boundingRadius": boundingRadius
       };
 
-      var markers = Markers.getMarkers(params).then(function(markers){
-        console.log("Markers: ", markers);
-        var records = markers.data.result;
+     var service = new google.maps.places.PlacesService(map);
 
-        for (var i = 0; i < records.length; i++) {
+     //var resource = document.getElementById("resource").innerHTML;
+     console.log(document.getElementById("resource").innerHTML);
+     console.log("loadMarkers resource =: ", resource);
 
-          var record = records[i];
+     var search = {
+        location: center,
+        radius: 4000,
+        types: [resource]
+      };
 
-          // Check if the marker has already been added
-          if (!markerExists(record.lat, record.lng)) {
-              
-              var markerPos = new google.maps.LatLng(record.lng, record.lat);
-              // add the marker
-              var marker = new google.maps.Marker({
-                  map: map,
-                  animation: google.maps.Animation.DROP,
-                  position: markerPos
-              });
 
-              // Add the marker to the markerCache so we know not to add it again later
-              var markerData = {
-                lat: record.lat,
-                lng: record.lng,
-                marker: marker
-              };
+    //calls the service API for locations of Vets neer you
+      service.nearbySearch(search, callback); 
 
-              markerCache.push(markerData);
-
-              var infoWindowContent = "<h4>" + record.name + "</h4>";          
-
-              addInfoWindow(marker, infoWindowContent, record);
-          }          
-
-        }
-
-      });    
   }
+
+  function callback(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        var place = results[i];
+        createMarker(results[i]);
+      }
+    }
+  }
+
+  function createMarker(place) {
+    //console.log("Marker: ", place);
+  var placeLoc = place.geometry.location;
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(place.name);
+    infowindow.open(map, this);
+  });
+}
 
   function markerExists(lat, lng){
       var exists = false;
@@ -471,9 +495,6 @@ angular.module('wiscares.controllers', ['ui.router'])
 
     }
   }
-})
-
-.controller('MapCtrl', function($scope, $state, $cordovaGeolocation, GoogleMaps) {
-      GoogleMaps.init();
 });
+
 
