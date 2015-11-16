@@ -5,8 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js 
-angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services',
- 'ngResource', 'loginCtrl', 'localstorage', 'ui.router', 'Devise'])
+angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
+  'wiscares.services', 'ngResource', 'loginCtrl', 'localstorage', 'ui.router', 'Devise'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -115,6 +115,13 @@ angular.module('wiscares', ['ionic', 'wiscares.controllers', 'wiscares.services'
         templateUrl: 'templates/options.html',
         controller: 'OptionsCtrl'
     })
+
+    .state('resources', {
+        url: '/resources',
+        templateUrl: 'templates/resources.html',
+        controller: 'MapCtrl'
+    })
+
     
 
       // .state('login', {
