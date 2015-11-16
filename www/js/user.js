@@ -2,10 +2,10 @@ angular.module('loginCtrl', [])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicPopup, $localstorage, UserSession, Auth) {
 
-         //-------------------------------------------SIGN UP----------------------------------
-     $scope.signUpDate = {};
+        //-------------------------------------------SIGN UP----------------------------------
+    $scope.signUpDate = {};
 
-     $ionicModal.fromTemplateUrl('templates/signup.html', {
+    $ionicModal.fromTemplateUrl('templates/signup.html', {
         scope: $scope
     }).then(function (modal) {
         $scope.sign_up_modal = modal;
@@ -28,27 +28,13 @@ angular.module('loginCtrl', [])
     };
 
     $scope.doSignUp = function () {
-        //console.log(Object.keys($scope.signUpDate));
-        //console.log($scope.signUpDate.email);
-        //console.log($scope.signUpDate.password);
-        //console.log($scope.signUpDate.password_confirmation);
-        Auth.register($scope.signUpDate).then(function(user) {
-            //console.log(Object.keys(user)); // => {id: 1, ect: '...'}
-            window.localStorage['userId'] = user.id;
-            window.localStorage['user'] = user;
-            $scope.sign_up_modal.hide();
-        }, function(error) {
-            console.log(Object.keys(error));
-            // Registration failed...
-        });
-        /*console.log('Doing signup', $scope.signUpDate);
+        console.log('Doing signup', $scope.signUpDate);
         if ($scope.signUpDate.password != $scope.signUpDate.confirm_password){
             $scope.password_not_match();
         }else{
             $localstorage.set($scope.signUpDate.username,$scope.signUpDate.password);
         }
-        console.log($localstorage.get($scope.signUpDate.username));*/
-
+        console.log($localstorage.get($scope.signUpDate.username));
     };
 
 
