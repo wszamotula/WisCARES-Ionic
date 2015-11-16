@@ -8,7 +8,7 @@
 
 var resource = '';
 angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
-  'wiscares.services', 'ngResource', 'loginCtrl', 'localstorage', 'ui.router', 'Devise'])
+  'wiscares.services', 'ngResource', 'loginCtrl', 'localstorage', 'ui.router', 'Devise', 'ngMockE2E'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {

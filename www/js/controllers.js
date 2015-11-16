@@ -1,4 +1,4 @@
-angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
+angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload', 'ngMockE2E','ngCordova'])
 
 .controller('DashCtrl', function ($scope) {
  
@@ -126,22 +126,11 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
 
 
     $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
-<<<<<<< HEAD
-        //if(typeof $scope.pet.imageURI == "undefined") {
-            $scope.pet.$save(function() {
-                $state.go('pets');
-            });
-        //} else {
-            //ImageUploader.uploadImage($scope.pet);
-            //$state.go('pets');
-            //window.resolveLocalFileSystemURL($scope.pet.imageURI, ImageUploader.createFile, ImageUploader.fail);
-        //}
 
-=======
         $scope.pet.$save(function() {
             $state.go('pets');
         });
->>>>>>> Adding-unit-testing
+
     };
 })
 
