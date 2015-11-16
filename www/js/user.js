@@ -60,7 +60,7 @@ angular.module('loginCtrl', [])
         backdropClickToClose: false
     }).then(function (modal) {
         $scope.modal = modal;
-        //$scope.login()
+        $scope.login()
     });
 
     $scope.closeLogin = function () {
