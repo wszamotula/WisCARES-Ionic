@@ -28,9 +28,9 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
 
 .config(function ($stateProvider, $urlRouterProvider, $httpProvider, AuthProvider) {
     $httpProvider.defaults.withCredentials = true;
-    AuthProvider.loginPath("http://vast-bastion-6115.herokuapp.com/users/sign_in.json");
+    AuthProvider.loginPath("https://vast-bastion-6115.herokuapp.com/users/sign_in.json");
     AuthProvider.loginMethod("POST");
-    AuthProvider.registerPath("http://vast-bastion-6115.herokuapp.com/users.json");
+    AuthProvider.registerPath("https://vast-bastion-6115.herokuapp.com/users.json");
     AuthProvider.registerMethod("POST");
     
     // Ionic uses AngularUI Router which uses the concept of states
