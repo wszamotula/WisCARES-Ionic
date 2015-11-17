@@ -1,4 +1,4 @@
-angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload', 'ngMockE2E','ngCordova'])
+angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova'])
 
 .controller('DashCtrl', function ($scope) {
  

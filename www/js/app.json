@@ -1,0 +1,6 @@
+{
+    "name": "WisCARES Demo Services App",
+    "description": "A Demo of our progress on the WisCARES app for CS 506",
+    "repository": "https://github.com/wszamotula/WisCARES-Ionic",
+    "keywords": ["ionic", "WisCARES", "UW-Madison", "CS506"]
+}
