@@ -2,7 +2,7 @@ angular.module('wiscares.services', ['ngFileUpload'])
 
 .factory('Pets', function ($resource) {
 
-    return $resource("https://vast-bastion-6115.herokuapp.com/pets/:id.json", { id: '@id' }, {
+    return $resource("http://vast-bastion-6115.herokuapp.com/pets/:id.json", { id: '@id' }, {
         update: {
             method: 'PUT'
         }
@@ -32,9 +32,9 @@ angular.module('wiscares.services', ['ngFileUpload'])
             console.log("fail: " + error.code);
         },
         uploadImage: function (imageFile) {
-            console.log("https://vast-bastion-6115.herokuapp.com/pets.json/");
+            console.log("http://vast-bastion-6115.herokuapp.com/pets.json/");
             Upload.upload({
-                url: "https://vast-bastion-6115.herokuapp.com/pets.json/",
+                url: "http://vast-bastion-6115.herokuapp.com/pets.json/",
                 method: 'POST',
                 fields: { 'pet[name]': pet.name, 'pet[userId]': pet.userId, 'pet[species]': pet.species,
                 'pet[breed]': pet.breed, 'pet[gender]': pet.gender, 'pet[birthDate]': pet.birthDate,
@@ -89,7 +89,7 @@ angular.module('wiscares.services', ['ngFileUpload'])
                     birthDate: pet.birthDate}
             };*/
             console.log(options.params);
-            ft.upload(pet.imageURI, "https://vast-bastion-6115.herokuapp.com/pets.json/",
+            ft.upload(pet.imageURI, "http://vast-bastion-6115.herokuapp.com/pets.json/",
                 function (e) {
                     console.log("WIN" + JSON.stringify(e));
                 },
@@ -112,7 +112,7 @@ angular.module('wiscares.services', ['ngFileUpload'])
                         "birthDate": pet.birthDate
                     };
              
-                    ft.upload(filepath, "https://vast-bastion-6115.herokuapp.com/pets/",
+                    ft.upload(filepath, "http://vast-bastion-6115.herokuapp.com/pets/",
                         function (e) {
                             console.log("WIN" + JSON.stringify(e));
                         },
@@ -131,7 +131,7 @@ angular.module('wiscares.services', ['ngFileUpload'])
                         var url = fileEntry.nativeURL;
                         console.log(url);
                         Upload.upload({
-                            url: "https://vast-bastion-6115.herokuapp.com/pets/",
+                            url: "http://vast-bastion-6115.herokuapp.com/pets/",
                             method: 'POST',
                             fields: { 'pet[name]': pet.name, 'pet[userId]': pet.userId, 'pet[species]': pet.species,
                             'pet[breed]': pet.breed, 'pet[gender]': pet.gender, 'pet[birthDate]': pet.birthDate,
@@ -151,7 +151,7 @@ angular.module('wiscares.services', ['ngFileUpload'])
 
 .factory('HealthProblems', function ($resource) {
 
-    return $resource("https://vast-bastion-6115.herokuapp.com/health_problems/:id.json", { id: '@id' }, {
+    return $resource("http://vast-bastion-6115.herokuapp.com/health_problems/:id.json", { id: '@id' }, {
         update: {
             method: 'PUT'
         }
@@ -160,7 +160,7 @@ angular.module('wiscares.services', ['ngFileUpload'])
 
 .factory('Medications', function ($resource) {
 
-    return $resource("https://vast-bastion-6115.herokuapp.com/medications/:id.json", { id: '@id' }, {
+    return $resource("http://vast-bastion-6115.herokuapp.com/medications/:id.json", { id: '@id' }, {
         update: {
             method: 'PUT'
         }
@@ -169,7 +169,7 @@ angular.module('wiscares.services', ['ngFileUpload'])
 
 .factory('Vaccinations', function ($resource) {
 
-    return $resource("https://vast-bastion-6115.herokuapp.com/vaccinations/:id.json", { id: '@id' }, {
+    return $resource("http://vast-bastion-6115.herokuapp.com/vaccinations/:id.json", { id: '@id' }, {
         update: {
             method: 'PUT'
         }
@@ -178,7 +178,7 @@ angular.module('wiscares.services', ['ngFileUpload'])
 
 .factory('Visits', function ($resource) {
 
-    return $resource("https://vast-bastion-6115.herokuapp.com/visits/:id.json", { id: '@id' }, {
+    return $resource("http://vast-bastion-6115.herokuapp.com/visits/:id.json", { id: '@id' }, {
         update: {
             method: 'PUT'
         }
@@ -187,7 +187,7 @@ angular.module('wiscares.services', ['ngFileUpload'])
 
 .factory('Vets', function ($resource) {
 
-    return $resource("https://vast-bastion-6115.herokuapp.com/vets/:id.json", { id: '@id' }, {
+    return $resource("http://vast-bastion-6115.herokuapp.com/vets/:id.json", { id: '@id' }, {
         update: {
             method: 'PUT'
         }
@@ -195,7 +195,7 @@ angular.module('wiscares.services', ['ngFileUpload'])
 })
 
 .factory('UserSession', function($resource) {
-  return $resource("https://vast-bastion-6115.herokuapp.com/users/sign_in.json");
+  return $resource("http://vast-bastion-6115.herokuapp.com/users/sign_in.json");
 })
 
 .factory('Events', function () {
