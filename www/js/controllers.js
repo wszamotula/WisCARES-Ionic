@@ -454,33 +454,35 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
 // Resources and MAPS controler functions
 ///////////////////////////////////////////////
 
-.controller('Resources', function($scope, $state, $stateParams) {
-        $scope.search = function() { 
-            console.log("search resource =: ", resource);
+.controller('Resources', function ($scope, $stateParams, $state) {
+        $scope.val = {};
+        $scope.search = function() {
+            searchQuery = $scope.val.search;
+            //console.log("MApSearch task =: " + $scope.task);            
+            console.log("MApSearch resource =: " + $scope.val.search);
+            console.log("search resource =: " + resource);
             $state.go('map-search');
     };
 })
 .controller('MapVet', function($scope, $state, $cordovaGeolocation, GoogleMaps) {
       resource = 'veterinary_care';
-      
+      searchQuery = "";
       //var resource = document.getElementById("resource").value;
       //console.log("MApCtrl resource =: ", resource);
       GoogleMaps.init();
 })
 
 .controller('MapSupplies', function($scope, $state, $cordovaGeolocation, GoogleMaps) {
-      resource = 'grocery_or_supermarket';
-      
+      resource = 'pet_store';
+      searchQuery = "";
       //var resource = document.getElementById("resource").value;
       //console.log("MApCtrl resource =: ", resource);
       GoogleMaps.init();
 })
 
 .controller('MapSearch', function($scope, $state, $cordovaGeolocation, GoogleMaps) {
-      //resource = 'grocery_or_supermarket';
+      //resource = '';
       
-      //var resource = document.getElementById("resource").value;
-      //console.log("MApCtrl resource =: ", resource);
       GoogleMaps.init();
 })
 
@@ -638,13 +640,29 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
      //
      //var resource = document.getElementById("resource").innerHTML;
      //console.log(document.getElementById("resource").innerHTML);
-     console.log("loadMarkers resource =: ", resource);
+     console.log("loadMarkers resource =: " + resource);
+     console.log("loadMarkers searchQuery =: " + searchQuery);
 
-     var search = {
+
+     if (resource == ''){
+
+        console.log("resource was blank");
+        var search = {
         location: center,
         radius: 4000,
-        types: [resource]
+        keyword: searchQuery
       };
+     }else{
+
+      console.log("resource was not blank");
+       var search = {
+        location: center,
+        radius: 4000,
+        types: [resource],
+      };
+     }
+
+    
 
 
     //calls the service API for locations of Vets neer you
