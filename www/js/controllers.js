@@ -1,7 +1,7 @@
-angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
+angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova'])
 
 .controller('DashCtrl', function ($scope) {
-
+ 
 })
 
 
@@ -13,24 +13,24 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
     //
     //$scope.$on('$ionicView.enter', function(e) {
     //});
-    
 
     var userId = window.localStorage['userId'];
+
+    Pets.query().$promise.then(function (response) {
+        $scope.pets = response;
+        $scope.petsLoaded = true;
+    });
 
     $scope.$on('$ionicView.enter', function() {
         Pets.query({"userId":userId}).$promise.then(function (response) {
             $scope.pets = response;
+            $scope.petsLoaded = true;
         });
     });
 
-
-    //$scope.pets = Pets.all();
-    //$scope.remove = function(pet) {
-    // Pets.remove(pet);
-    //};
 })
 
-.controller('PetDetailCtrl', function ($scope, $state, $stateParams, Events, Pets, HealthProblems, Medications, Vaccinations, Visits) {
+.controller('PetDetailCtrl', function ($scope, $state, $stateParams, Pets, HealthProblems, Medications, Vaccinations, Visits) {
     $scope.loadPet = function () { //Issues a GET request
         $scope.pet = Pets.get({ id: $stateParams.petId });
     };
@@ -72,6 +72,8 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
         });
     };
 
+    $scope.loadPet();
+
     $scope.$on('$ionicView.enter', function() {
         $scope.loadPet();
         HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
@@ -99,18 +101,22 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
      };
     HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.healthproblems = response;
+        $scope.healthproblemsLoaded = true;
     });
 
     Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.vaccinations = response;
+        $scope.vaccinationsLoaded = true;
     });
 
     Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.medications = response;
+        $scope.medicationsLoaded = true;
     });
 
     Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.visits = response;
+        $scope.visitsLoaded = true;
     });
 })
 
@@ -120,15 +126,10 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload'])
 
 
     $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
-        //if(typeof $scope.pet.imageURI == "undefined") {
-            $scope.pet.$save(function() {
-                $state.go('pets');
-            });
-        //} else {
-            //ImageUploader.uploadImage($scope.pet);
-            //$state.go('pets');
-            //window.resolveLocalFileSystemURL($scope.pet.imageURI, ImageUploader.createFile, ImageUploader.fail);
-        //}
+
+        $scope.pet.$save(function() {
+            $state.go('pets');
+        });
 
     };
 })
