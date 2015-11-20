@@ -5,15 +5,38 @@
   The Friends service returns an array of friend data
 -->
 <ion-view view-title="The Mission">
-<ion-content>
-	<div class="card">
+
+<body ng-app="starter">
+
+ <ion-pane>
+
+   <ion-header-bar class="bar-stable">
+ <h1 class="title">Devdactic Media Popover</h1>
+   </ion-header-bar>
+   <ion-content class="has-header padding" ng-controller="MediaCtrl">
+   <br><br>
+
+ <a class="item item-list-detail">
+ <ion-scroll direction="x">
+ <img ng-repeat="image in allImages" ng-src="{{image.src}}" ng-click="showImages($index)" class="image-list-thumb"/>
+ </ion-scroll>
+ </a>
+
+ 	<div class="card">
 	  <div class="item item-text-wrap">
-	    Wisconsin Companion Animal Resources, Education, and Social Services (WisCARES) is an innovative and unified approach to providing holistic health care and housing support to Dane County’s disadvantaged residents and their pets.
+		<p>	  
+	    Wisconsin Companion Animal Resources, Education, and Social Services (WisCARES) is an innovative and unified approach to providing holistic health care and housing support to Dane County’s disadvantaged residents and their pets.</p>
 
-		We recognize the benefits of animal companionship and appreciate the number of people faced with the decision of providing for their pets or their other family members.
+	    <p>
+		We recognize the benefits of animal companionship and appreciate the number of people faced with the decision of providing for their pets or their other family members.</p>
 
-		With partnerships between the School of Veterinary Medicine, the School of Social Work, and other social services in the Dane County area, we aim to leverage pet ownership as a method to improve access to human medical and social services, allowing the human-animal bond to thrive in situations where it may be most needed.
+		<p>
+		With partnerships between the School of Veterinary Medicine, the School of Social Work, and other social services in the Dane County area, we aim to leverage pet ownership as a method to improve access to human medical and social services, allowing the human-animal bond to thrive in situations where it may be most needed.</p>
 	  </div>
 	</div>
-</ion-content>
+
+   </ion-content>
+ </ion-pane>
+</body>
+
 </ion-view>
