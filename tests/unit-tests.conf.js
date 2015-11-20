@@ -11,18 +11,19 @@ module.exports = function(config) {
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
-
-
+    
     // list of files / patterns to load in the browser
     files: [
       '../www/lib/angular/angular.js',
       '../www/lib/angular-mocks/angular-mocks.js',
       '../www/lib/ionic/js/ionic.bundle.js',
+      '../www/lib/ng-cordova/dist/ng-cordova.js',
+      '../www/lib/ng-file-upload/ng-file-upload.min.js',
       'unit-tests/*.js',
       '../www/lib/ionic/js/angular/angular-resource.min.js',
       '../www/lib/AngularDevise/lib/devise-min.js',
       '../www/js/*.js',
-    ],
+    ],  
 
 
     // list of files to exclude
@@ -71,6 +72,12 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultanous
-    concurrency: Infinity
+    concurrency: Infinity,
+
+    plugins: [
+        'karma-jasmine',
+        'karma-phantomjs-launcher',
+        'karma-coverage'
+    ]
   })
 }

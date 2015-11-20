@@ -17,16 +17,25 @@ describe('Pet details controller', function(){
   //pass through all templates we pre-load
   beforeEach(inject(function($injector) {
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.whenGET('templates/options.html').respond(10,"");
-    $httpBackend.whenGET('templates/tab-account.html').respond(10,"");
-    $httpBackend.whenGET('templates/vets.html').respond(10,"");
-    $httpBackend.whenGET('templates/pet-detail.html').respond(10,"");
-    $httpBackend.whenGET('templates/vet-add.html').respond(10,"");
-    $httpBackend.whenGET('templates/mission.html').respond(10,"");
-    $httpBackend.whenGET('templates/pet-edit.html').respond(10,"");
-    $httpBackend.whenGET('templates/tab-home.html').respond(10,"");
-    $httpBackend.whenGET('templates/events.html').respond(10,"");
-    $httpBackend.whenGET('templates/event.html').respond(10,"");
+    $httpBackend.whenGET('templates/options.html').respond({});
+    $httpBackend.whenGET('templates/tab-account.html').respond({});
+    $httpBackend.whenGET('templates/vets.html').respond({});
+    $httpBackend.whenGET('templates/pet-detail.html').respond({});
+    $httpBackend.whenGET('templates/vet-add.html').respond({});
+    $httpBackend.whenGET('templates/mission.html').respond({});
+    $httpBackend.whenGET('templates/pet-edit.html').respond({});
+    $httpBackend.whenGET('templates/tab-home.html').respond({});
+    $httpBackend.whenGET('templates/events.html').respond({});
+    $httpBackend.whenGET('templates/event.html').respond({});
+    $httpBackend.whenGET('templates/med-add.html').respond({});
+    $httpBackend.whenGET('templates/visit-add.html').respond({});
+    $httpBackend.whenGET('templates/hp-add.html').respond({});
+    $httpBackend.whenGET('templates/vac-add.html').respond({});
+    $httpBackend.whenGET('templates/add-account.html').respond({});
+    $httpBackend.whenGET('templates/resources.html').respond({});
+    $httpBackend.whenGET('templates/map-vet.html').respond({});
+    $httpBackend.whenGET('templates/map-supplies.html').respond({});
+    $httpBackend.whenGET('templates/map-search.html').respond({});
   }));
 
   //Load the q and rootscope services
@@ -103,8 +112,6 @@ describe('Pet details controller', function(){
     });
 
   }));
-
-  /*
 
   describe('Loading inital pet list', function(){
 
@@ -229,7 +236,5 @@ describe('Pet details controller', function(){
     });
 
   });
-
-  */
 
 });
