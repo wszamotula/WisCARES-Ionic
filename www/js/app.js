@@ -176,6 +176,37 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
 
 })
 
+// Cotroller for mission
+.controller('MediaCtrl', function($scope, $ionicModal) {
+ $scope.allImages = [{
+ 'src' : 'img/WisCares.png'}, {
+ 'src' : 'img/venn.jpg'} , {
+ 'src' : 'img/helpinghand.jpg' 
+ }];
+ 
+ $scope.showImages = function(index) {
+ $scope.activeSlide = index;
+ $scope.showModal('templates/image-popover.html');
+ }
+ 
+ $scope.showModal = function(templateUrl) {
+ $ionicModal.fromTemplateUrl(templateUrl, {
+ scope: $scope,
+ animation: 'slide-in-up'
+ }).then(function(modal) {
+ $scope.modal = modal;
+ $scope.modal.show();
+ });
+ }
+ 
+ // Close the modal
+ $scope.closeModal = function() {
+ $scope.modal.hide();
+ $scope.modal.remove()
+ };
+})
+//End Controller for mission
+
   // Disable BACK button on home
   /*$ionicPlatform.registerBackButtonAction(function (event) {
     if($state.current.name=="home"){
