@@ -1,12 +1,13 @@
 describe('Application controller tests', function(){
   var $q, $rootScope, $scope, $httpBackend, 
-  petQeryDeferred, hpQeryDeferred, vaccQeryDeferred, medQeryDeferred, visitsQeryDeferred,
-  mockPetService, mockHpService, mockVaccService, mockMedService, mockVisitsService,
+  petQueryDeferred, hpQueryDeferred, vaccQueryDeferred, medQueryDeferred, visitsQueryDeferred, vetQueryDeferred,
+  mockPetService, mockHpService, mockVaccService, mockMedService, mockVisitsService, mockVetService,
   mockPetsResponse = [{ id: 1, name: "Monty", species: "cat" },{ id: 2, name: "Fritz", species: "cat" }],
   mockHpResponse = [{ id: 1, name: "Rash", description: "rash on back" },{ id: 2, name: "Vommiting", description: "Ate bad food" }],
   mockVaccResponse = [{ id: 1, name: "PFS", description: "test test" },{ id: 2, name: "Another", description: "More vaccinations" }],
   mockMedResponse = [{ id: 1, name: "Blue pills", description: "the blue pills" },{ id: 2, name: "Red pills", description: "the red pills" }],
-  mockVisitsResponse = [{ id: 1, name: "Vet appt", description: "at the vet" },{ id: 2, name: "pictures", description: "got pics taken" }];
+  mockVisitsResponse = [{ id: 1, name: "Vet appt", description: "at the vet" },{ id: 2, name: "pictures", description: "got pics taken" }],
+  mockVetResponse = [{ id: 1, name: "Joe joe vet", contact: "down the road" },{ id: 2, name: "John john vet", contact: "up the road" }];
 
   //load the module for our app
   beforeEach(module('wiscares'));
@@ -181,7 +182,9 @@ describe('Application controller tests', function(){
       });
 
       it('should have called Pets.$delete', function() {
-        expect(mockPetService.get).toHaveBeenCalled();
+        expect(mockPetService.$delete).toHaveBeenCalled();
+        //TODO: Rob/Adam, Is the pet.$delete function configured somewhere or is
+        //it inherent in ngResource?
       });
 
     });
@@ -289,6 +292,151 @@ describe('Application controller tests', function(){
       });
 
     });
+
+  });
+
+  /*****
+  Tests for the pet add controller
+  *****/
+  describe("The pet add controller", function(){
+    //Create mocked services, spy on used calls
+    beforeEach(inject(function($controller) {
+      $scope = $rootScope.$new();
+      petQueryDeferred = $q.defer();
+
+      mockPetService = {
+        $save: function() {
+          //do nothing
+        }
+      }
+
+      spyOn(mockPetService, '$save');
+      
+      $controller('PetAddCtrl', {
+        '$scope': $scope,
+        '$stateParams': "",
+        '$state': "",
+        'Pets': mockPetService,
+        'ImageUploader': ""
+      });
+
+    }));
+
+    //Describe functionality of the controller
+    describe("Adding a pet", function(){
+
+      beforeEach(function(){
+        $scope.addPet();
+      });
+
+      it('Should have called the save function in pet service', function(){
+        expect(mockPetService.$save).toHaveBeenCalled();
+        //TODO: Rob/Adam, why do we create a new instance of the pet service
+        //in the pet add controler?
+      });
+
+    });
+
+  });
+
+  /*****
+  Tests for the pet edit controller
+  *****/
+  describe("the pet edit controller", function(){
+    //Create mocked services, spy on used calls
+    beforeEach(inject(function($controller) {
+      $scope = $rootScope.$new();
+      petQueryDeferred = $q.defer();
+
+      mockPetService = {
+        get: function(id) {
+          return { id: 1, name: "Monty", species: "cat" };
+        }
+      }
+
+      spyOn(mockPetService, 'get');
+      
+      $controller('PetEditCtrl', {
+        '$scope': $scope,
+        '$state': "",
+        '$stateParams': "",
+        'Pets': mockPetService,
+        'Upload': ""
+      });
+
+    }));
+
+    //TODO: Rob/Chang, add testing for image upload
+    //TODO: Rob/Adam, is pet.$update a function we can mock?
+
+    describe("loading a pet", function() {
+
+      it("should have called get in the pet service", function(){
+        expect(mockPetService.get).toHaveBeenCalled();
+      });
+
+    });
+
+  });
+
+  //TODO: Chang/Rob, can you build tests for the camera controller?
+  //TODO: Create unit tests for entering different kinds of pet events
+
+  /*****
+  Tests for the vet controller
+  *****/
+  describe("the vet controller", function(){
+    //Create mocked services, spy on used calls
+    beforeEach(inject(function($controller) {
+      $scope = $rootScope.$new();
+      vetQueryDeferred = $q.defer();
+
+      mockVetService = {
+        query: function() {
+          //queryDeferred = $q.defer();
+          return {$promise: vetQueryDeferred.promise};
+        }
+      }
+
+      spyOn(mockVetService, 'query').and.callThrough();
+      
+      $controller('VetsCtrl', {
+        '$scope': $scope,
+        'Vets': mockVetService
+      });
+
+    }));
+
+    //Describe functionality of the controller
+    describe('Vets query', function() {
+
+      beforeEach(function() {
+        vetQueryDeferred.resolve(mockVetResponse);
+        $rootScope.$apply();
+      });
+
+      it('should query the vet service', function() {
+        expect(mockVetService.query).toHaveBeenCalled();
+      });
+
+      it('should set the response from the mockVetResponse to $scope.vets', function() {
+        expect($scope.vets).toEqual(mockVetResponse);
+      });
+
+      it('should set $scope.vetsLoaded to true', function() {
+        expect($scope.vetsLoaded).toBe(true);
+      });
+
+    });
+
+  });
+
+  /*****
+  Tests for the *** controller
+  *****/
+  describe("the *** controller", function(){
+    //TODO: Create mocked services, spy on used calls
+    //TODO: Describe functionality of the controller
   });
 
 });

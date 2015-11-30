@@ -122,7 +122,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
 .controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets, ImageUploader) {
     $scope.pet = new Pets();  //create new movie instance. Properties will be set via ng-model on UI
-    $scope.pet.userId = window.localStorage['userId']
+    $scope.pet.userId = window.localStorage['userId'];
 
 
     $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
@@ -399,9 +399,15 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     	});
   	};
 
+    Vets.query({"userID":userID}).$promise.then(function (response) {
+            $scope.vets = response;
+            $scope.vetsLoaded = true;
+        });
+
     $scope.$on('$ionicView.enter', function() {
         Vets.query({"userID":userID}).$promise.then(function (response) {
             $scope.vets = response;
+            $scope.vetsLoaded = true;
         });
     });
 })
