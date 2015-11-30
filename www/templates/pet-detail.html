@@ -24,6 +24,7 @@
                 <a class="button button-clear button-assertive" ng-click="deletePet()">Delete</a>
             </div>
             </ion-item>
+            <!--
             <ion-item type="item-text-wrap">
                 <ul class="eventTypeList">
                     <li class="item item-checkbox eventType">
@@ -52,11 +53,13 @@
                     </li>
                 </ul>
             </ion-item>
+            -->
         </ion-list>
         <br />
-        <div ng-show="filters.showHealthProblems">
-            <h4>Health Problems</h4>
-            <div class="list card" ng-repeat="healthproblem in healthproblems">
+        <div >
+            <a class="button icon-right ion-android-arrow-dropdown-circle button-clear button-dark" ng-model="filters.showHealthProblems" 
+               ng-click="filters.showHealthProblems=!filters.showHealthProblems"><b>Health Problems</b></a>
+            <div class="list card" ng-repeat="healthproblem in healthproblems" ng-show="filters.showHealthProblems">
                 <div class="item item-divider">{{healthproblem.dateOccurred}}</div>
                 <div class="item item-body">
                     <div>
@@ -66,9 +69,10 @@
                 </div>
             </div>
         </div>
-        <div ng-show="filters.showMedications">
-            <h4>Medications</h4>
-            <div class="list card" ng-repeat="medication in medications">
+        <div>
+            <a class="button icon-right ion-android-arrow-dropdown-circle button-clear button-dark" ng-model="filters.showMedications" 
+               ng-click="filters.showMedications=!filters.showMedications"><b>Medications</b></a>
+            <div class="list card" ng-repeat="medication in medications" ng-show="filters.showMedications">
                 <div class="item item-divider">{{medication.name}}</div>
                 <div class="item item-body">
                     <div>
@@ -78,9 +82,10 @@
                 </div>
             </div>
         </div>
-        <div ng-show="filters.showVisits">
-            <h4>Visits</h4>
-            <div class="list card" ng-repeat="visit in visits">
+        <div >
+            <a class="button icon-right ion-android-arrow-dropdown-circle button-clear button-dark" ng-model="filters.showVisits" 
+               ng-click="filters.showVisits=!filters.showVisits"><b>Visits</b></a>
+            <div class="list card" ng-repeat="visit in visits" ng-show="filters.showVisits">
                 <div class="item item-divider">{{visit.dateVisited}}</div>
                 <div class="item item-body">
                     <div>
@@ -90,9 +95,10 @@
                 </div>
             </div>
         </div>
-        <div ng-show="filters.showVaccinations">
-            <h4>Vaccinations</h4>
-            <div class="list card" ng-repeat="vaccination in vaccinations">
+        <div>
+            <a class="button icon-right ion-android-arrow-dropdown-circle button-clear button-dark" ng-model="filters.showVaccinations" 
+               ng-click="filters.showVaccinations=!filters.showVaccinations"><b>Vaccinations</b></a>
+            <div class="list card" ng-repeat="vaccination in vaccinations" ng-show="filters.showVaccinations">
                 <div class="item item-divider">{{vaccination.name}}</div>
                 <div class="item item-body">
                     <div>

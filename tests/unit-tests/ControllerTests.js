@@ -114,7 +114,7 @@ describe('Application controller tests', function(){
           return {$promise: petQueryDeferred.promise};
         },
         get: function(id) {
-          return { id: 1, name: "Monty", species: "cat" };
+            return { id: 1, name: "Monty", species: "cat" };
         },
         $delete: function() {
           //do nothing

@@ -94,29 +94,49 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     });
 
     $scope.filters = {
-         showHealthProblems : true,
-         showVaccinations : true,
-         showMedications : true,
-         showVisits : true
+         showHealthProblems : false,
+         showVaccinations : false,
+         showMedications : false,
+         showVisits : false
      };
     HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.healthproblems = response;
         $scope.healthproblemsLoaded = true;
+
+        if($scope.healthproblems.length != 0){
+            $scope.filters.showHelathProblems = true;
+        }
+
     });
 
     Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.vaccinations = response;
         $scope.vaccinationsLoaded = true;
+
+        if ($scope.vaccinations.length != 0) {
+            $scope.filters.showVaccinations = true;
+        }
+
     });
 
     Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.medications = response;
         $scope.medicationsLoaded = true;
+
+        if ($scope.medications.length != 0) {
+            $scope.filters.showMedications = true;
+        }
+
     });
 
     Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.visits = response;
         $scope.visitsLoaded = true;
+
+        if ($scope.visits.length != 0) {
+            $scope.filters.showVisits = true;
+        }
+
     });
 })
 
