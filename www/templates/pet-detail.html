@@ -56,10 +56,10 @@
             -->
         </ion-list>
         <br />
-        <div >
-            <a class="button icon-right ion-android-arrow-dropdown-circle button-clear button-dark" ng-model="filters.showHealthProblems" 
-               ng-click="filters.showHealthProblems=!filters.showHealthProblems"><b>Health Problems</b></a>
-            <div class="list card" ng-repeat="healthproblem in healthproblems" ng-show="filters.showHealthProblems">
+        <div ng-hide="hideHpSect" >
+            <a class="button icon-right button-clear button-dark" ng-class="{ 'ion-android-arrow-dropdown' : showHealthProblems, 'ion-android-arrow-dropleft' : !showHealthProblems }"
+               ng-model="showHealthProblems" ng-click="showHealthProblems=!showHealthProblems"><b>Health Problems</b></a>
+            <div class="list card" ng-repeat="healthproblem in healthproblems" ng-show="showHealthProblems">
                 <div class="item item-divider">{{healthproblem.dateOccurred}}</div>
                 <div class="item item-body">
                     <div>
@@ -69,10 +69,10 @@
                 </div>
             </div>
         </div>
-        <div>
-            <a class="button icon-right ion-android-arrow-dropdown-circle button-clear button-dark" ng-model="filters.showMedications" 
-               ng-click="filters.showMedications=!filters.showMedications"><b>Medications</b></a>
-            <div class="list card" ng-repeat="medication in medications" ng-show="filters.showMedications">
+        <div ng-hide="hideMedSect">
+            <a class="button icon-right button-clear button-dark" ng-class="{ 'ion-android-arrow-dropdown' : showMedications, 'ion-android-arrow-dropleft' : !showMedications }"
+               ng-model="showMedications" ng-click="showMedications=!showMedications"><b>Medications</b></a>
+            <div class="list card" ng-repeat="medication in medications" ng-show="showMedications">
                 <div class="item item-divider">{{medication.name}}</div>
                 <div class="item item-body">
                     <div>
@@ -82,10 +82,10 @@
                 </div>
             </div>
         </div>
-        <div >
-            <a class="button icon-right ion-android-arrow-dropdown-circle button-clear button-dark" ng-model="filters.showVisits" 
-               ng-click="filters.showVisits=!filters.showVisits"><b>Visits</b></a>
-            <div class="list card" ng-repeat="visit in visits" ng-show="filters.showVisits">
+        <div ng-hide="hideVisitSect">
+            <a class="button icon-right button-clear button-dark" ng-class="{ 'ion-android-arrow-dropdown' : showVisits, 'ion-android-arrow-dropleft' : !showVisits }"
+               ng-model="showVisits" ng-click="showVisits=!showVisits"><b>Visits</b></a>
+            <div class="list card" ng-repeat="visit in visits" ng-show="showVisits">
                 <div class="item item-divider">{{visit.dateVisited}}</div>
                 <div class="item item-body">
                     <div>
@@ -95,10 +95,10 @@
                 </div>
             </div>
         </div>
-        <div>
-            <a class="button icon-right ion-android-arrow-dropdown-circle button-clear button-dark" ng-model="filters.showVaccinations" 
-               ng-click="filters.showVaccinations=!filters.showVaccinations"><b>Vaccinations</b></a>
-            <div class="list card" ng-repeat="vaccination in vaccinations" ng-show="filters.showVaccinations">
+        <div ng-hide="hideVaccSect">
+            <a class="button icon-right button-clear button-dark" ng-class="{ 'ion-android-arrow-dropdown' : showVaccinations, 'ion-android-arrow-dropleft' : !showVaccinations }"
+               ng-model="showVaccinations" ng-click="showVaccinations=!showVaccinations"><b>Vaccinations</b></a>
+            <div class="list card" ng-repeat="vaccination in vaccinations" ng-show="showVaccinations">
                 <div class="item item-divider">{{vaccination.name}}</div>
                 <div class="item item-body">
                     <div>

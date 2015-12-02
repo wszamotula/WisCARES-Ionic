@@ -72,71 +72,65 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
         });
     };
 
+    $scope.showHealthProblems = true;
+    $scope.showVaccinations = true;
+    $scope.showMedications = true;
+    $scope.showVisits = true;
+
+    $scope.hideHpSect = true;
+    $scope.hideVaccSect = true;
+    $scope.hideMedSect = true;
+    $scope.hideVisitSect = true;
+
     $scope.loadPet();
 
     $scope.$on('$ionicView.enter', function() {
         $scope.loadPet();
         HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
             $scope.healthproblems = response;
+            if ($scope.healthproblems.length != 0) { $scope.hideHpSect = false; }
         });
 
         Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
             $scope.vaccinations = response;
+            if ($scope.vaccinations.length != 0) { $scope.hideVaccSect = false; }
         });
 
         Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
             $scope.medications = response;
+            if ($scope.medications.length != 0) { $scope.hideMedSect = false; }
         });
 
         Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
             $scope.visits = response;
+            if ($scope.visits.length != 0) { $scope.hideVisitSect = false; }
         });
     });
 
-    $scope.filters = {
-         showHealthProblems : false,
-         showVaccinations : false,
-         showMedications : false,
-         showVisits : false
-     };
+    
+
     HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.healthproblems = response;
         $scope.healthproblemsLoaded = true;
-
-        if($scope.healthproblems.length != 0){
-            $scope.filters.showHelathProblems = true;
-        }
-
+        if($scope.healthproblems.length != 0){ $scope.hideHpSect = false; }
     });
 
     Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.vaccinations = response;
         $scope.vaccinationsLoaded = true;
-
-        if ($scope.vaccinations.length != 0) {
-            $scope.filters.showVaccinations = true;
-        }
-
+        if ($scope.vaccinations.length != 0) { $scope.hideVaccSect = false; }
     });
 
     Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.medications = response;
         $scope.medicationsLoaded = true;
-
-        if ($scope.medications.length != 0) {
-            $scope.filters.showMedications = true;
-        }
-
+        if ($scope.medications.length != 0) { $scope.hideMedSect = false; }
     });
 
     Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
         $scope.visits = response;
         $scope.visitsLoaded = true;
-
-        if ($scope.visits.length != 0) {
-            $scope.filters.showVisits = true;
-        }
-
+        if ($scope.visits.length != 0) { $scope.hideVisitSect = false; }
     });
 })
 
