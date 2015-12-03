@@ -138,7 +138,6 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     $scope.pet = new Pets();  //create new movie instance. Properties will be set via ng-model on UI
     $scope.pet.userId = window.localStorage['userId'];
 
-
     $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
 
         $scope.pet.$save(function() {

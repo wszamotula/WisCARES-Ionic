@@ -5,6 +5,9 @@
   The Friends service returns an array of friend data
 -->
 <ion-view view-title="Editing">
+    <ion-nav-buttons side="primary">
+        <a class="button icon-left button-clear ion-ios-arrow-left" href="#/pets/{{pet.id}}">&nbsp;{{pet.name}}</a>
+    </ion-nav-buttons>
     <ion-content class="padding">
         <ion-item class="item item-input">
             <span class="input-label">Pet Name</span>

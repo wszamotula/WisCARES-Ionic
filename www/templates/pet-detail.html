@@ -5,9 +5,11 @@
   The Friends service returns an array of friend data
 -->
 <ion-view view-title="{{pet.name}}">
+    <ion-nav-buttons side="primary">
+        <a class="button icon-left button-clear ion-ios-arrow-left" ng-href="#/pets">&nbsp;Pets</a>
+    </ion-nav-buttons>
     <ion-content class="padding">
         <ion-list>
-            <a class="item-icon-left" ng-href="#/pets">Pets</a>
             <ion-item class="item-remove-animate item-thumbnail-left item-icon-right" type="item-text-wrap">
                 <img ng-src="https://d30y9cdsu7xlg0.cloudfront.net/png/13421-200.png" style="width: 64px; height: 64px">
                 <h2>{{pet.name}}</h2>
@@ -24,36 +26,6 @@
                 <a class="button button-clear button-assertive" ng-click="deletePet()">Delete</a>
             </div>
             </ion-item>
-            <!--
-            <ion-item type="item-text-wrap">
-                <ul class="eventTypeList">
-                    <li class="item item-checkbox eventType">
-                        <label class="checkbox">
-                            <input type="checkbox" ng-model="filters.showHealthProblems" >
-                        </label>
-                        Health problems
-                    </li>
-                    <li class="item item-checkbox eventType">
-                        <label class="checkbox">
-                            <input type="checkbox" ng-model="filters.showVaccinations" >
-                        </label>
-                        Vaccinations
-                    </li>
-                    <li class="item item-checkbox eventType">
-                        <label class="checkbox">
-                            <input type="checkbox" ng-model="filters.showMedications" >
-                        </label>
-                        Medications
-                    </li>
-                    <li class="item item-checkbox eventType">
-                        <label class="checkbox">
-                            <input type="checkbox" ng-model="filters.showVisits" >
-                        </label>
-                        Visits
-                    </li>
-                </ul>
-            </ion-item>
-            -->
         </ion-list>
         <br />
         <div ng-hide="hideHpSect" >

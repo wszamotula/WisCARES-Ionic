@@ -1,4 +1,7 @@
 <ion-view title="Vet">
+    <ion-nav-buttons side="primary">
+        <a class="button icon-left button-clear ion-ios-arrow-left" ng-href="#/home">&nbsp;Home</a>
+    </ion-nav-buttons>
     <ion-content padding="true" class="has-header">
         <div>Health Problems</div>
         <div class="list card" ng-repeat="vet in vets">
@@ -16,6 +19,5 @@
                 <i class="icon ion-ios-plus-empty"></i>
                 <h2>New Vet</h2>
         </ion-item>
-        <a class="item-icon-left" ng-href="#/home">Home</a>
     </ion-content>
 </ion-view>

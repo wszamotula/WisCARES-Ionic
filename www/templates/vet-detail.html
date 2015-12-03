@@ -5,6 +5,9 @@
   The Friends service returns an array of friend data
 -->
 <ion-view view-title="{{vet.name}}">
+    <ion-nav-buttons side="primary">
+        <a class="button icon-left button-clear ion-ios-arrow-left" ng-href="#/vets">&nbsp;Vets</a>
+    </ion-nav-buttons>
     <ion-content class="padding">
         <ion-list>
             <a class="item-icon-left" ui-sref="vets">Vets</a>
