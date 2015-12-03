@@ -2,35 +2,71 @@
     <ion-nav-buttons side="primary">
         <a class="button icon-left button-clear ion-ios-arrow-left" ng-href="goBackPage()">&nbsp;Pets</a>
     </ion-nav-buttons>
+
     <ion-content class="padding">
-        <ion-item class="item item-input">
-            <span class="input-label">Pet Name</span>
-                <input type="text" placeholder="Whats your pets name?" ng-model="pet.name" required>
-        </ion-item>
-        <ion-item class="item item-input">
-            <span class="input-label">Birthday</span>
-                <input type="text" placeholder="When was your pet born?" ng-model="pet.birthDate">
-        </ion-item>
-        <ion-item class="item item-input">
-            <span class="input-label">Species</span>
-                <input type="text" placeholder="What kind of pet is it?" ng-model="pet.species" required>
-        </ion-item>
-        <ion-item class="item item-input">
-            <span class="input-label">Breed</span>
-                <input type="text" placeholder="What breed is your pet?" ng-model="pet.breed">
-        </ion-item>
-        <ion-item class="item item-input">
-            <span class="input-label">Gender</span>
-                <input type="text" placeholder="What is your pet's gender?" ng-model="pet.gender" required>
-        </ion-item>
-        <ion-item class="item item-input">
-            <span class="input-label">Weight</span>
-                <input type="text" placeholder="How much does your pet weigh?" ng-model="pet.weight" required>
-        </ion-item>
-        <!--<div data-ng-controller="CameraCtrl">
-            <button class="button button-full button-positive" ng-click="showActionSheet()">Upload Image</button>
-            <progress max="100" value="0" id="ft-prog" ng-show="showProgress" class="progress"></progress>
-        </div>-->
-        <button class="button button-block button-positive" type="submit" ng-click="addPet()">Add Pet</button>
+
+        <form name="PetrAddForm" novalidate>
+
+            <ion-item class="item item-input">
+                <span class="input-label">Pet Name</span>
+<!-- 
+                    <input type="text" placeholder="Whats your pets name?" ng-model="pet.name" required> -->
+
+                    <input type="text" name="PetName" 
+                        ng-model="pet.name" ng-minlength="2" required>
+            </ion-item>
+
+            <ion-item class="item item-input">
+                <span class="input-label">Birthday</span>
+                    <input type="text" placeholder="When was your pet born?" ng-model="pet.birthDate">
+            </ion-item>
+
+            <ion-item class="item item-input">
+                <span class="input-label">Species</span>
+                    <input type="text" placeholder="What kind of pet is it?" ng-model="pet.species" required>
+            </ion-item>
+
+            <ion-item class="item item-input">
+                <span class="input-label">Breed</span>
+                    <input type="text" placeholder="What breed is your pet?" ng-model="pet.breed">
+            </ion-item>
+
+            <ion-item class="item item-input">
+                <span class="input-label">Gender</span>
+                    <input type="text" placeholder="What is your pet's gender?" ng-model="pet.gender" required>
+            </ion-item>
+
+            <ion-item class="item item-input">
+                <span class="input-label">Weight</span>
+                    <input type="text" placeholder="How much does your pet weigh?" ng-model="pet.weight" required>
+            </ion-item>
+            <!--<div data-ng-controller="CameraCtrl">
+                <button class="button button-full button-positive" ng-click="showActionSheet()">Upload Image</button>
+                <progress max="100" value="0" id="ft-prog" ng-show="showProgress" class="progress"></progress>
+            </div>-->
+
+            <div class="padding">
+
+                <p ng-show="PetrAddForm.PetName.$error.required">* Pet Name is required</p>
+                <p ng-show="myForm.username.$error.minlength">* Pet Name must be longer than 2 characters</p>
+
+            <!-- 
+                <p ng-show="myForm.password.$error.required">* Password is required</p>
+                <p ng-show="myForm.password.$error.minlength">* Password must be longer than 6 characters</p> -->
+            </div>
+
+
+            <div class="padding">
+
+                <button type="button" class="button button-block button-positive" ng-disabled   ="PetrAddForm.$invalid" ng-click="addPet()">Add Pet</button>
+                </div>
+<!-- 
+                <button class="button button-block button-positive" type="submit" ng-click="    addPet()">Add Pet</button> -->
+
+            </div>
+        </form>
+
     </ion-content>
+
 </ion-view>
+
