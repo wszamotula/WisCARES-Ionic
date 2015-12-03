@@ -1,6 +1,6 @@
 <ion-view view-title="Add New Pet">
     <ion-nav-buttons side="primary">
-        <a class="button icon-left button-clear ion-ios-arrow-left" ng-href="goBackPage()">&nbsp;Pets</a>
+        <a class="button icon-left button-clear ion-ios-arrow-left" ng-href="#/pets">&nbsp;Pets</a>
     </ion-nav-buttons>
 
     <ion-content class="padding">
@@ -48,9 +48,10 @@
             <ion-item class="item item-input">
 
                 <span class="input-label">Weight</span>
-                    <input type="text" name="PetWeight" placeholder="How much does your pet weigh?" ng-model="pet.weight" required>
+                    <input type="number" name="PetWeight" placeholder="Pet weight in pounds?" ng-model="pet.weight" required>
 
             </ion-item>
+
             <!--<div data-ng-controller="CameraCtrl">
                 <button class="button button-full button-positive" ng-click="showActionSheet()">Upload Image</button>
                 <progress max="100" value="0" id="ft-prog" ng-show="showProgress" class="progress"></progress>
@@ -61,25 +62,23 @@
                 <p ng-show="PetAddForm.PetName.$error.required">* Pet Name is required</p>
                 <p ng-show="PetAddForm.PetName.$error.minlength">* Pet Name must be longer than 2 characters</p>
 
-                <p ng-show="PetAddForm.PetSpecies.$error.required">* Pet Species is required</p>
+                <p ng-show="PetAddForm.PetSpecies.$error.required">* Species is required</p>
 
-                <p ng-show="PetAddForm.PetGender.$error.required">* Pet Gender is required</p>
+                <p ng-show="PetAddForm.PetGender.$error.required">* Gender is required</p>
 
-                <p ng-show="PetAddForm.PetWeight.$error.required">* Pet Weight is required</p>
-            <!-- 
-                <p ng-show="myForm.password.$error.required">* Password is required</p>
-                <p ng-show="myForm.password.$error.minlength">* Password must be longer than 6 characters</p> -->
+                <p ng-show="PetAddForm.PetWeight.$error.required">* Weight is required</p>
+                <p ng-show="PetAddForm.PetWeight.$invalid && !PetAddForm.PetWeight.$pristine">* Weight must be a number of pounds</p>
+
             </div>
 
 
             <div class="padding">
 
-                <button type="submit" class="button button-block button-positive" ng-disabled   ="PetAddForm.$invalid" ng-click="addPet()">Add Pet</button>
+                <button type="submit" class="button button-block button-assertive" ng-disabled   ="PetAddForm.$invalid" ng-click="addPet()">Add Pet</button>
                 </div>
-<!-- 
-                <button class="button button-block button-positive" type="submit" ng-click="    addPet()">Add Pet</button> -->
 
             </div>
+            
         </form>
 
     </ion-content>
