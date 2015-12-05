@@ -22,6 +22,7 @@
                 <label class="item">
                     <button class="button button-block button-positive" type="submit" ng_disabled="!signUpForm.$valid">Sign up</button>
                 </label>
+                <div ng-hide="notloading" ><ion-spinner></ion-spinner></div>
             </div>
         </form>
     </ion-content>

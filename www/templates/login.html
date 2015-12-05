@@ -19,6 +19,7 @@
         <label class="item">
           <button class="button button-block button-assertive" type="submit" ng_disabled="!loginForm.$valid">Log in</button>
         </label>
+        <div ng-hide="notloading" ><ion-spinner></ion-spinner></div>
       </div>
     </form>
     <div class="center" style="padding-top: 30px"><button class="button button-outline button-assertive icon-left button-small ion-person-add" ng-click="signUp()">
