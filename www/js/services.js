@@ -39,14 +39,20 @@ angular.module('wiscares.services', ['ngFileUpload'])
             options.fileName = pet.imageURI.substr(pet.imageURI.lastIndexOf('/') + 1);
             options.mimeType = "image/jpeg";
             options.chunkedMode = false;
-            options.httpMethod = "PUT";
             var params = new Object();
 
-            params.pet = pet;
-         
-
+            params.userId = pet.userId
+            params.name = pet.name
+            params.birthDate = pet.birthDate
+            params.species = pet.species
+            params.breed = pet.breed
+            params.gender = pet.gender
+            params.weight = pet.weight
+            //params.pet = pet;
             options.params = params;
+
             if("id" in pet) {
+                options.httpMethod = "PUT";
                 ft.upload(pet.imageURI, "http://vast-bastion-6115.herokuapp.com/pets/" + pet.id + ".json",
                     function (e) {
                         console.log("WIN" + JSON.stringify(e));
