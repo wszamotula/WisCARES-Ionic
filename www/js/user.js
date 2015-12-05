@@ -1,9 +1,10 @@
 angular.module('loginCtrl', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicPopup, $localstorage, UserSession, Auth) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicPopup, UserSession, Auth, $ionicPlatform, $state, $ionicHistory, $ionicLoading) {
 
         //-------------------------------------------SIGN UP----------------------------------
-    $scope.signUpDate = {};
+    $scope.signUpData = {};
+    $scope.notloading = true
 
     $ionicModal.fromTemplateUrl('templates/signup.html', {
         scope: $scope
@@ -12,7 +13,7 @@ angular.module('loginCtrl', [])
     });
 
     $scope.signUp = function () {
-        $scope.signUpDate = {};
+        $scope.signUpData = {};
         $scope.modal.hide();
         $scope.sign_up_modal.show();
     };
@@ -28,13 +29,24 @@ angular.module('loginCtrl', [])
     };
 
     $scope.doSignUp = function () {
-        console.log('Doing signup', $scope.signUpDate);
-        if ($scope.signUpDate.password != $scope.signUpDate.confirm_password){
+        if ($scope.signUpData.password != $scope.signUpData.password_confirmation){
             $scope.password_not_match();
-        }else{
-            $localstorage.set($scope.signUpDate.username,$scope.signUpDate.password);
+        } else{  
+            $ionicLoading.show({
+                template: 'Signing in <div ng-hide="notloading" ><ion-spinner></ion-spinner></div>'
+            })
+            Auth.register($scope.signUpData).then(function(user) {
+                window.localStorage['userId'] = user.id;
+                $ionicLoading.hide()
+                $scope.sign_up_modal.hide();
+            }, function(error) {
+                $ionicLoading.hide()
+                $ionicPopup.alert({
+                    template: 'Error connecting to the internet, please make sure you are online'
+                 });
+            });
         }
-        console.log($localstorage.get($scope.signUpDate.username));
+        console.log($localstorage.get($scope.signUpData.username));
     };
 
 
@@ -46,9 +58,26 @@ angular.module('loginCtrl', [])
         backdropClickToClose: false
     }).then(function (modal) {
         $scope.modal = modal;
-        $scope.login()
+        if(window.localStorage['userId'] == undefined) {
+           $scope.login()
+        }
     });
 
+    $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $scope.login()
+        }
+    });
+
+    $ionicPlatform.registerBackButtonAction(function() {
+        //var path = $location.path()
+        if ($state.is('home')) {
+            ionic.Platform.exitApp();
+        } else {
+            $ionicHistory.goBack();
+        }
+    }, 300);
+ 
     $scope.closeLogin = function () {
         $scope.modal.hide();
     };
@@ -73,13 +102,17 @@ angular.module('loginCtrl', [])
         //            template: "Invalid username or password"
         //        });
         //    });
-
+        $ionicLoading.show({
+            template: 'Logging in <div ng-hide="notloading" ><ion-spinner></ion-spinner></div>'
+        })
         Auth.login($scope.loginData).then(function(user) {
             window.localStorage['userId'] = user.id;
-            window.localStorage['user'] = user;
             $scope.modal.hide();
+            $ionicLoading.hide();
         }, function(error) {
             // Authentication failed...
+            $scope.notloading = true
+            $ionicLoading.hide();
             var confirmPopup = $ionicPopup.alert({
                 template: "Invalid username or password"
             });

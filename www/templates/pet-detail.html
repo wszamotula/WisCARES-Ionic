@@ -11,7 +11,7 @@
     <ion-content class="padding">
         <ion-list>
             <ion-item class="item-remove-animate item-thumbnail-left item-icon-right" type="item-text-wrap">
-                <img ng-src="https://d30y9cdsu7xlg0.cloudfront.net/png/13421-200.png" style="width: 64px; height: 64px">
+                <img ng-src="{{pet.photo_url}}" style="width: 64px; height: 64px">
                 <h2>{{pet.name}}</h2>
                 <p>
                     {{pet.species}}
@@ -20,11 +20,19 @@
                     <br />
                     {{pet.gender}}
                 </p>
+<<<<<<< HEAD
                 <!--<div>
                     <a class="button button-clear button-positive" ui-sref="pet-edit({id:pet.id})">Edit</a>
                     <a class="button button-clear button-positive" ui-sref="add-event({id:pet.id})">Add Event</a>
                     <a class="button button-clear button-assertive" ng-click="deletePet()">Delete</a>
                 </div>-->
+=======
+            <div>
+                <a class="button button-clear button-positive" ui-sref="pet-edit({id:pet.id})">Edit</a>
+                <a class="button button-clear button-positive" ui-sref="add-event({id:pet.id})">Add Event</a>
+                <a class="button button-clear button-assertive" ng-click="showActionSheet()">Delete</a>
+            </div>
+>>>>>>> 3cdbd447d88ef2e05e0254d473c4bd342c5e642d
             </ion-item>
             <div class="text-center">
                     <a class="button button-clear button-dark ion-edit" ui-sref="pet-edit({id:pet.id})">&nbsp;Edit Pet</a>

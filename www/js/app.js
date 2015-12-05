@@ -140,6 +140,12 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
         controller: 'OptionsCtrl'
     })
 
+    .state('reminders', {
+        url: '/reminders',
+        templateUrl: 'templates/reminder.html',
+        controller: 'Reminders'
+    })
+
     .state('resources', {
         url: '/resources',
         templateUrl: 'templates/resources.html',
