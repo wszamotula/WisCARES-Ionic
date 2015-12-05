@@ -113,8 +113,16 @@ describe('Application controller tests', function(){
         query: function() {
           return {$promise: petQueryDeferred.promise};
         },
-        get: function(id) {
-            return { id: 1, name: "Monty", species: "cat" };
+        get: function(input) {
+            return { 
+              id: 1, 
+              name: "Monty", 
+              species: "cat", 
+              deleted: false,
+              $delete: function() {
+                deleted = true;
+              }
+            };
         },
         $delete: function() {
           //do nothing
@@ -157,7 +165,7 @@ describe('Application controller tests', function(){
       $controller('PetDetailCtrl', {
         '$scope': $scope,
         '$state' : "",
-        '$stateParams' : "",
+        '$stateParams' : { petId : 1 },
         'Pets': mockPetService,
         'HealthProblems': mockHpService,
         'Medications' : mockMedService,
@@ -173,16 +181,20 @@ describe('Application controller tests', function(){
         expect(mockPetService.get).toHaveBeenCalled();
       });
 
+      it('should have pet id 1', function() {
+        expect($scope.pet.id).toEqual(1);
+      });
+
     });
 
     describe('Deleting a pet', function(){
     
       beforeEach(function(){
-        $scope.deletePet;
+        $scope.deletePet();
       });
 
       it('should have called Pets.$delete', function() {
-        expect(mockPetService.$delete).toHaveBeenCalled();
+        expect($scope.pet.deleted).toBe(true);
         //TODO: Rob/Adam, Is the pet.$delete function configured somewhere or is
         //it inherent in ngResource?
       });
@@ -276,19 +288,19 @@ describe('Application controller tests', function(){
     describe('Filter setup', function(){
 
       it('Health problem filter should be set to true after loading', function() {
-        expect($scope.filters.showHealthProblems).toBe(true);
+        expect($scope.showHealthProblems).toBe(true);
       });
 
       it('Vaccination filter should be set to true after loading', function() {
-        expect($scope.filters.showVaccinations).toBe(true);
+        expect($scope.showVaccinations).toBe(true);
       });
 
       it('Medication filter should be set to true after loading', function() {
-        expect($scope.filters.showMedications).toBe(true);
+        expect($scope.showMedications).toBe(true);
       });
 
       it('Visit filter should be set to true after loading', function() {
-        expect($scope.filters.showVisits).toBe(true);
+        expect($scope.showVisits).toBe(true);
       });
 
     });
@@ -299,6 +311,14 @@ describe('Application controller tests', function(){
   Tests for the pet add controller
   *****/
   describe("The pet add controller", function(){
+
+    /*var mockPetService = (function() {
+      function mockPetService() {
+        return { id: "" };
+      }
+      return mockPetService;
+    }).call(this);*/
+
     //Create mocked services, spy on used calls
     beforeEach(inject(function($controller) {
       $scope = $rootScope.$new();
@@ -307,10 +327,16 @@ describe('Application controller tests', function(){
       mockPetService = {
         $save: function() {
           //do nothing
-        }
+        },
+        mockPetService: function() {
+          return function mockPetService() {
+            //return { id: "" };
+          }
+          //return mockPetService;
+        } 
       }
 
-      spyOn(mockPetService, '$save');
+      spyOn(mockPetService, 'mockPetService');
       
       $controller('PetAddCtrl', {
         '$scope': $scope,
@@ -326,11 +352,13 @@ describe('Application controller tests', function(){
     describe("Adding a pet", function(){
 
       beforeEach(function(){
-        $scope.addPet();
+        //$scope.addPet();
+        console.log(mockPetService.mockPetService);
       });
 
       it('Should have called the save function in pet service', function(){
-        expect(mockPetService.$save).toHaveBeenCalled();
+
+        expect(mockPetService.mockPetService).toHaveBeenCalled();
         //TODO: Rob/Adam, why do we create a new instance of the pet service
         //in the pet add controler?
       });

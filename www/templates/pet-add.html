@@ -48,7 +48,7 @@
             <ion-item class="item item-input">
 
                 <span class="input-label">Weight</span>
-                    <input type="number" name="PetWeight" placeholder="Pet weight in pounds?" ng-model="pet.weight" required>
+                    <input type="number" name="PetWeight" placeholder="Pet weight in pounds?" ng-model="pet.weight">
 
             </ion-item>
 
@@ -66,7 +66,6 @@
 
                 <p ng-show="PetAddForm.PetGender.$error.required">* Gender is required</p>
 
-                <p ng-show="PetAddForm.PetWeight.$error.required">* Weight is required</p>
                 <p ng-show="PetAddForm.PetWeight.$invalid && !PetAddForm.PetWeight.$pristine">* Weight must be a number of pounds</p>
 
             </div>

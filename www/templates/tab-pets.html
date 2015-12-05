@@ -4,11 +4,11 @@
     </ion-nav-buttons>
     <ion-content>
         <ion-list>
-            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="pet in pets" type="item-text-wrap" href="#/pets/{{pet.id}}">
+            <ion-item class="item-remove-animate item-thumbnail-left item-icon-right" ng-repeat="pet in pets" type="item-text-wrap" href="#/pets/{{pet.id}}">
 
                 <img ng-src="{{pet.photo_url}}" style="width: 64px; height: 64px">
 
-                <h2>{{pet.name}}</h2>
+                <h2><b>{{pet.name}}</b></h2>
                 <p>{{pet.species}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
 <!-- 
@@ -16,8 +16,8 @@
                   Delete
                 </ion-option-button> -->
             </ion-item>
-            <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/pets/pet-add">
-                <img ng-src="http://s3.amazonaws.com/wiscares/GenericPetIcon.png">
+            <ion-item class="item-remove-animate item-thumbnail-left item-icon-right" type="item-text-wrap" href="#/pets/pet-add">
+                <img ng-src="https://d30y9cdsu7xlg0.cloudfront.net/png/13421-200.png">
                 <i class="icon ion-ios-plus-empty"></i>
                 <h2>New pet</h2>
             </ion-item>

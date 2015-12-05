@@ -155,7 +155,11 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 })
 
 .controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets, ImageUploader) {
+<<<<<<< HEAD
+    $scope.pet = new Pets();  //create new pet movie instance. Properties will be set via ng-model on UI
+=======
     $scope.pet = new Pets(); 
+>>>>>>> 3cdbd447d88ef2e05e0254d473c4bd342c5e642d
     $scope.pet.userId = window.localStorage['userId'];
 
     $scope.$on('$ionicView.enter', function() {

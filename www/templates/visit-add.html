@@ -2,15 +2,31 @@
     <ion-nav-buttons side="primary">
         <a class="button icon-left button-clear ion-ios-arrow-left" ui-sref="add-event({id:visit.petID})">&nbsp;Events</a>
     </ion-nav-buttons>
+
     <ion-content class="padding">
+
+    <form name="visitAddForm" novalidate>
+
         <ion-item class="item item-input">
             <span class="input-label">Visit</span>
-                <input type="text" placeholder="Where did the visit happen?" ng-model="visit.location">
+                <input type="text" name="location" placeholder="Where did the visit happen?" ng-model="visit.location" ng-minlength="2" required>
         </ion-item>
+
         <ion-item class="item item-input">
             <span class="input-label">Date Occured</span>
                 <input type="date" placeholder="When did it happen?" ng-model="visit.dateVisited">
         </ion-item>
-        <button class="button button-block button-positive" type="submit" ng-click="addVisit()">Add Visit</button>
+
+        <div class="padding">
+            <p ng-show="visitAddForm.location.$error.required">* Location is required</p>
+            <p ng-show="visitAddForm.location.$error.minlength">* Location must be longer than 2 characters</p>
+
+        </div>
+
+        <button class="button button-block button-assertive" type="submit" ng-disabled   ="visitAddForm.$invalid" ng-click="addVisit()">Add Visit</button>
+
+    </form>
+
     </ion-content>
+
 </ion-view>

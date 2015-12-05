@@ -20,23 +20,25 @@
                     <br />
                     {{pet.gender}}
                 </p>
-            <div>
-                <a class="button button-clear button-positive" ui-sref="pet-edit({id:pet.id})">Edit</a>
-                <a class="button button-clear button-positive" ui-sref="add-event({id:pet.id})">Add Event</a>
-                <a class="button button-clear button-assertive" ng-click="showActionSheet()">Delete</a>
-            </div>
             </ion-item>
+            <div class="text-center">
+                    <a class="button button-clear button-dark ion-edit" ui-sref="pet-edit({id:pet.id})">&nbsp;Edit Pet</a>
+                    <a class="button button-clear button-dark ion-plus-round" ui-sref="add-event({id:pet.id})">&nbsp;New Event</a>
+                    <a class="button button-clear button-dark ion-trash-b" ng-click="deletePet()">&nbsp;Delete</a>
+            </div>
         </ion-list>
-        <br />
-        <div ng-hide="hideHpSect" >
+        <div ng-hide="hideHpSect">
             <a class="button icon-right button-clear button-dark" ng-class="{ 'ion-android-arrow-dropdown' : showHealthProblems, 'ion-android-arrow-dropleft' : !showHealthProblems }"
                ng-model="showHealthProblems" ng-click="showHealthProblems=!showHealthProblems"><b>Health Problems</b></a>
             <div class="list card" ng-repeat="healthproblem in healthproblems" ng-show="showHealthProblems">
                 <div class="item item-divider">{{healthproblem.dateOccurred}}</div>
-                <div class="item item-body">
-                    <div>
-                        {{healthproblem.description}}   
-                        <button class="btn btn-primary" ng-click="deleteHP(healthproblem)">Delete</button>
+                <div class="item item-body row">
+                    <div class="col text-left">
+                        {{healthproblem.description}}
+                    </div>
+                    <div class="col text-right">
+                        <!--<a class="button icon-right button-clear ion-trash-b" ng-click="deleteHP(healthproblem)"></a>-->
+                        <button class="button-clear ion-trash-b" ng-click="deleteHP(healthproblem)"></button>
                     </div>
                 </div>
             </div>
@@ -46,10 +48,12 @@
                ng-model="showMedications" ng-click="showMedications=!showMedications"><b>Medications</b></a>
             <div class="list card" ng-repeat="medication in medications" ng-show="showMedications">
                 <div class="item item-divider">{{medication.name}}</div>
-                <div class="item item-body">
-                    <div>
-                        {{medication.frequency}}
-                        <button class="btn btn-primary" ng-click="deleteMed(medication)">Delete</button>
+                <div class="item item-body row">
+                    <div class="col text-left">
+                        {{medication.frequency}}                       
+                    </div>
+                    <div class="col text-right">
+                        <button class="button-clear ion-trash-b" ng-click="deleteMed(medication)"></button>
                     </div>
                 </div>
             </div>
@@ -59,10 +63,12 @@
                ng-model="showVisits" ng-click="showVisits=!showVisits"><b>Visits</b></a>
             <div class="list card" ng-repeat="visit in visits" ng-show="showVisits">
                 <div class="item item-divider">{{visit.dateVisited}}</div>
-                <div class="item item-body">
-                    <div>
-                        {{visit.location}}   
-                        <button class="btn btn-primary" ng-click="deleteVisit(visit)">Delete</button>
+                <div class="item item-body row">
+                    <div class="col text-left">
+                        {{visit.location}}                        
+                    </div>
+                    <div class="col text-right">
+                        <button class="button-clear ion-trash-b" ng-click="deleteVisit(visit)"></button>
                     </div>
                 </div>
             </div>
@@ -72,10 +78,12 @@
                ng-model="showVaccinations" ng-click="showVaccinations=!showVaccinations"><b>Vaccinations</b></a>
             <div class="list card" ng-repeat="vaccination in vaccinations" ng-show="showVaccinations">
                 <div class="item item-divider">{{vaccination.name}}</div>
-                <div class="item item-body">
-                    <div>
-                        {{vaccination.dateGiven}}
-                        <button class="btn btn-primary" ng-click="deleteVac(vaccination)">Delete</button>
+                <div class="item item-body row">
+                    <div class="col text-left">
+                        {{vaccination.dateGiven}}                        
+                    </div>
+                    <div class="col text-right">
+                        <button class="button-clear ion-trash-b" ng-click="deleteVac(vaccination)"></button>
                     </div>
                 </div>
             </div>
