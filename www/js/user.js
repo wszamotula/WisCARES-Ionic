@@ -1,6 +1,6 @@
 angular.module('loginCtrl', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicPopup, UserSession, Auth, $ionicPlatform, $state, $ionicHistory) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicPopup, UserSession, Auth, $ionicPlatform, $state, $ionicHistory, $ionicLoading) {
 
         //-------------------------------------------SIGN UP----------------------------------
     $scope.signUpData = {};
@@ -32,13 +32,15 @@ angular.module('loginCtrl', [])
         if ($scope.signUpData.password != $scope.signUpData.password_confirmation){
             $scope.password_not_match();
         } else{  
-            $scope.notloading = false
+            $ionicLoading.show({
+                template: 'Signing in <div ng-hide="notloading" ><ion-spinner></ion-spinner></div>'
+            })
             Auth.register($scope.signUpData).then(function(user) {
-                $scope.notloading = true
                 window.localStorage['userId'] = user.id;
+                $ionicLoading.hide()
                 $scope.sign_up_modal.hide();
             }, function(error) {
-                $scope.notloading = true
+                $ionicLoading.hide()
                 $ionicPopup.alert({
                     template: 'Error connecting to the internet, please make sure you are online'
                  });
@@ -100,14 +102,17 @@ angular.module('loginCtrl', [])
         //            template: "Invalid username or password"
         //        });
         //    });
-        $scope.notloading = false
+        $ionicLoading.show({
+            template: 'Logging in <div ng-hide="notloading" ><ion-spinner></ion-spinner></div>'
+        })
         Auth.login($scope.loginData).then(function(user) {
             window.localStorage['userId'] = user.id;
             $scope.modal.hide();
-            $scope.notloading = true
+            $ionicLoading.hide();
         }, function(error) {
             // Authentication failed...
             $scope.notloading = true
+            $ionicLoading.hide();
             var confirmPopup = $ionicPopup.alert({
                 template: "Invalid username or password"
             });

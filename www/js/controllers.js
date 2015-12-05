@@ -29,14 +29,55 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
 })
 
-.controller('PetDetailCtrl', function ($scope, $state, $stateParams, Pets, HealthProblems, Medications, Vaccinations, Visits) {
+.controller('PetDetailCtrl', function ($scope, $state, $stateParams, Pets, HealthProblems, Medications, Vaccinations, Visits, $ionicActionSheet, $ionicLoading) {
+
+    $scope.showActionSheet = function () {
+        // Show the action sheet
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+              { text: 'Yes' }
+            ],
+
+            titleText: 'Delete Your Pet?',
+            cancelText: 'No',
+            cancel: function () {
+                hideSheet();
+            },
+            buttonClicked: function (index) {
+        
+                if (index == 0) {
+                    $ionicLoading.show({
+                        template: 'Removing Pet <div ng-hide="notloading" ><ion-spinner></ion-spinner></div>'
+                    });
+                    $scope.deletePet()
+                } else {
+                    return true;
+                }
+                hideSheet();
+            }
+        });
+    };
     $scope.loadPet = function () { //Issues a GET request
         $scope.pet = Pets.get({ id: $stateParams.petId });
     };
 
     $scope.deletePet = function() { 
-    	$scope.pet.$delete();
-    	$state.go('pets');
+        for(var i = 0; i < $scope.medications.length; i++) {
+            $scope.medications[i].$delete();
+        }
+        for(var i = 0; i < $scope.vaccinations.length; i++) {
+            $scope.vaccinations[i].$delete();
+        }
+        for(var i = 0; i < $scope.healthproblems.length; i++) {
+            $scope.healthproblems[i].$delete();
+        }
+        for(var i = 0; i < $scope.visits.length; i++) {
+            $scope.visits[i].$delete();
+        }
+    	$scope.pet.$delete(function() {
+            $ionicLoading.hide();
+            $state.go('pets');
+        });
   	};
 
     $scope.deleteMed = function(med) { 
@@ -165,7 +206,6 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
     $scope.showActionSheet = function () {
         // Show the action sheet
-        console.log(Object.keys($scope.pet));
         var hideSheet = $ionicActionSheet.show({
             buttons: [
               { text: 'Take Photo' },
