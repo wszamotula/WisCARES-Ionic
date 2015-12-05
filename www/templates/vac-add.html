@@ -2,15 +2,32 @@
     <ion-nav-buttons side="primary">
         <a class="button icon-left button-clear ion-ios-arrow-left" ui-sref="add-event({id:vaccination.petID})">&nbsp;Events</a>
     </ion-nav-buttons>
+
     <ion-content class="padding">
+
+    <form name="vacAddForm" novalidate>
+
         <ion-item class="item item-input">
             <span class="input-label">Vaccination Name</span>
-                <input type="text" placeholder="What is the name of the Vaccination?" ng-model="vaccination.name">
+                <input type="text" name="vacName" placeholder="What is the name of the Vaccination?" ng-model="vaccination.name" ng-minlength="2" required>
         </ion-item>
+
         <ion-item class="item item-input">
             <span class="input-label">Date Given</span>
                 <input type="date" placeholder="When was the vaccination given?" ng-model="vaccination.dateGiven">
         </ion-item>
-        <button class="button button-block button-positive" type="submit" ng-click="addVac()">Add Vaccination</button>
+
+        <div class="padding">
+
+            <p ng-show="vacAddForm.vacName.$error.required">* Vaccination name is required</p>
+            <p ng-show="vacAddForm.vacName.$error.minlength">* Vaccination name must be longer than 2 characters</p>
+
+        </div>
+
+        <button class="button button-block button-assertive" type="submit" ng-disabled   ="vacAddForm.$invalid" ng-click="addVac()">Add Vaccination</button>
+
+    </form>
+        
     </ion-content>
+
 </ion-view>
