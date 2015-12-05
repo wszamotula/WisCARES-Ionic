@@ -421,6 +421,135 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     };
 })
 
+.controller('Reminders', ['$scope', '$rootScope', 'Pets', 'ReminderFactory', '$ionicModal', '$timeout',
+  function ($scope, $rootScope, UserSession, ReminderFactory, $ionicModal, $timeout) {
+      $scope.reminders = [];
+
+      // Trigger Load reminders
+      $timeout(function () {
+          $rootScope.$broadcast('load-reminders');
+      }, 9); // Race Condition
+
+      $scope.doRefresh = function () {
+          $rootScope.$broadcast('load-reminders');
+          $scope.$broadcast('scroll.refreshComplete');
+      }
+
+      $rootScope.createNew = function () {
+          $scope.modal.show();
+      }
+
+      $ionicModal.fromTemplateUrl('templates/newReminder.html', function (modal) {
+          $scope.modal = modal;
+      }, {
+          animation: 'slide-in-up',
+          focusFirstInput: true
+      });
+
+      $rootScope.$on('load-reminders', function (event) {
+          $rootScope.showLoading('Fetching Reminders..');
+          var user = UserSession.getSession();
+          ReminderFactory.getAll(user._id).success(function (data) {
+              $scope.reminders = data.reminders;
+              $rootScope.hideLoading();
+          }).error(function (data) {
+              $rootScope.hideLoading();
+              $rootScope.toast('Oops.. Something went wrong');
+          });
+      });
+
+      $scope.deleteReminder = function (reminder) {
+          $rootScope.showLoading('Deleting Reminder..');
+
+          ReminderFactory.delete(reminder.userId, reminder._id)
+            .success(function (data) {
+                console.log(data);
+                $rootScope.hideLoading();
+                $rootScope.$broadcast('load-reminders');
+            }).error(function (data) {
+                $rootScope.hideLoading();
+                console.log(data);
+            })
+      }
+
+  }
+])
+
+
+.controller('NewReminderCtrl', ['$scope', '$ionicPopup', '$filter', '$rootScope', 'ReminderFactory', 'UserSession',
+  function ($scope, $ionicPopup, $filter, $rootScope, ReminderFactory, UserSession) {
+
+      $scope.reminder = {
+          'remindThis': '',
+          'formattedDate': '',
+          'shdlSMS': true,
+          'shdlCall': true
+
+      };
+
+      $scope.$watch('reminder.formattedDate', function (unformattedDate) {
+          $scope.reminder.formattedDate = $filter('date')(unformattedDate, 'dd/MM/yyyy HH:mm');
+      });
+
+      $scope.createReminder = function () {
+          $rootScope.showLoading('Creating..');
+          console.log("Create Button Works!");
+          var user = UserSession.getSession();
+          var _r = $scope.reminder;
+          console.log($scope.reminder);
+          var d = new Date(_r.fullDate);
+          console.log(d);
+          if (_r.shdlSMS) _r.shdlSMS = d.getTime();
+          if (_r.shdlCall) _r.shdlCall = d.getTime();
+
+          console.log(_r.shdlSMS);
+          var x = new Date(parseInt(_r.shdlSMS));
+          console.log(x);
+          delete _r.formattedDate;
+          delete _r.fullDate;
+
+          ReminderFactory.create(user._id, _r).success(function (data) {
+              $rootScope.hideLoading();
+              $scope.modal.hide();
+              $rootScope.$broadcast('load-reminders');
+          }).error(function (data) {
+              $rootScope.hideLoading();
+              console.log(data);
+          });
+
+
+      };
+
+      $scope.openDatePicker = function () {
+          $scope.tmp = {};
+          $scope.tmp.newDate = $scope.reminder.formattedDate;
+
+          var remindWhen = $ionicPopup.show({
+              template: '<datetimepicker ng-model="tmp.newDate"></datetimepicker>',
+              title: "When to Remind",
+              scope: $scope,
+              buttons: [{
+                  text: 'Cancel'
+              }, {
+                  text: '<b>Select</b>',
+                  type: 'button-stable',
+                  onTap: function (e) {
+                      $scope.reminder.fullDate = $scope.tmp.newDate;
+                      $scope.reminder.formattedDate = $scope.tmp.newDate;
+                      console.log($scope.reminder.formattedDate);
+                      // var w = new Date($scope.reminderformattedDate.fullDate));
+                      //console.log(w);
+                      //var d = new Date(_r.fullDate);
+
+                      //if (_r.shdlSMS) _r.shdlSMS = d.getTime();
+                  }
+              }]
+          });
+      }
+
+  }
+])
+
 .controller('OptionsCtrl', function ($scope, $state, Auth) {
     $scope.$on('$ionicView.enter', function() {
         if(window.localStorage['userId'] == undefined) {
