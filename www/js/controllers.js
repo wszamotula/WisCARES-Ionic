@@ -463,6 +463,17 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
 .controller('Reminders', ['$scope', '$rootScope', 'Pets', 'ReminderFactory', '$ionicModal', '$timeout',
   function ($scope, $rootScope, UserSession, ReminderFactory, $ionicModal, $timeout) {
+
+     $ionicModal.fromTemplateUrl('templates/newReminder.html', {
+          scope: $scope
+      }).then(function (modal) {
+          $scope.modal = modal;
+      });
+
+      $scope.NewReminder = function () {
+          $scope.modal.show();
+      };
+      
       $scope.reminders = [];
 
       // Trigger Load reminders
