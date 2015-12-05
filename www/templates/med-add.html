@@ -2,15 +2,32 @@
     <ion-nav-buttons side="primary">
         <a class="button icon-left button-clear ion-ios-arrow-left" ui-sref="add-event({id:medication.petID})">&nbsp;Events</a>
     </ion-nav-buttons>
+
     <ion-content class="padding">
+
+    <form name="medAddForm" novalidate>
+
         <ion-item class="item item-input">
             <span class="input-label">Medication Name</span>
-                <input type="text" placeholder="What is the name of the medication?" ng-model="medication.name">
+                <input type="text" name="medName" placeholder="What is the name of the medication?" ng-model="medication.name" ng-minlength="2" required>
         </ion-item>
+
         <ion-item class="item item-input">
             <span class="input-label">Frequency</span>
-                <input type="text" placeholder="How often should your pet take it?" ng-model="medication.frequency">
+                <input type="text" name="medFreq" placeholder="How often should your pet take it?" ng-model="medication.frequency" required>
         </ion-item>
-        <button class="button button-block button-positive" type="submit" ng-click="addMed()">Add Medication</button>
+
+        <div class="padding">
+
+            <p ng-show="medAddForm.medName.$error.required">* Medication name is required</p>
+            <p ng-show="medAddForm.medName.$error.minlength">* Medication name must be longer than 2 characters</p>
+
+            <p ng-show="medAddForm.medFreq.$error.required">* Medication frequency is required</p>
+
+        </div>
+
+        <button class="button button-block button-assertive" type="submit" ng-disabled   ="medAddForm.$invalid" ng-click="addMed()">Add Medication</button>
+
+    </form>
     </ion-content>
 </ion-view>
