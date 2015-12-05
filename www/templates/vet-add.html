@@ -3,21 +3,35 @@
         <a class="button icon-left button-clear ion-ios-arrow-left" ng-href="#/vets">&nbsp;Vets</a>
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header">
+
+    <form name="VetAddForm" novalidate>
+
         <ion-list>
-            <label class="item item-input">
+            <ion-item class="item item-input">
                 <span class="input-label">Name</span>
-                <input type="text" placeholder="Veterinarian Name" ng-model="vet.name">
-            </label>
-            <label class="item item-input">
+                <input type="text" placeholder="Veterinarian Name" name="vetname" ng-model="vet.name" ng-minlength="2" ng-maxlength="20" required>
+            </ion-item>
+            <ion-item class="item item-input">
                 <span class="input-label">Address</span>
                 <input type="tel" placeholder="Veterinarian Address" ng-model="vet.address">
-            </label>
-            <label class="item item-input">
+            </ion-item>
+            <ion-item class="item item-input">
                 <span class="input-label">Phone Number</span>
-                <input type="text" placeholder="Veterinarian Phone #" ng-model="vet.contact">
-            </label>
-        </ion-list>
+                <input type="number" placeholder="Veterinarian Phone #" ng-model="vet.contact">
+            </ion-item>
 
-        <button class="button button-block button-positive" type="submit" ng-click="addVet()">Add Vet</button>
+            <div class="padding">
+
+                <p ng-show="VetAddForm.vetname.$error.required">* Veterinarian Name is required</p>
+                <p ng-show="VetAddForm.vetname.$error.minlength">* Veterinarian Name must be longer than 2 characters</p>
+                <p ng-show="VetAddForm.vetname.$error.maxlength">* Veterinarian Name must be shorter than 20 characters</p>
+
+            </div>
+
+        <button class="button button-block button-assertive" type="submit" ng-disabled   ="VetAddForm.$invalid" ng-click="addVet()">Add Vet</button>
+
+        </ion-list>
+        </form>
+
     </ion-content>
 </ion-view>

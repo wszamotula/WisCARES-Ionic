@@ -35,7 +35,8 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
         // Show the action sheet
         var hideSheet = $ionicActionSheet.show({
             buttons: [
-              { text: 'Yes' }
+              { text: 'Yes' },
+              { text: 'No'}
             ],
 
             titleText: 'Delete Your Pet?',
@@ -50,7 +51,10 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
                         template: 'Removing Pet <div ng-hide="notloading" ><ion-spinner></ion-spinner></div>'
                     });
                     $scope.deletePet()
-                } else {
+                } else if(index == 1) {
+                    return true;
+                }
+                else {
                     return true;
                 }
                 hideSheet();
@@ -232,6 +236,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
                         encodingType: Camera.EncodingType.JPEG,
                         destinationType: Camera.DestinationType.FILE_URI
                     };
+
                     CameraPopover.getPicture(options).then(function (imageURI) {
                         $scope.pet.imageURI = imageURI;
                     }, function (err) {
