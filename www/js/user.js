@@ -1,9 +1,9 @@
 angular.module('loginCtrl', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicPopup, $localstorage, UserSession, Auth) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicPopup, UserSession, Auth, $ionicPlatform, $state, $ionicHistory) {
 
         //-------------------------------------------SIGN UP----------------------------------
-    $scope.signUpDate = {};
+    $scope.signUpData = {};
 
     $ionicModal.fromTemplateUrl('templates/signup.html', {
         scope: $scope
@@ -12,7 +12,7 @@ angular.module('loginCtrl', [])
     });
 
     $scope.signUp = function () {
-        $scope.signUpDate = {};
+        $scope.signUpData = {};
         $scope.modal.hide();
         $scope.sign_up_modal.show();
     };
@@ -28,13 +28,18 @@ angular.module('loginCtrl', [])
     };
 
     $scope.doSignUp = function () {
-        console.log('Doing signup', $scope.signUpDate);
-        if ($scope.signUpDate.password != $scope.signUpDate.confirm_password){
+        console.log('Doing signup', $scope.signUpData);
+        if ($scope.signUpData.password != $scope.signUpData.password_confirmation){
             $scope.password_not_match();
-        }else{
-            $localstorage.set($scope.signUpDate.username,$scope.signUpDate.password);
+        } else{  
+            Auth.register($scope.signUpData).then(function(user) {
+                window.localStorage['userId'] = user.id;
+                $scope.sign_up_modal.hide();
+            }, function(error) {
+                // Registration failed...
+            });
         }
-        console.log($localstorage.get($scope.signUpDate.username));
+        console.log($localstorage.get($scope.signUpData.username));
     };
 
 
@@ -46,9 +51,27 @@ angular.module('loginCtrl', [])
         backdropClickToClose: false
     }).then(function (modal) {
         $scope.modal = modal;
-        $scope.login()
+        if(window.localStorage['userId'] == undefined) {
+           $scope.login()
+        }
     });
 
+ 
+    $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $scope.login()
+        }
+    });
+
+    $ionicPlatform.registerBackButtonAction(function() {
+        //var path = $location.path()
+        if ($state.is('home')) {
+            ionic.Platform.exitApp();
+        } else {
+            $ionicHistory.goBack();
+        }
+    }, 300);
+ 
     $scope.closeLogin = function () {
         $scope.modal.hide();
     };
@@ -76,7 +99,6 @@ angular.module('loginCtrl', [])
 
         Auth.login($scope.loginData).then(function(user) {
             window.localStorage['userId'] = user.id;
-            window.localStorage['user'] = user;
             $scope.modal.hide();
         }, function(error) {
             // Authentication failed...

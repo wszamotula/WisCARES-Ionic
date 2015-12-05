@@ -5,7 +5,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 })
 
 
-.controller('PetsCtrl', function ($scope, Pets) {
+.controller('PetsCtrl', function ($scope, Pets, Auth, $state) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -16,13 +16,12 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
     var userId = window.localStorage['userId'];
 
-    Pets.query().$promise.then(function (response) {
-        $scope.pets = response;
-        $scope.petsLoaded = true;
-    });
-
     $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
         Pets.query({"userId":userId}).$promise.then(function (response) {
+            console.log(window.localStorage['userId'])
             $scope.pets = response;
             $scope.petsLoaded = true;
         });
@@ -82,9 +81,11 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     $scope.hideMedSect = true;
     $scope.hideVisitSect = true;
 
-    $scope.loadPet();
 
     $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
         $scope.loadPet();
         HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
             $scope.healthproblems = response;
@@ -106,37 +107,17 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
             if ($scope.visits.length != 0) { $scope.hideVisitSect = false; }
         });
     });
-
-    
-
-    HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
-        $scope.healthproblems = response;
-        $scope.healthproblemsLoaded = true;
-        if($scope.healthproblems.length != 0){ $scope.hideHpSect = false; }
-    });
-
-    Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
-        $scope.vaccinations = response;
-        $scope.vaccinationsLoaded = true;
-        if ($scope.vaccinations.length != 0) { $scope.hideVaccSect = false; }
-    });
-
-    Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
-        $scope.medications = response;
-        $scope.medicationsLoaded = true;
-        if ($scope.medications.length != 0) { $scope.hideMedSect = false; }
-    });
-
-    Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
-        $scope.visits = response;
-        $scope.visitsLoaded = true;
-        if ($scope.visits.length != 0) { $scope.hideVisitSect = false; }
-    });
 })
 
 .controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets, ImageUploader) {
     $scope.pet = new Pets(); 
     $scope.pet.userId = window.localStorage['userId'];
+
+    $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
+    });
 
     $scope.addPet = function() { 
         if("imageURI" in $scope.pet) {
@@ -152,6 +133,11 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 })
 
 .controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets, ImageUploader) {
+    $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
+    });
   
   $scope.updatePet = function() { 
 
@@ -240,7 +226,12 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
 }])
 
-.controller('EventCtrl', function ($scope, $stateParams) {
+.controller('EventCtrl', function ($scope, $stateParams, $state) {
+    $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
+    });
     $scope.petID = $stateParams.id
     var today = new Date();
     var dd = today.getDate();
@@ -254,6 +245,9 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
 .controller('MedCtrl', function ($scope, $stateParams, $state, Medications){
     $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
         $scope.medication = new Medications();
         $scope.medication.petID = $stateParams.id;
         var today = new Date();
@@ -274,6 +268,9 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
 .controller('VacCtrl', function ($scope, $stateParams, $state, Vaccinations){
     $scope.$on('$ionicView.enter', function() {    
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
         $scope.vaccination = new Vaccinations(); 
         $scope.vaccination.petID = $stateParams.id;
         var today = new Date();
@@ -293,6 +290,9 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
 .controller('HealthProbCtrl', function ($scope, $stateParams, $state, HealthProblems){
     $scope.$on('$ionicView.enter', function() {  
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
         $scope.healthproblem = new HealthProblems(); 
         $scope.healthproblem.petID = $stateParams.id;
         var today = new Date();
@@ -312,7 +312,10 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 })
 
 .controller('VisitCtrl', function ($scope, $stateParams, $state, Visits){
-    $scope.$on('$ionicView.enter', function() {  
+    $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
         $scope.visit = new Visits(); 
         $scope.visit.petID = $stateParams.id;
         var today = new Date();
@@ -331,7 +334,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     };
 })
 
-.controller('VetsCtrl', function ($scope, Vets) {
+.controller('VetsCtrl', function ($scope, Vets, $state) {
     var userID = window.localStorage['userId'];
     console.log(userID);
 
@@ -349,6 +352,9 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
         });
 
     $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
         Vets.query({"userID":userID}).$promise.then(function (response) {
             $scope.vets = response;
             $scope.vetsLoaded = true;
@@ -362,6 +368,9 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     };
 
     $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
         $scope.loadVet();
     });
 })
@@ -369,7 +378,11 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 .controller('VetAddCtrl', function ($scope, $stateParams, $state, Vets) {
     $scope.vet = new Vets();  //create new pet instance. Properties will be set via ng-model on UI
     $scope.vet.userID=window.localStorage['userId']
-    console.log($scope.vet.userID);
+    $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
+    });
     $scope.addVet = function() { //create a new pet. Issues a POST to /api/pets
       $scope.vet.$save(function() {
       $state.go('vets');
@@ -388,17 +401,41 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     $scope.vet = Vets.get({ id: $stateParams.id });
   };
 
+    $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
+    });
+
   $scope.loadVet(); // Load a pet which can be edited on UI
 })
 
-.controller('AccountCtrl', function ($scope) {
+.controller('AccountCtrl', function ($scope, $state) {
+    $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
+    });
     $scope.settings = {
         enableFriends: true
     };
 })
 
-.controller('OptionsCtrl', function ($scope) {
-
+.controller('OptionsCtrl', function ($scope, $state, Auth) {
+    $scope.$on('$ionicView.enter', function() {
+        if(window.localStorage['userId'] == undefined) {
+            $state.go('home');
+        }
+    });
+    $scope.logout = function() {
+        window.localStorage.removeItem('userId')
+        Auth.logout().then(function(oldUser) {
+            // alert(oldUser.name + "you're signed out now.");
+            $state.go('home')
+        }, function(error) {
+        });
+        $state.go('home')
+    }
 })
 
 ////////////////////////////////////////////////
