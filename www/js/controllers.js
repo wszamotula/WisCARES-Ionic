@@ -500,7 +500,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
       $rootScope.$on('load-reminders', function (event) {
           $rootScope.showLoading('Fetching Reminders..');
           var user = UserSession.getSession();
-          ReminderFactory.getAll(user._id).success(function (data) {
+          ReminderFactory.query({ "userID": user._id }).success(function (data) {
               $scope.reminders = data.reminders;
               $rootScope.hideLoading();
           }).error(function (data) {
@@ -511,8 +511,11 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
       $scope.deleteReminder = function (reminder) {
           $rootScope.showLoading('Deleting Reminder..');
-
-          ReminderFactory.delete(reminder.userId, reminder._id)
+          reminder.$delete(function () {
+              $rootScope.hideLoading();
+              $rootScope.$broadcast('load-reminders');
+          })
+          /*ReminderFactory.delete(reminder.userId, reminder._id)
             .success(function (data) {
                 console.log(data);
                 $rootScope.hideLoading();
@@ -520,7 +523,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
             }).error(function (data) {
                 $rootScope.hideLoading();
                 console.log(data);
-            })
+            })*/
       }
 
   }

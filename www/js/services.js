@@ -113,25 +113,30 @@ angular.module('wiscares.services', ['ngFileUpload'])
     });
 })
 
-.factory('ReminderFactory', ['$http',
-  function ($http) {
-      var _remFactory = {};
-
-      _remFactory.getAll = function (userId) {
-          var t = Date.now();
-          return $http.get(baseUrl + '/api/v1/reminders/' + userId + '?_t=' + t);
-      }              //change url
-
-      _remFactory.create = function (userId, reminder) {
-          return $http.post(baseUrl + '/api/v1/reminder/' + userId + '/create', reminder);
-      }
-
-      _remFactory.delete = function (userId, reminderId) {
-          return $http.delete(baseUrl + '/api/v1/reminder/' + userId + '/' + reminderId);
-      }
-      return _remFactory;
-  }
-])
+.factory('ReminderFactory', function ($resource) {
+    /*function ($http) {
+        var _remFactory = {};
+  
+        _remFactory.getAll = function (userId) {
+            var t = Date.now();
+            return $http.get(baseUrl + '/api/v1/reminders/' + userId + '?_t=' + t);
+        }              //change url
+  
+        _remFactory.create = function (userId, reminder) {
+            return $http.post(baseUrl + '/api/v1/reminder/' + userId + '/create', reminder);
+        }
+  
+        _remFactory.delete = function (userId, reminderId) {
+            return $http.delete(baseUrl + '/api/v1/reminder/' + userId + '/' + reminderId);
+        }
+        return _remFactory;
+    }*/
+    return $resource("http://vast-bastion-6115.herokuapp.com/reminders/:id.json", { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
+})
 
 .factory('UserSession', function($resource) {
   return $resource("http://vast-bastion-6115.herokuapp.com/users/sign_in.json");
