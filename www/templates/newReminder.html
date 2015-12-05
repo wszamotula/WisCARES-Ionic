@@ -8,11 +8,11 @@
       <div class="list">
         <label class="item item-input item-stacked-label">
           <span class="input-label">Remind Me</span>
-          <input ng-model="reminder.remindThis" type="text" placeholder="Appointment">
+          <input ng-model="reminder.description" type="text" placeholder="Appointment">
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">At</span>
-          <input type="time" ng-model="reminder.formattedDate" placeholder="Tap to select Date & Time">
+          <input type="datetime-local" ng-model="reminder.dateToRemind" placeholder="Tap to select Date & Time">
         </label>
 
         <ul class="list">

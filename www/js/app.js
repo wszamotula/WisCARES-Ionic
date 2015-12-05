@@ -12,6 +12,7 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
   'wiscares.services', 'ngResource', 'loginCtrl', 'localstorage', 'ui.router', 'Devise'])
 
 .run(function ($ionicPlatform) {
+  //CHANG PUT NOTIFICATION CODE HERE
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default  e accessory bar above the keyboard
         // for form inputs)

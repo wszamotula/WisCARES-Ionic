@@ -476,6 +476,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
       });
 
       $scope.NewReminder = function () {
+          $scope.reminder = new ReminderFactory();
           $scope.modal.show();
       };
       
@@ -492,6 +493,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
       }
 
       $rootScope.createNew = function () {
+          $scope.reminder = new ReminderFactory();
           $scope.modal.show();
       }
 
@@ -503,21 +505,14 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
       });
 
       $rootScope.$on('load-reminders', function (event) {
-          $rootScope.showLoading('Fetching Reminders..');
-          var user = UserSession.getSession();
-          ReminderFactory.query({ "userID": user._id }).success(function (data) {
-              $scope.reminders = data.reminders;
-              $rootScope.hideLoading();
-          }).error(function (data) {
-              $rootScope.hideLoading();
-              $rootScope.toast('Oops.. Something went wrong');
+          var userID = window.localStorage['userId'] 
+          ReminderFactory.query({ "userID": userID }).$promise.then(function (data) {
+              $scope.reminders = data;
           });
       });
 
       $scope.deleteReminder = function (reminder) {
-          $rootScope.showLoading('Deleting Reminder..');
           reminder.$delete(function () {
-              $rootScope.hideLoading();
               $rootScope.$broadcast('load-reminders');
           })
           /*ReminderFactory.delete(reminder.userId, reminder._id)
@@ -536,23 +531,17 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
 
 .controller('NewReminderCtrl', ['$scope', '$ionicPopup', '$filter', '$rootScope', 'ReminderFactory', 'UserSession',
-  function ($scope, $ionicPopup, $filter, $rootScope, ReminderFactory, UserSession) {
+  function ($scope, $ionicPopup, $filter, $rootScope, ReminderFactory, UserSession, $state) {
 
-      $scope.reminder = {
-          'remindThis': '',
-          'formattedDate': '',
-          'shdlSMS': true,
-          'shdlCall': true
 
-      };
-
-      $scope.$watch('reminder.formattedDate', function (unformattedDate) {
+      /*$scope.$watch('reminder.formattedDate', function (unformattedDate) {
           $scope.reminder.formattedDate = $filter('date')(unformattedDate, 'dd/MM/yyyy HH:mm');
-      });
+      });*/
 
+    
+        $scope.reminder = new ReminderFactory();
       $scope.createReminder = function () {
-          $rootScope.showLoading('Creating..');
-          console.log("Create Button Works!");
+          /*console.log("Create Button Works!");
           var user = UserSession.getSession();
           var _r = $scope.reminder;
           console.log($scope.reminder);
@@ -565,16 +554,23 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
           var x = new Date(parseInt(_r.shdlSMS));
           console.log(x);
           delete _r.formattedDate;
-          delete _r.fullDate;
+          delete _r.fullDate;*/
 
-          ReminderFactory.create(user._id, _r).success(function (data) {
+          $scope.reminder.userID = window.localStorage['userId'] 
+          $scope.reminder.$save(function() {
+
+            $scope.reminder = new ReminderFactory();
+            $scope.modal.hide();
+            $rootScope.$broadcast('load-reminders');
+          });
+          /*ReminderFactory.$save(user._id, _r).success(function (data) {
               $rootScope.hideLoading();
               $scope.modal.hide();
               $rootScope.$broadcast('load-reminders');
           }).error(function (data) {
               $rootScope.hideLoading();
               console.log(data);
-          });
+          });*/
 
 
       };
