@@ -6,7 +6,7 @@
         <ion-list>
             <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="pet in pets" type="item-text-wrap" href="#/pets/{{pet.id}}">
 
-                <img ng-src="https://d30y9cdsu7xlg0.cloudfront.net/png/13421-200.png">
+                <img ng-src="{{pet.photo_url}}" style="width: 64px; height: 64px">
 
                 <h2>{{pet.name}}</h2>
                 <p>{{pet.species}}</p>
@@ -17,7 +17,7 @@
                 </ion-option-button> -->
             </ion-item>
             <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/pets/pet-add">
-                <img ng-src="https://d30y9cdsu7xlg0.cloudfront.net/png/13421-200.png">
+                <img ng-src="http://s3.amazonaws.com/wiscares/GenericPetIcon.png">
                 <i class="icon ion-ios-plus-empty"></i>
                 <h2>New pet</h2>
             </ion-item>

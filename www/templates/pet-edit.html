@@ -33,6 +33,11 @@
                 <span class="input-label">Weight</span>
                 <input type="text" placeholder="How much does your pet weigh?" ng-model="pet.weight" required>
             </ion-item>
+            
+            <div data-ng-controller="CameraCtrl">
+                <button class="button button-full button-positive" ng-click="showActionSheet()">Upload Image</button>
+                <progress max="100" value="0" id="ft-prog" ng-show="showProgress" class="progress"></progress>
+            </div>
             <!--<label class="item item-input-inset">
                 <button class="button button-small" ng-href="#/event">
                     _Health Problem_

@@ -35,12 +35,12 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
         $scope.pet = Pets.get({ id: $stateParams.petId });
     };
 
-    $scope.deletePet = function() { // Delete a pet. Issues a DELETE to /api/pets/:id
+    $scope.deletePet = function() { 
     	$scope.pet.$delete();
     	$state.go('pets');
   	};
 
-    $scope.deleteMed = function(med) { // Delete a movie. Issues a DELETE to /api/movies/:id
+    $scope.deleteMed = function(med) { 
         med.$delete(function() {
             Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
                 $scope.medications = response;
@@ -48,7 +48,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
         });
     };
 
-    $scope.deleteVac = function(vac) { // Delete a movie. Issues a DELETE to /api/movies/:id
+    $scope.deleteVac = function(vac) { 
         vac.$delete(function() {
             Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
                 $scope.vaccinations = response;
@@ -56,7 +56,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
         });
     };
 
-    $scope.deleteHP = function(hp) { // Delete a movie. Issues a DELETE to /api/movies/:id
+    $scope.deleteHP = function(hp) { 
         hp.$delete(function() {
             HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
                 $scope.healthproblems = response;
@@ -64,7 +64,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
         });
     };
 
-    $scope.deleteVisit = function(visit) { // Delete a movie. Issues a DELETE to /api/movies/:id
+    $scope.deleteVisit = function(visit) { 
         visit.$delete(function() {
             Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
                 $scope.visits = response;
@@ -135,50 +135,34 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 })
 
 .controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets, ImageUploader) {
-    $scope.pet = new Pets();  //create new movie instance. Properties will be set via ng-model on UI
+    $scope.pet = new Pets(); 
     $scope.pet.userId = window.localStorage['userId'];
 
-    $scope.addPet = function() { //create a new movie. Issues a POST to /api/movies
-
-        $scope.pet.$save(function() {
+    $scope.addPet = function() { 
+        if("imageURI" in $scope.pet) {
+            console.log("Image URI Attached")
+            ImageUploader.uploadImage($scope.pet)
             $state.go('pets');
-        });
-
+        } else {
+            $scope.pet.$save(function() {
+                $state.go('pets');
+            });
+        }
     };
 })
 
-.controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets, Upload) {
-  function fail(error) {
-    console.log("fail: " + error.code);
-  }
-
-  function uploadImage(imageFile) {
-    console.log("http://vast-bastion-6115.herokuapp.com/pets/" + $scope.pet.id);
-    Upload.upload({
-        url: "http://vast-bastion-6115.herokuapp.com/pets/" + $scope.pet.id,
-        method: 'POST',
-        fields: { 'pet[name]': $scope.pet.name, 'pet[userId]': $scope.pet.userId, 'pet[species]': $scope.pet.species,
-        'pet[breed]': $scope.pet.breed, 'pet[gender]': $scope.pet.gender, 'pet[birthDate]': $scope.pet.birthDate,
-        'pet[weight]': $scope.pet.weight},
-        file: imageFile,
-        fileFormDataName: 'pet[photo]'
-    });
-  }
-
-  function createFile(fileEntry) {
-    fileEntry.file(uploadImage, fail)
-  };
+.controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets, ImageUploader) {
   
-  $scope.updatePet = function() { //Update the edited movie. Issues a PUT to /api/movies/:id
-        console.log(Object.keys($scope.pet));
-        console.log(typeof $scope.pet.imageURI == "undefined");
-        console.log($scope.pet.imageURI);
-        if(typeof $scope.pet.imageURI == "undefined") {
-            $scope.pet.$update(function() {
-                $state.go('pet-detail', {petId: $scope.pet.id}); // on success go back to home i.e. movies state.
-            });
+  $scope.updatePet = function() { 
+
+        if("imageURI" in $scope.pet) {
+            console.log("Image URI Attached")
+            ImageUploader.uploadImage($scope.pet)
+            $state.go('pet-detail', {petId: $scope.pet.id});
         } else {
-            window.resolveLocalFileSystemURL($scope.pet.imageURI, createFile, fail);
+            $scope.pet.$update(function() {
+                $state.go('pet-detail', {petId: $scope.pet.id});
+            });
         }
   };
 
@@ -192,8 +176,6 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 .controller('CameraCtrl', ['$scope', "CameraPopover", "$ionicActionSheet", function ($scope, CameraPopover, $ionicActionSheet) {
     $scope.showProgress = false;
 
-
-    //var uploadFileUrl = "serve api";
 
     $scope.showActionSheet = function () {
         // Show the action sheet
@@ -241,7 +223,10 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
                     };
                     CameraPopover.getPicture(options).then(function (imageURI) {
                         console.log(imageURI);
-                        $scope.pet.imageURI = imageURI;
+                        if(imageURI.lastIndexOf('?') != -1) {
+                            imageURI = imageURI.substr(0, imageURI.lastIndexOf('?'));
+                        }
+                        $scope.pet.imageURI = imageURI
                     }, function (err) {
                         console.error(err);
                     });
@@ -252,60 +237,6 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
             }
         });
     };
-
-    // upload file with a imageURI
-    /*var uploadFile = function (imageURI) {
-        // show the progress bar
-        safeApply($scope, function () {
-            $scope.showProgress = true;
-        });
-        var uploadOptions = new FileUploadOptions();
-        uploadOptions.fileKey = "petImage";
-        uploadOptions.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
-        uploadOptions.mimeType = "image/jpeg";
-        uploadOptions.chunkedMode = false;
-
-        var ft = new FileTransfer();
-
-        var statusDom = document.getElementById("ft-prog");
-
-        ft.onprogress = function (progressEvent) {
-            if (progressEvent.lengthComputable) {
-                var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
-                statusDom.value = perc;
-                if (perc == 100) {
-                    safeApply($scope, function () {
-                        $scope.showProgress = false;
-                    });
-                }
-            } else {
-                console.log("loading....");
-            }
-        };
-
-        ft.upload(imageURI, encodeURI(uploadFileUrl), onSuccess, onFail, uploadOptions, true);
-
-        function onSuccess(responseData) {
-            responseString = JSON.stringify(responseData);
-            responseObject = JSON.parse(responseString);
-            responsePerson = JSON.parse(responseObject.response);
-            safeApply($scope, function () {
-                // update url
-            });
-        };
-        function onFail() {
-            alert("something wrong, please try again");
-        };
-    };
-
-    //get photos form device and return a file path url
-    var takePicture = function (options) {
-        CameraPopover.getPicture(options).then(function (imageURI) {
-            uploadFile(imageURI);
-        }, function (err) {
-            console.error(err);
-        });
-    };*/
 
 }])
 
@@ -334,7 +265,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
         $scope.medication.dateEntered = yyyy + '/' + mm + '/' + dd;
     });
 
-    $scope.addMed = function() { //create a new med. Issues a POST to /api/movies
+    $scope.addMed = function() { 
         $scope.medication.$save(function() {
             $state.go('pet-detail', {petId: $scope.medication.petID});
         });
@@ -404,7 +335,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     var userID = window.localStorage['userId'];
     console.log(userID);
 
-    $scope.deleteVet = function(vet) { // Delete a movie. Issues a DELETE to /api/pets/:id
+    $scope.deleteVet = function(vet) { 
     	vet.$delete(function() {
     		Vets.query({"userID":userID}).$promise.then(function (response) {
             	$scope.vets = response;
