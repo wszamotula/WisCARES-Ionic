@@ -2,15 +2,33 @@
     <ion-nav-buttons side="primary">
         <a class="button icon-left button-clear ion-ios-arrow-left" ui-sref="add-event({id:healthproblem.petID})">&nbsp;Events</a>
     </ion-nav-buttons>
+
     <ion-content class="padding">
+
+    <form name="hpAddForm" novalidate>
+
         <ion-item class="item item-input">
             <span class="input-label">Health Problem</span>
-                <input type="text" placeholder="What type of problem is it?" ng-model="healthproblem.description">
+                <input type="text" name="hp" placeholder="What type of problem is it?" ng-model="healthproblem.description" ng-minlength="2" required>
         </ion-item>
+
         <ion-item class="item item-input">
             <span class="input-label">Date Occured</span>
-                <input type="date" placeholder="When did it happen?" ng-model="healthproblem.dateOccurred">
+                <input type="date" placeholder="When did it happen?" name="hpDate" ng-model="healthproblem.dateOccurred">
         </ion-item>
-        <button class="button button-block button-positive" type="submit" ng-click="addHP()">Add Health Problem</button>
+
+        <div class="padding">
+
+                <p ng-show="hpAddForm.hp.$error.required">* Health problem is required</p>
+                <p ng-show="hpAddForm.hp.$error.minlength">* Health problem must be longer than 2 characters</p>
+
+                <p ng-show="hpAddForm.hpDate.$invalid && !PetAddForm.PetWeight.$pristine">* Date must be a valid date</p>
+
+        </div>
+
+        <button class="button button-block button-assertive" type="submit" ng-disabled   ="hpAddForm.$invalid" ng-click="addHP()">Add Health Problem</button>
+
+    </form>
+
     </ion-content>
 </ion-view>
