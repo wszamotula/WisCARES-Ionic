@@ -753,9 +753,10 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
   }
 
   function disableMap(){
-    $ionicLoading.show({
+    console.log(ConnectivityMonitor.isOnline())
+    /*$ionicLoading.show({
       template: 'You must be connected to the Internet to view this map.'
-    });
+    });*/
   }
 
   function loadGoogleMaps(){
@@ -955,9 +956,9 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
       });
 
       // Disable the map when the user goes offline
-      $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
+      /*$rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
         disableMap();
-      });
+      });*/
      
     }
     else {

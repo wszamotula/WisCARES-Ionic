@@ -119,8 +119,7 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
       .state('add-event', {
         url: 'pets/:id/:petName/addEvent',
         templateUrl: 'templates/event.html',
-        controller: 'EventCtrl',
-        cache: true
+        controller: 'EventCtrl'
       })
       .state('add-medication', {
         url: 'pets/:id/addEvent/medication',
