@@ -462,7 +462,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 })
 
 .controller('Reminders', ['$scope', '$rootScope', 'Pets', 'ReminderFactory', '$ionicModal', '$timeout',
-  function ($scope, $rootScope, UserSession, ReminderFactory, $ionicModal, $timeout) {
+  function ($scope, $rootScope, UserSession, ReminderFactory, $ionicModal, $timeout, $cordovaLocalNotification) {
 
      $ionicModal.fromTemplateUrl('templates/newReminder.html', {
           scope: $scope
