@@ -3,14 +3,13 @@
         <a class="button icon-left button-clear ion-ios-arrow-left" ng-href="#/home">&nbsp;Home</a>
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header">
-        <div>Health Problems</div>
         <div class="list card" ng-repeat="vet in vets">
             <div class="item item-divider">{{vet.name}}</div>
             <div class="item item-body">
                 <div>
                     {{vet.contact}}  
-                    <button class="btn btn-primary" ui-sref="vet-detail({id:vet.id})">View</button>
-                    <button class="btn btn-primary" ng-click="deleteVet(vet)">Delete</button>
+                    <button class="button button-clear button-dark ion-search" ui-sref="vet-detail({id:vet.id})"> View Details</button>
+                    <button class="button button-clear button-dark ion-trash-b" ng-click="deleteVet(vet)"> Remove Vet</button>
                 </div>
             </div>
         </div>

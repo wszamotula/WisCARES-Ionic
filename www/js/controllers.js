@@ -38,12 +38,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
               { text: 'Yes' },
               { text: 'No'}
             ],
-
             titleText: 'Delete Your Pet?',
-            cancelText: 'No',
-            cancel: function () {
-                hideSheet();
-            },
             buttonClicked: function (index) {
         
                 if (index == 0) {
@@ -382,7 +377,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
 .controller('VetsCtrl', function ($scope, Vets, $state) {
     var userID = window.localStorage['userId'];
-    console.log(userID);
+
 
     $scope.deleteVet = function(vet) { 
     	vet.$delete(function() {
@@ -392,12 +387,9 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     	});
   	};
 
-    Vets.query({"userID":userID}).$promise.then(function (response) {
-            $scope.vets = response;
-            $scope.vetsLoaded = true;
-        });
 
     $scope.$on('$ionicView.enter', function() {
+        var userID = window.localStorage['userId'];
         if(window.localStorage['userId'] == undefined) {
             $state.go('home');
         }
@@ -429,7 +421,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
             $state.go('home');
         }
     });
-    $scope.addVet = function() { //create a new pet. Issues a POST to /api/pets
+    $scope.addVet = function() { //create a new vet. Issues a POST to /api/pets
       $scope.vet.$save(function() {
       $state.go('vets');
     });
@@ -541,7 +533,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
     
         $scope.reminder = new ReminderFactory();
-      $scope.createReminder = function () {
+        $scope.createReminder = function () {
           /*console.log("Create Button Works!");
           var user = UserSession.getSession();
           var _r = $scope.reminder;

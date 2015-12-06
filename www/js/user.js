@@ -33,7 +33,7 @@ angular.module('loginCtrl', [])
             $scope.password_not_match();
         } else{  
             $ionicLoading.show({
-                template: 'Signing in <div ng-hide="notloading" ><ion-spinner></ion-spinner></div>'
+                template: 'Signing up <div ng-hide="notloading" ><ion-spinner></ion-spinner></div>'
             })
             Auth.register($scope.signUpData).then(function(user) {
                 window.localStorage['userId'] = user.id;
