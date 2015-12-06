@@ -14,6 +14,8 @@
                 <img ng-src="{{pet.photo_url}}" style="width: 64px; height: 64px">
                 <h2>{{pet.name}}</h2>
                 <p>
+                    {{pet.birthDate}}
+                    <br />
                     {{pet.species}}
                     <br />
                     {{pet.breed}}
@@ -24,7 +26,7 @@
             <div class="text-center">
                     <a class="button button-clear button-dark ion-edit" ui-sref="pet-edit({id:pet.id})">&nbsp;Edit Pet</a>
                     <a class="button button-clear button-dark ion-plus-round" ui-sref="add-event({id:pet.id})">&nbsp;New Event</a>
-                    <a class="button button-clear button-dark ion-trash-b" ng-click="deletePet()">&nbsp;Delete</a>
+                    <a class="button button-clear button-dark ion-trash-b" ng-click="showActionSheet()">&nbsp;Delete</a>
             </div>
         </ion-list>
         <div ng-hide="hideHpSect">

@@ -15,7 +15,7 @@
         </ion-item>
             <ion-item class="item item-input">
                 <span class="input-label">Birthday</span>
-                <input type="text" placeholder="When was your pet born?" ng-model="pet.birthDate">
+                <input type="date" placeholder="When was your pet born?" ng-model="pet.birthDate">
             </ion-item>
             <ion-item class="item item-input">
                 <span class="input-label">Species</span>
@@ -33,7 +33,7 @@
                 <span class="input-label">Weight</span>
                 <input type="text" placeholder="How much does your pet weigh?" ng-model="pet.weight" required>
             </ion-item>
-            
+
             <div data-ng-controller="CameraCtrl">
                 <button class="button button-full button-positive" ng-click="showActionSheet()">Upload Image</button>
                 <progress max="100" value="0" id="ft-prog" ng-show="showProgress" class="progress"></progress>
