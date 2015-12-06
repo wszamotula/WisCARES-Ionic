@@ -15,16 +15,17 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     //});
 
     var userId = window.localStorage['userId'];
+    Pets.query({"userId":userId}).$promise.then(function (response) {
+            console.log(window.localStorage['userId'])
+            $scope.pets = response;
+            $scope.petsLoaded = true;
+    });
 
     $scope.$on('$ionicView.enter', function() {
         if(window.localStorage['userId'] == undefined) {
             $state.go('home');
         }
-        Pets.query({"userId":userId}).$promise.then(function (response) {
-            console.log(window.localStorage['userId'])
-            $scope.pets = response;
-            $scope.petsLoaded = true;
-        });
+
     });
 
 })
@@ -121,31 +122,30 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     $scope.hideMedSect = true;
     $scope.hideVisitSect = true;
 
+    $scope.loadPet();
+    HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.healthproblems = response;
+        if ($scope.healthproblems.length != 0) { $scope.hideHpSect = false; }
+    });
 
+    Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.vaccinations = response;
+        if ($scope.vaccinations.length != 0) { $scope.hideVaccSect = false; }
+    });
+
+    Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.medications = response;
+        if ($scope.medications.length != 0) { $scope.hideMedSect = false; }
+    });
+
+    Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
+        $scope.visits = response;
+        if ($scope.visits.length != 0) { $scope.hideVisitSect = false; }
+    });
     $scope.$on('$ionicView.enter', function() {
         if(window.localStorage['userId'] == undefined) {
             $state.go('home');
         }
-        $scope.loadPet();
-        HealthProblems.query({"petID":$stateParams.petId}).$promise.then(function (response) {
-            $scope.healthproblems = response;
-            if ($scope.healthproblems.length != 0) { $scope.hideHpSect = false; }
-        });
-
-        Vaccinations.query({"petID":$stateParams.petId}).$promise.then(function (response) {
-            $scope.vaccinations = response;
-            if ($scope.vaccinations.length != 0) { $scope.hideVaccSect = false; }
-        });
-
-        Medications.query({"petID":$stateParams.petId}).$promise.then(function (response) {
-            $scope.medications = response;
-            if ($scope.medications.length != 0) { $scope.hideMedSect = false; }
-        });
-
-        Visits.query({"petID":$stateParams.petId}).$promise.then(function (response) {
-            $scope.visits = response;
-            if ($scope.visits.length != 0) { $scope.hideVisitSect = false; }
-        });
     });
 })
 
@@ -387,16 +387,15 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     	});
   	};
 
-
+        Vets.query({"userID":userID}).$promise.then(function (response) {
+            $scope.vets = response;
+            $scope.vetsLoaded = true;
+        });
     $scope.$on('$ionicView.enter', function() {
         var userID = window.localStorage['userId'];
         if(window.localStorage['userId'] == undefined) {
             $state.go('home');
         }
-        Vets.query({"userID":userID}).$promise.then(function (response) {
-            $scope.vets = response;
-            $scope.vetsLoaded = true;
-        });
     });
 })
 
@@ -405,11 +404,11 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
         $scope.vet = Vets.get({ id: $stateParams.id });
     };
 
+    $scope.loadVet();
     $scope.$on('$ionicView.enter', function() {
         if(window.localStorage['userId'] == undefined) {
             $state.go('home');
         }
-        $scope.loadVet();
     });
 })
 

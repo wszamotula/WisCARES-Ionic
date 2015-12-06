@@ -59,7 +59,8 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
     .state('vets', {
         url: '/vets',
         templateUrl: 'templates/vets.html',
-        controller: 'VetsCtrl'
+        controller: 'VetsCtrl',
+        cache: false
     })
 
     .state('vet-add', {
@@ -77,13 +78,15 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
     .state('vet-detail', {
         url: '/vets/:id',
         templateUrl: 'templates/vet-detail.html',
-        controller: 'VetDetailCtrl'
+        controller: 'VetDetailCtrl',
+        cache: false
       })
 
     .state('pets', {
         url: '/pets',
         templateUrl: 'templates/tab-pets.html',
-        controller: 'PetsCtrl'
+        controller: 'PetsCtrl',
+        cache: false
     })
 
     .state('pet-add', {
@@ -100,7 +103,8 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
       .state('pet-detail', {
           url: '/pets/:petId',
           templateUrl: 'templates/pet-detail.html',
-          controller: 'PetDetailCtrl'
+          controller: 'PetDetailCtrl',
+          cache: false
       })
       .state('add-event', {
         url: 'pets/:id/addEvent',
