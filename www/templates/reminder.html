@@ -1,34 +1,37 @@
 <ion-view view-title="Reminder">
-    <ion-nav-buttons side="primary">
-        <a class="button icon-left button-clear ion-ios-arrow-left" ng-href="#/home">&nbsp;Home</a>
-    </ion-nav-buttons>
-    <ion-content has-footer="true" padding="true">
-        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
-        </ion-refresher>
-      <div class="list">
+        <ion-nav-buttons side="primary">
+            <a class="button icon-left button-clear ion-ios-arrow-left" ng-href="#/home">&nbsp;Home</a>
+        </ion-nav-buttons>
+        <ion-content has-footer="true" padding="true">
+            <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+            </ion-refresher>
+            <div class="list">
 
-            <div ng-hide="hideRmSect">
-               <!--<a class="button icon-right button-clear button-dark" ng-class="{ 'ion-android-arrow-dropdown' : showReminders, 'ion-android-arrow-dropleft' : !showReminders }"
-                   ng-model="showReminders" ng-click="showReminders=!showReminders"><b>Current Reminders</b></a>--> 
-                <div class="list card" ng-repeat="reminder in reminders | orderBy: 'isCompleted'" ng-class="{'completed' : reminder.isCompleted}">
-                    <div class="item item-divider">{{reminder.dateToRemind | date:'medium'}}</div>
-                    <div class="item item-body row">
-                        <div class="col text-left">
-                           {{reminder.description}}
-                        </div>
-                        <div class="col text-right">
-                            <button class="button-clear ion-trash-b" ng-click="deleteReminder(reminder)"></button>
+                <div ng-hide="hideRmSect">
+                    <!--<a class="button icon-right button-clear button-dark" ng-class="{ 'ion-android-arrow-dropdown' : showReminders, 'ion-android-arrow-dropleft' : !showReminders }"
+                        ng-model="showReminders" ng-click="showReminders=!showReminders"><b>Current Reminders</b></a>-->
+                    <div class="list card" ng-repeat="reminder in reminders | orderBy: 'isCompleted'" ng-class="{'completed' : reminder.isCompleted}">
+                        <div class="item item-divider">{{reminder.dateToRemind | date:'medium'}}</div>
+                        <div class="item item-body row">
+                            <div class="col text-left">
+                                {{reminder.description}}
+
+                                <button class="button" ng-click="add()">add notification</button>
+                                <button class="button" ng-click="isScheduled()">schedule</button>
+                            </div>
+                            <div class="col text-right">
+                                <button class="button-clear ion-trash-b" ng-click="deleteReminder(reminder)"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="item" ng-show="reminders.length == 0">
-                No reminders yet. Create a new one!
+                <div class="item" ng-show="reminders.length == 0">
+                    No reminders yet. Create a new one!
+                </div>
+                <div data-ng-controller="NewReminderCtrl">
+                    <button class="button button-full button-positive" ng-click="NewReminder()">new reminder</button>
+                </div>
             </div>
-            <div data-ng-controller="NewReminderCtrl">
-                <button class="button button-full button-positive" ng-click="NewReminder()">new reminder</button>
-            </div>
-       </div>
     </ion-content>
 </ion-view>

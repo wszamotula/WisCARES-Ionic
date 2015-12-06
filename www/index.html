@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
     <title>WisCARES Vet Services</title>
     
      
@@ -17,6 +18,7 @@
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="lib/ng-cordova/dist/ng-cordova.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
@@ -45,5 +47,37 @@
       have templates inline in this html file if you'd like).
     -->
     <ion-nav-view></ion-nav-view>
+    
+     <ion-pane>
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Local Notification Sample</h1>
+    </ion-header-bar>
+    <ion-content>
+      
+        <button class="button button-block button-positive" ng-click="scheduleInstantNotification()">
+          Instant 
+        </button>
+
+        <button class="button  button-block button-positive" ng-click="scheduleDelayedNotification()">
+          In 5 Sec
+        </button>
+        <button class="button button-block button-positive" ng-click="scheduleEveryMinuteNotification()">
+          Every Minute
+        </button>
+      
+        <button class="button  button-block button-positive" ng-click="updateNotificationText()">
+          Update Text for Every Minute
+        </button>
+
+        <button class="button  button-block button-positive" ng-click="updateNotificationEvery()">
+          Update Every Min to Second
+        </button>
+        <button class="button  button-block button-positive" ng-click="cancelNotification()">
+          Cancel 
+        </button>
+      
+    </ion-content>
+  </ion-pane>
+
 </body>
 </html>
