@@ -499,6 +499,8 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
           focusFirstInput: true
       });
 
+  //    $scope.showReminders = true;
+
       $rootScope.$on('load-reminders', function (event) {
           var userID = window.localStorage['userId'] 
           ReminderFactory.query({ "userID": userID }).$promise.then(function (data) {
@@ -529,9 +531,9 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
   function ($scope, $ionicPopup, $filter, $rootScope, ReminderFactory, UserSession, $state) {
 
 
-      /*$scope.$watch('reminder.formattedDate', function (unformattedDate) {
+    /*  $scope.$watch('reminder.formattedDate', function (unformattedDate) {
           $scope.reminder.formattedDate = $filter('date')(unformattedDate, 'dd/MM/yyyy HH:mm');
-      });*/
+      }); */
 
     
         $scope.reminder = new ReminderFactory();

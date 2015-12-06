@@ -15,23 +15,6 @@
           <input type="datetime-local" ng-model="reminder.dateToRemind" placeholder="Tap to select Date & Time">
         </label>
 
-        <ul class="list">
-
-          <li class="item item-checkbox checkbox-assertive">
-            <label class="checkbox">
-              <input type="checkbox" ng-model="reminder.shdlSMS">
-            </label>
-            SMS me
-          </li>
-          <li class="item item-checkbox checkbox-assertive">
-            <label class="checkbox">
-              <input type="checkbox" ng-model="reminder.shdlCall">
-            </label>
-            Call me
-          </li>
-        </ul>
-
-
         <button class="button button-full button-assertive" ng-click="createReminder()">Create</button>
       </div>
     </div>
