@@ -1,11 +1,11 @@
-<ion-view view-title="Add New Pet Event">
+<ion-view view-title="Add New Pet Information">
     <ion-nav-buttons side="primary">
         <a class="button icon-left button-clear ion-ios-arrow-left" href="#/pets/{{petID}}">&nbsp;{{petName}}</a>
     </ion-nav-buttons>
     <ion-content class="padding">
-        <button class="button button-block button-light", ui-sref="add-vaccination({id:petID})">Add a new Vaccination</button>
-        <button class="button button-block button-light", ui-sref="add-visit({id:petID})">Add a new Visit</button>
-        <button class="button button-block button-light", ui-sref="add-healthproblem({id:petID})">Add a new Health Problem</button>
-        <button class="button button-block button-light", ui-sref="add-medication({id:petID})">Add a new Medication</button>
+        <button class="button button-full button-assertive", ui-sref="add-vaccination({id:petID})">Vaccination</button>
+        <button class="button button-full button-assertive", ui-sref="add-visit({id:petID})">Visit</button>
+        <button class="button button-full button-assertive", ui-sref="add-healthproblem({id:petID})">Health Problem</button>
+        <button class="button button-full button-assertive", ui-sref="add-medication({id:petID})">Medication</button>
     </ion-content>
 </ion-view>
