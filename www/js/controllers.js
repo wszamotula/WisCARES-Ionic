@@ -523,6 +523,32 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
             })*/
       }
 
+      $scope.$on("$cordovaLocalNotification:added", function (id, state, json) {
+          alert("Added a notification");
+      });
+
+      $scope.add = function () {
+
+          var d = new Date($scope.reminder.fullDate);
+          var alarmTime = d.getMinutes;
+          $cordovaLocalNotification.add({
+              id: alarmTime.toString,
+              date: alarmTime,
+              message: $scope.reminder.message,
+              title: $scope.reminder.title,
+              autoCancel: true,
+              sound: null
+          }).then(function () {
+              console.log("The notification has been set");
+          });
+      };
+
+      $scope.isScheduled = function () {
+          $cordovaLocalNotification.isScheduled(true).then(function (isScheduled) {
+              alert("Notification Scheduled: " + isScheduled);
+          });
+      }
+
   }
 ])
 
@@ -559,6 +585,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
             $scope.reminder = new ReminderFactory();
             $scope.modal.hide();
             $rootScope.$broadcast('load-reminders');
+
           });
           /*ReminderFactory.$save(user._id, _r).success(function (data) {
               $rootScope.hideLoading();

@@ -11,7 +11,7 @@ var searchQuery = '';
 angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
   'wiscares.services', 'ngResource', 'loginCtrl', 'localstorage', 'ui.router', 'Devise'])
 
-.run(function ($ionicPlatform) {
+.run(function ($ionicPlatform, $rootScope, $timeout) {
   //CHANG PUT NOTIFICATION CODE HERE
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default  e accessory bar above the keyboard
@@ -25,6 +25,16 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
             // org.apache.cordova.statusbar required
             StatusBar.styleLightContent();
         }
+        window.plugin.notification.local.onadd = function (id, state, json) {
+            var notification = {
+                id: id,
+                state: state,
+                json: json
+            };
+            $timeout(function () {
+                $rootScope.$broadcast("$cordovaLocalNotification:added", notification);
+            });
+        };
     });
 })
 
