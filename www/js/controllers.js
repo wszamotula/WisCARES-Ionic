@@ -273,7 +273,10 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
             $state.go('home');
         }
     });
+    console.log(Object.keys($stateParams))
     $scope.petID = $stateParams.id
+    $scope.petName = $stateParams.petName
+    console.log($scope.petName)
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
