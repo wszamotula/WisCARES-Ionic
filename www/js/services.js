@@ -29,7 +29,7 @@ angular.module('wiscares.services', ['ngFileUpload'])
 .factory('ImageUploader', function (Upload) {
     return {
 
-        uploadImage: function(pet) {
+        uploadImage: function(pet, state, loader) {
             console.log(pet.imageURI);
 
             
@@ -43,19 +43,41 @@ angular.module('wiscares.services', ['ngFileUpload'])
 
             params.userId = pet.userId
             params.name = pet.name
-            params.birthDate = pet.birthDate
+
+            if("birthDate" in pet) {
+                if(pet.birthDate != null) {
+                    params.birthDate = pet.birthDate
+            }
+            }
+
             params.species = pet.species
-            params.breed = pet.breed
+
+            if("breed" in pet) {
+                if(pet.breed != null) {
+                params.breed = pet.breed
+            }
+            }
+
             params.gender = pet.gender
-            params.weight = pet.weight
+
+            if("weight" in pet) {
+                if(pet.weight != null) {
+                params.weight = pet.weight
+            }
+            }
             //params.pet = pet;
             options.params = params;
 
+            loader.show({
+                template: 'Uploading Image <div ><ion-spinner></ion-spinner></div>'
+            })
             if("id" in pet) {
                 options.httpMethod = "PUT";
                 ft.upload(pet.imageURI, "http://vast-bastion-6115.herokuapp.com/pets/" + pet.id + ".json",
                     function (e) {
                         console.log("WIN" + JSON.stringify(e));
+                        loader.hide()
+                        state.go('pet-detail', {petId: pet.id});   
                     },
                     function (e) {
                         console.log("FAIL" + JSON.stringify(e));
@@ -64,6 +86,8 @@ angular.module('wiscares.services', ['ngFileUpload'])
                 ft.upload(pet.imageURI, "http://vast-bastion-6115.herokuapp.com/pets.json/",
                     function (e) {
                         console.log("WIN" + JSON.stringify(e));
+                        loader.hide()
+                        state.go('pets');
                     },
                     function (e) {
                         console.log("FAIL" + JSON.stringify(e));

@@ -149,7 +149,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     });
 })
 
-.controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets, ImageUploader) {
+.controller('PetAddCtrl', function ($scope, $stateParams, $state, Pets, ImageUploader, $ionicLoading) {
 
     $scope.pet = new Pets(); 
     $scope.pet.userId = window.localStorage['userId'];
@@ -163,8 +163,8 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     $scope.addPet = function() { 
         if("imageURI" in $scope.pet) {
             console.log("Image URI Attached")
-            ImageUploader.uploadImage($scope.pet)
-            $state.go('pets');
+            ImageUploader.uploadImage($scope.pet, $state, $ionicLoading)
+            //$state.go('pets');
         } else {
             $scope.pet.$save(function() {
                 $state.go('pets');
@@ -173,7 +173,7 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
     };
 })
 
-.controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets, ImageUploader) {
+.controller('PetEditCtrl', function ($scope, $state, $stateParams, Pets, ImageUploader, $ionicLoading) {
     $scope.$on('$ionicView.enter', function() {
         if(window.localStorage['userId'] == undefined) {
             $state.go('home');
@@ -184,8 +184,8 @@ angular.module('wiscares.controllers', ['ui.router', 'ngFileUpload','ngCordova']
 
         if("imageURI" in $scope.pet) {
             console.log("Image URI Attached")
-            ImageUploader.uploadImage($scope.pet)
-            $state.go('pet-detail', {petId: $scope.pet.id});
+            ImageUploader.uploadImage($scope.pet, $state, $ionicLoading)
+            //$state.go('pet-detail', {petId: $scope.pet.id});
         } else {
             $scope.pet.$update(function() {
                 $state.go('pet-detail', {petId: $scope.pet.id});

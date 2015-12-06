@@ -25,7 +25,7 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
             // org.apache.cordova.statusbar required
             StatusBar.styleLightContent();
         }
-        window.plugin.notification.local.onadd = function (id, state, json) {
+        /*window.plugin.notification.local.onadd = function (id, state, json) {
             var notification = {
                 id: id,
                 state: state,
@@ -34,7 +34,7 @@ angular.module('wiscares', ['ionic', 'ngCordova', 'wiscares.controllers',
             $timeout(function () {
                 $rootScope.$broadcast("$cordovaLocalNotification:added", notification);
             });
-        };
+        };*/
     });
 })
 
